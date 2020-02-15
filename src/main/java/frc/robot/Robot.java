@@ -40,14 +40,14 @@ public class Robot extends TimedRobot {
   //private Spark m_spark4;
   //private Spark m_spark5;
   //private Spark m_spark6;
-  private RobotContainer m_robotContainer;
+  //private RobotContainer m_robotContainer;
   //private JoystickButton buttonA1, leftBumper1, rightBumper1, buttonB1, buttonX1;
   //private JoyButton leftTrigger1, rightTrigger1;
-  private static Robot me;
+  //private static Robot me;
 
-  public static Robot getInstance() {
-    return me;
-  }
+  //public static Robot getInstance() {
+    //return me;
+  //}
 
   /*public double getTalonMotorLevel() {
     return m_talon.get();
@@ -83,8 +83,8 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
-    me = this;
-    m_robotContainer = new RobotContainer();
+    //me = this;
+    //m_robotContainer = new RobotContainer();
     m_talon1 = new WPI_TalonSRX(1);
     m_talon1 = new WPI_TalonSRX(2);
     m_victor11 = new WPI_VictorSPX(11);
