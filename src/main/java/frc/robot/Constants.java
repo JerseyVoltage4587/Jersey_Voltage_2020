@@ -16,4 +16,24 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+    public static int LeftTalon1CAN_Address;
+    public static int LeftVictor1CAN_Address;
+    public static int LeftTalon1PDP_Port;
+    public static int LeftVictor11PDP_Port;
+    public static int RightTalon2PDP_Port;
+    public static int RightVictor21PDP_Port;
+    public static int RightTalon2CAN_Address;
+    public static int RightVictor21CAN_Address;
+    public static int IntakeArmPWM_Address;
+    public static int IntakeArmPDP_Port;
+    public static int IntakePWM_Address;
+    public static int IntakePDP_Port;
+    public static double IntakeArmMotorLevel;
+    public static double IntakeMotorLevel;
+    public static int ShooterMotorPWM_Address;
+    public static int ShooterMotorPDP_Port;
+    public static int FeederMotorPWM_Address;
+    public static int FeederMotorPDP_Port;
+    public static int ClimberMotorPWM_Address;
+    public static int ClimberMotorPDP_Port;
 }
