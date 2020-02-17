@@ -17,8 +17,8 @@ public class Intake extends SubsystemBase {
    * Creates a new Intake.
    */
   public Intake() {
-    //m_intakeMotor = new ?;
-    //m_intakeArmMotor = new ?;
+    //m_intakeMotor = new ?();
+    //m_intakeArmMotor = new ?();
   }
 
   public static Intake getInstance() {

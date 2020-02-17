@@ -23,7 +23,7 @@ public class Shooter extends SubsystemBase {
   public Shooter() {
     //m_shooterMotorLeft = new Spark();
     //m_shooterMotorRight = new Spark();
-    //m_StorageToShooterMotor = new ?
+    //m_StorageToShooterMotor = new ?();
   }
 
   public static Shooter getInstance() {
