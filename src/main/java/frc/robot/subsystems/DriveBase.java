@@ -21,10 +21,10 @@ public class DriveBase extends SubsystemBase {
   private WPI_VictorSPX m_leftvictor11;
   private WPI_VictorSPX m_rightvictor21;
   private double LeftMotorLevel;
-  private double LeftMotor1_Current, LeftMotor2_Current;
+  private double LeftTalon1_Current, LeftVictor11_Current;
   private double LeftEncoderReading, LeftVelocity, LeftAcceleration;
   private double RightMotorLevel;
-  private double RightMotor1_Current, RightMotor2_Current;
+  private double RightTalon2_Current, RightVictor21_Current;
   private double RightEncoderReading, RightVelocity, RightAcceleration;
   private double Heading;
   /**

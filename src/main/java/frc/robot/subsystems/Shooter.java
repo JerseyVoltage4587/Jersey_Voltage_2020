@@ -13,9 +13,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
   static Shooter m_Instance = null;
-  private Spark m_shooterMotorLeft = null;
-  private Spark m_shooterMotorRight = null;
-  //private ? m_StorageToShooterMotor = null;
+  private static Spark m_shooterMotorLeft = null;
+  private static Spark m_shooterMotorRight = null;
+  //private static ? m_StorageToShooterMotor = null;
   private Encoder m_shooterEncoder = null;
   /**
    * Creates a new Shooter.
@@ -35,8 +35,13 @@ public class Shooter extends SubsystemBase {
 		return m_Instance;
   }
 
-  public static void setShooterRPM() {
-    
+  public static void setShooterRPM(double x) {
+    //m_shooterMotorLeft.set(x);
+    //m_shooterMotorRight.set(x);
+  }
+
+  public static void setStorageToShooterRPM(double x) {
+    //m_StorageToShooterMotor.set(x);
   }
 
   @Override
