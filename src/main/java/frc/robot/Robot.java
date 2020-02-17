@@ -41,8 +41,8 @@ public class Robot extends TimedRobot {
     return Shooter.getInstance();
   }
 
-  public static Feeder getFeeder() {
-    return Feeder.getInstance();
+  public static Storage getStorage() {
+    return Storage.getInstance();
   }
 
   public static Climber getClimber() {

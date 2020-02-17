@@ -7,20 +7,23 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
   static Shooter m_Instance = null;
-  private WPI_TalonSRX m_shooterMotor = null;
-  private Encoder m_shooterEncoder;
+  private Spark m_shooterMotorLeft = null;
+  private Spark m_shooterMotorRight = null;
+  //private ? m_StorageToShooterMotor = null;
+  private Encoder m_shooterEncoder = null;
   /**
    * Creates a new Shooter.
    */
   public Shooter() {
-    //m_shooterMotor = new WPI_TalonSRX();
+    //m_shooterMotorLeft = new Spark();
+    //m_shooterMotorRight = new Spark();
+    //m_StorageToShooterMotor = new ?
   }
 
   public static Shooter getInstance() {

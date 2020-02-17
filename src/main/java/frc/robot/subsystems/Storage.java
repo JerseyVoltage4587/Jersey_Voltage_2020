@@ -11,26 +11,26 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
-public class Feeder extends SubsystemBase {
-  static Feeder m_Instance = null;
-  private WPI_TalonSRX m_feederMotor = null;
+public class Storage extends SubsystemBase {
+  static Storage m_Instance = null;
+  //private ? m_storageMotor = null;
   /**
-   * Creates a new Feeder.
+   * Creates a new Storage.
    */
-  public Feeder() {
-    //m_feederMotor = new WPI_TalonSRX();
+  public Storage() {
+    //m_storageMotor = new ?;
   }
 
-  public static Feeder getInstance() {
+  public static Storage getInstance() {
     if(m_Instance == null) {
-			synchronized (Feeder.class) {
-				m_Instance = new Feeder();
+			synchronized (Storage.class) {
+				m_Instance = new Storage();
 			}
 		}
 		return m_Instance;
   }
 
-  public static void setFeederMotorLevel() {
+  public static void setStoragerMotorLevel() {
     
   }
 

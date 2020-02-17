@@ -6,19 +6,19 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.subsystems;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   static Intake m_Instance = null;
-  private WPI_TalonSRX m_intakeMotor = null;
-  private WPI_TalonSRX m_intakeArmMotor = null;
+  //private ? m_intakeMotor = null;
+  //private ? m_intakeArmMotor = null;
   /**
    * Creates a new Intake.
    */
   public Intake() {
-    //m_intakeMotor = new WPI_TalonSRX();
-    //m_intakeArmMotor = new WPI_TalonSRX();
+    //m_intakeMotor = new ?;
+    //m_intakeArmMotor = new ?;
   }
 
   public static Intake getInstance() {

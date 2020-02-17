@@ -11,6 +11,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
   static Climber m_Instance = null;
+  //private ? m_climberMotor1;
+  //private ? m_climberMotor2;
   /**
    * Creates a new Climber.
    */
