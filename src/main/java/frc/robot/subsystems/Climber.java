@@ -7,17 +7,19 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
   static Climber m_Instance = null;
-  //private ? m_climberMotor1;
-  //private ? m_climberMotor2;
+  private WPI_TalonSRX m_leftClimberMotor;
+  private WPI_TalonSRX m_rightClimberMotor;
   /**
    * Creates a new Climber.
    */
   public Climber() {
-
+    m_leftClimberMotor = new WPI_TalonSRX(2);
+    m_rightClimberMotor = new WPI_TalonSRX(3);
   }
 
   public static Climber getInstance() {
@@ -29,8 +31,12 @@ public class Climber extends SubsystemBase {
 		return m_Instance;
   }
 
-  public static void setClimberMotorLevel() {
-    
+  public void setLeftClimberMotorLevel(double x) {
+    m_leftClimberMotor.set(x);
+  }
+
+  public void setRightClimberMotorLevel(double x) {
+    m_rightClimberMotor.set(x);
   }
 
   @Override

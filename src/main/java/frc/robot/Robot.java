@@ -60,9 +60,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     CameraServer.getInstance();
-    NetworkTable limelightTable;
-    limelightTable = NetworkTableInstance.getDefault().getTable("limelight");
-    NetworkTableEntry tv = limelightTable.getEntry("tv");
   }
 
   /**
@@ -115,13 +112,10 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    // This makes sure that the autonomous stops running when
-    // teleop starts running. If you want the autonomous to
-    // continue until interrupted by another command, remove
-    // this line or comment it out.
-    //if (m_autonomousCommand != null) {
-//      m_autonomousCommand.cancel();
-    //}
+    getDriveBase().setLeftSensor(0, 0, 10);
+    m_right2.setSelectedSensorPosition(0, 0, 10);
+    Gyro.reset();
+    m_drive.setSafetyEnabled(true);
   }
 
   /**

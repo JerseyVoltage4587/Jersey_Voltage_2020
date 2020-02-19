@@ -56,17 +56,22 @@ public class DriveBase extends SubsystemBase {
   }
 
   public void setLeftMotorLevel(double x) {
-    m_lefttalon1.set(x);
+    LeftMotorLevel = x;
+    m_lefttalon1.set(LeftMotorLevel);
   }
 
   public void setRightMotorLevel(double x) {
-    m_righttalon2.set(x);
+    RightMotorLevel = x;
+    m_righttalon2.set(RightMotorLevel);
   }
 
   public void setSafetyEnabled(boolean x){
     m_drive.setSafetyEnabled(x);
   }
-  
+
+  public void setLeftSensor(int a, int b, int c) {
+    m_lefttalon1.setSelectedSensorPosition(a, b, c);
+  }
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

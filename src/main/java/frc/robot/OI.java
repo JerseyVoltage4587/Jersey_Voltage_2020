@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Aim;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -67,7 +68,7 @@ public class OI extends CommandBase {
     leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
-    //buttonA1.whenPressed(new Aim());
+    buttonA1.whenPressed(new Aim());
     //buttonB1.whenPressed();
     //buttonX1.whenPressed();
     //buttonY1.whenPressed();
@@ -115,13 +116,13 @@ public class OI extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double forward = -1.0 * m_joy1.getY();	// Sign this so forward is positive
-    double turn = +1.0 * m_joy1.getRawAxis(4);
+    double forward = 0;
+    double turn = 0;
 
-    if (Math.abs(forward) < 0.10) {
+    if (Math.abs(getDrive()) < 0.10) {
 			forward = 0;
 		}
-		if (Math.abs(turn) < 0.10) {
+		if (Math.abs(getTurn()) < 0.10) {
 			turn = 0;
     }
     

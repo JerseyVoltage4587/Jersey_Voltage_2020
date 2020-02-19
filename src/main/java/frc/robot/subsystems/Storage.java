@@ -13,7 +13,8 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Storage extends SubsystemBase {
   static Storage m_Instance = null;
-  //private ? m_storageMotor = null;
+  private WPI_TalonSRX m_storageBeltMotor = null;
+  private WPI_TalonSRX m_storageSeparatorMotor = null;
   /**
    * Creates a new Storage.
    */
