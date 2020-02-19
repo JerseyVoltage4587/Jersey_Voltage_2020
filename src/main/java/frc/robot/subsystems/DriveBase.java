@@ -27,6 +27,7 @@ public class DriveBase extends SubsystemBase {
   private double RightTalon2_Current, RightVictor21_Current;
   private double RightEncoderReading, RightVelocity, RightAcceleration;
   private double Heading;
+
   /**
    * Creates a new DriveBase.
    */
@@ -46,22 +47,26 @@ public class DriveBase extends SubsystemBase {
   }
 
   public static DriveBase getInstance() {
-    if(m_Instance == null) {
-			synchronized (DriveBase.class) {
-				m_Instance = new DriveBase();
-			}
-		}
-		return m_Instance;
+    if (m_Instance == null) {
+      synchronized (DriveBase.class) {
+        m_Instance = new DriveBase();
+      }
+    }
+    return m_Instance;
   }
 
-  public static void setLeftMotorLevel() {
-
+  public void setLeftMotorLevel(double x) {
+    m_lefttalon1.set(x);
   }
 
-  public static void setRightMotorLevel() {
-
+  public void setRightMotorLevel(double x) {
+    m_righttalon2.set(x);
   }
 
+  public void setSafetyEnabled(boolean x){
+    m_drive.setSafetyEnabled(x);
+  }
+  
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

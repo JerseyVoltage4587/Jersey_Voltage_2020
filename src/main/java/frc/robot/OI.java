@@ -67,7 +67,7 @@ public class OI extends CommandBase {
     leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
-    //buttonA1.whenPressed();
+    //buttonA1.whenPressed(new Aim());
     //buttonB1.whenPressed();
     //buttonX1.whenPressed();
     //buttonY1.whenPressed();
