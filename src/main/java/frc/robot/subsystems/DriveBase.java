@@ -72,6 +72,11 @@ public class DriveBase extends SubsystemBase {
   public void setLeftSensor(int a, int b, int c) {
     m_lefttalon1.setSelectedSensorPosition(a, b, c);
   }
+
+  public void setRightSensor(int a, int b, int c) {
+    m_righttalon2.setSelectedSensorPosition(a, b, c);
+  }
+
   @Override
   public void periodic() {
     // This method will be called once per scheduler run

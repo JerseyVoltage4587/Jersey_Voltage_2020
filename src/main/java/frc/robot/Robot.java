@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.*;
+import frc.robot.util.Gyro;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -51,6 +52,10 @@ public class Robot extends TimedRobot {
   
   public static OI getOI() {
     return OI.getInstance();
+  }
+
+  public static Gyro getGyro() {
+    return Gyro.getInstance();
   }
 
   /**
@@ -113,9 +118,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     getDriveBase().setLeftSensor(0, 0, 10);
-    m_right2.setSelectedSensorPosition(0, 0, 10);
-    Gyro.reset();
-    m_drive.setSafetyEnabled(true);
+    getDriveBase().setRightSensor(0, 0, 10);
+    getGyro().reset();
+    getDriveBase().setSafetyEnabled(true);
   }
 
   /**
