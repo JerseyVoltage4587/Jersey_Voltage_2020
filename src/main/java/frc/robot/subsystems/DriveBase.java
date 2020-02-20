@@ -17,8 +17,8 @@ import frc.robot.OI;
 public class DriveBase extends SubsystemBase {
   DifferentialDrive m_drive = null;
   static DriveBase m_Instance = null;
-  private WPI_TalonSRX m_lefttalon1;
-  private WPI_TalonSRX m_righttalon2;
+  public WPI_TalonSRX m_lefttalon1;
+  public WPI_TalonSRX m_righttalon2;
   private WPI_VictorSPX m_leftvictor11;
   private WPI_VictorSPX m_rightvictor21;
   private double LeftMotorLevel;
