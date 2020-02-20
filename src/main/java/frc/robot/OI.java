@@ -116,17 +116,7 @@ public class OI extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double forward = 0;
-    double turn = 0;
-
-    if (Math.abs(getDrive()) < 0.10) {
-			forward = 0;
-		}
-		if (Math.abs(getTurn()) < 0.10) {
-			turn = 0;
-    }
     
-    m_drive.arcadeDrive(forward, turn);
   }
 
   // Called once the command ends or is interrupted.
