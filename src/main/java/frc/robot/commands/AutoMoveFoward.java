@@ -37,9 +37,9 @@ public class AutoMoveFoward extends CommandBase {
   @Override
   public void execute() {
     averageInches = (leftInches + rightInches) / 2;
-    if (averageInches != 24) {
-      Robot.getDriveBase().setLeftMotorLevel(0.5);
-      Robot.getDriveBase().setRightMotorLevel(0.5);
+    if (averageInches < 24) {
+      Robot.getDriveBase().setLeftMotorLevel(0.75);
+      Robot.getDriveBase().setRightMotorLevel(0.75);
       leftEncoder = -1 * getDriveBase().m_lefttalon1.getSelectedSensorPosition(0);
       rightEncoder = -1 * getDriveBase().m_righttalon2.getSelectedSensorPosition(0);
       leftInches = leftEncoder / 4096.0 * Math.PI * 6;
@@ -55,14 +55,14 @@ public class AutoMoveFoward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.getDriveBase().setLeftMotorLevel(0.5);
-    Robot.getDriveBase().setRightMotorLevel(0.5);
+    Robot.getDriveBase().setLeftMotorLevel(0);
+    Robot.getDriveBase().setRightMotorLevel(0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (averageInches != 24) {
+    if (averageInches < 24) {
       return false;
     }
 

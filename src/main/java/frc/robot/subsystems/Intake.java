@@ -7,18 +7,26 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
   static Intake m_Instance = null;
-  //private ? m_intakeMotor = null;
-  //private ? m_intakeArmMotor = null;
+  private WPI_TalonSRX m_intakeMotorTALON = null;
+  private WPI_VictorSPX m_intakeMotorVICTOR = null;
+  private WPI_TalonSRX m_intakeArmMotor = null;
   /**
    * Creates a new Intake.
    */
   public Intake() {
-    //m_intakeMotor = new ?();
-    //m_intakeArmMotor = new ?();
+    //m_intakeMotorTALON = new TalonSRX; //TODO find out device number
+    //m_intakeMotorVICTOR = new VictorSPX(); //TODO find out device number
+    //m_intakeArmMotor = new TalonSRX(); //TODO find out device number
   }
 
   public static Intake getInstance() {

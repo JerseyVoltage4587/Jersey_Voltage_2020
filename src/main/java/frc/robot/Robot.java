@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Aim;
+import frc.robot.commands.AutoTurnAround;
 import frc.robot.commands.TurnToAngle;
 import frc.robot.subsystems.*;
 import frc.robot.util.Gyro;
@@ -107,7 +108,7 @@ public class Robot extends TimedRobot {
     //if (m_autonomousCommand != null) {
 //      m_autonomousCommand.schedule();
     //}
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup());
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new AutoTurnAround()));
   }
 
   /**
@@ -115,6 +116,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousPeriodic() {
+    CommandScheduler.getInstance().run();
   }
 
   @Override
