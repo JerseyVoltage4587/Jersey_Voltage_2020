@@ -16,6 +16,7 @@ public class AutoMoveFoward extends CommandBase {
   int rightEncoder = 0;
   double leftInches = 0;
   double rightInches = 0;
+  double averageInches = 0;
   /**
    * Creates a new AutoMoveFoward.
    */
@@ -35,7 +36,7 @@ public class AutoMoveFoward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double averageInches = (leftInches + rightInches) / 2;
+    averageInches = (leftInches + rightInches) / 2;
     if (averageInches != 24) {
       Robot.getDriveBase().setLeftMotorLevel(0.5);
       Robot.getDriveBase().setRightMotorLevel(0.5);
@@ -54,11 +55,19 @@ public class AutoMoveFoward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.getDriveBase().setLeftMotorLevel(0.5);
+    Robot.getDriveBase().setRightMotorLevel(0.5);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (averageInches != 24) {
+      return false;
+    }
+
+    else {
+      return true;
+    }
   }
 }
