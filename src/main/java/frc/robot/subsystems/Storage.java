@@ -19,7 +19,8 @@ public class Storage extends SubsystemBase {
    * Creates a new Storage.
    */
   public Storage() {
-    //m_storageMotor = new ?();
+	  //m_storageBeltMotor = new WPI_TalonSRX(0); //TODO find out device number
+    //m_storageSeparatorMotor = new WPI_TalonSRX(); //TODO find out device number
   }
 
   public static Storage getInstance() {
@@ -31,8 +32,12 @@ public class Storage extends SubsystemBase {
 		return m_Instance;
   }
 
-  public static void setStoragerMotorLevel() {
-    
+  public void setStoragerBeltMotorLevel(double x) {
+    m_storageBeltMotor.set(x);
+  }
+
+  public void setStoragerSeparatorMotorLevel(double x) {
+    m_storageSeparatorMotor.set(x);
   }
 
   @Override

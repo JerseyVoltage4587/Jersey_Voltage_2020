@@ -123,7 +123,10 @@ public class Robot extends TimedRobot {
   public void teleopInit() {
     getDriveBase().setLeftSensor(0, 0, 10);
     getDriveBase().setRightSensor(0, 0, 10);
-    getGyro().reset();
+    getIntake().setIntakeArmSensor(0, 0, 10);
+    getIntake().setIntakeSensor(0, 0, 10);
+    getGyro();
+    Gyro.reset();
     getDriveBase().setSafetyEnabled(true);
   }
 

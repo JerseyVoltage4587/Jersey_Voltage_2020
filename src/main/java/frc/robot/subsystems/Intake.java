@@ -7,12 +7,8 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.can.TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Intake extends SubsystemBase {
@@ -20,13 +16,14 @@ public class Intake extends SubsystemBase {
   private WPI_TalonSRX m_intakeMotorTALON = null;
   private WPI_VictorSPX m_intakeMotorVICTOR = null;
   private WPI_TalonSRX m_intakeArmMotor = null;
+  private String intakeArmMotorStatus = null;
   /**
    * Creates a new Intake.
    */
   public Intake() {
-    //m_intakeMotorTALON = new TalonSRX; //TODO find out device number
-    //m_intakeMotorVICTOR = new VictorSPX(); //TODO find out device number
-    //m_intakeArmMotor = new TalonSRX(); //TODO find out device number
+    //m_intakeMotorTALON = new WPI_TalonSRX; //TODO find out device number and whether it's a VictorSPX or a TalonSRX
+    //m_intakeMotorVICTOR = new WPI_VictorSPX();
+    //m_intakeArmMotor = new WPI_TalonSRX(); //TODO find out device number
   }
 
   public static Intake getInstance() {
@@ -38,20 +35,36 @@ public class Intake extends SubsystemBase {
 		return m_Instance;
   }
 
-  public static void raiseIntake() {
-
+  public void raiseIntake() {
+    m_intakeArmMotor.set(0.65);
+    intakeArmMotorStatus = "UP";
   }
 
-  public static void lowerIntake() {
-    
+  public void lowerIntake() {
+    m_intakeArmMotor.set(-0.65);
+    intakeArmMotorStatus = "DOWN";
   }
 
-  public static void startIntakeMotors() {
-    
+  public void startIntakeMotors() {
+    if (intakeArmMotorStatus.equals("DOWN")) {
+      m_intakeMotorTALON.set(0.7); //TODO Talon or Victor
+      m_intakeMotorVICTOR.set(0.7);
+    }
   }
 
-  public static void stopIntakeMotors() {
-    
+  public void stopIntakeMotors() {
+    if (intakeArmMotorStatus.equals("DOWN")) {
+      m_intakeMotorTALON.set(0); //TODO Talon or Victor
+      m_intakeMotorVICTOR.set(0);
+    }
+  }
+
+  public void setIntakeArmSensor(int a, int b, int c) {
+    m_intakeArmMotor.setSelectedSensorPosition(a, b, c);
+  }
+
+  public void setIntakeSensor(int a, int b, int c) {
+    m_intakeArmMotor.setSelectedSensorPosition(a, b, c);
   }
 
   @Override

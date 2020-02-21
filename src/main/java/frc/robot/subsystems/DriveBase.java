@@ -51,20 +51,6 @@ public class DriveBase extends SubsystemBase {
     return m_Instance;
   }
 
-  public void Drive() {
-    double forward = 0;
-    double turn = 0;
-
-    if (Math.abs(OI.getInstance().getDrive()) < 0.10) {
-			forward = 0;
-		}
-		if (Math.abs(OI.getInstance().getTurn()) < 0.10) {
-			turn = 0;
-    }
-    
-    m_drive.arcadeDrive(forward, turn);
-  }
-
   public void setLeftMotorLevel(double x) {
     LeftMotorLevel = x;
     m_lefttalon1.set(LeftMotorLevel);
@@ -90,6 +76,16 @@ public class DriveBase extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
-    Drive();
+    double forward = 0;
+    double turn = 0;
+
+    if (Math.abs(OI.getInstance().getDrive()) < 0.10) {
+			forward = 0;
+		}
+		if (Math.abs(OI.getInstance().getTurn()) < 0.10) {
+			turn = 0;
+    }
+    
+    m_drive.arcadeDrive(forward, turn);
   }
 }
