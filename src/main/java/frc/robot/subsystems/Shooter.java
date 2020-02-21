@@ -9,8 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -40,12 +38,13 @@ public class Shooter extends SubsystemBase {
   }
 
   public static void setShooterRPM(double x) {
-    //m_shooterMotorLeft.set(x);
-    //m_shooterMotorRight.set(x);
+    m_shooterMotorLeft.set(x);
+    m_shooterMotorRight.set(x);
   }
 
   public static void setStorageToShooterRPM(double x) {
-    //m_storageKicker.set(x);
+    m_storageKickerTALON.set(x);
+    m_storageKickerVICTOR.set(x);
   }
 
   @Override
