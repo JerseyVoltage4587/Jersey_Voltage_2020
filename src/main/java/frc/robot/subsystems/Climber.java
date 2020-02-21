@@ -18,8 +18,8 @@ public class Climber extends SubsystemBase {
    * Creates a new Climber.
    */
   public Climber() {
-    m_leftClimberMotor = new WPI_TalonSRX(2);
-    m_rightClimberMotor = new WPI_TalonSRX(3);
+    //m_leftClimberMotor = new WPI_TalonSRX(); //TODO Device Number
+    //m_rightClimberMotor = new WPI_TalonSRX(); //TODO Device Number
   }
 
   public static Climber getInstance() {

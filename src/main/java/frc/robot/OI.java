@@ -55,6 +55,7 @@ public class OI extends CommandBase {
     rightTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 3);
     
     m_joy2 = new Joystick(1);
+    
     buttonA2 = new JoystickButton(m_joy2, 1);
     buttonB2 = new JoystickButton(m_joy2, 2);
     buttonX2 = new JoystickButton(m_joy2, 3);
@@ -127,6 +128,6 @@ public class OI extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
