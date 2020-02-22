@@ -45,6 +45,8 @@ public class AutoTurnAround extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.getDriveBase().setRightMotorLevel(0);
+    Robot.getDriveBase().setLeftMotorLevel(0);
   }
 
   // Returns true when the command should end.

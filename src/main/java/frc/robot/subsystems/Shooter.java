@@ -37,7 +37,7 @@ public class Shooter extends SubsystemBase {
 		return m_Instance;
   }
 
-  public static void setShooterRPM(double x) {
+  public void setShooterRPM(double x) {
     m_shooterMotorLeft.set(x);
     m_shooterMotorRight.set(x);
   }

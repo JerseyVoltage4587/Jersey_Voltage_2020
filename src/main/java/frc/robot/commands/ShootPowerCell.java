@@ -7,37 +7,22 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.networktables.NetworkTableInstance;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.*;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class Aim extends CommandBase {
-  private static Aim me;
-
-  public static Aim getInstance() {
-    return me;
-  }
-
+public class ShootPowerCell extends CommandBase {
   /**
-   * Creates a new Aim.
+   * Creates a new ShootPowerCell.
    */
-  public Aim() {
+  public ShootPowerCell() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getDriveBase());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-    if (Math.abs(tx) > 2) {
-      CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new TurnToAngle(tx), new WaitCommand(.2), new Aim()));
-    }
-    SmartDashboard.putNumber("Aim", tx);
+    Robot.getShooter().setShooterRPM(Constants.ShooterMotorLevel);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -53,6 +38,6 @@ public class Aim extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }

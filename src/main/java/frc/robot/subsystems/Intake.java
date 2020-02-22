@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
   static Intake m_Instance = null;
@@ -36,12 +37,12 @@ public class Intake extends SubsystemBase {
   }
 
   public void raiseIntake() {
-    m_intakeArmMotor.set(0.65);
+    m_intakeArmMotor.set(Constants.IntakeArmMotorLevel);
     intakeArmMotorStatus = "UP";
   }
 
   public void lowerIntake() {
-    m_intakeArmMotor.set(-0.65);
+    m_intakeArmMotor.set(-1 * Constants.IntakeArmMotorLevel);
     intakeArmMotorStatus = "DOWN";
   }
 

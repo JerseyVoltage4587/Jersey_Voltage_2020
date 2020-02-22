@@ -28,9 +28,10 @@ public final class Constants {
     public static int IntakeArmPDP_Port;
     public static int IntakePWM_Address;
     public static int IntakePDP_Port;
-    public static double IntakeArmMotorLevel;
+    public static double IntakeArmMotorLevel = 0.65;
     public static double IntakeMotorLevel;
     public static int ShooterMotorPWM_Address;
+    public static double ShooterMotorLevel = 0.7;
     public static int ShooterMotorPDP_Port;
     public static int FeederMotorPWM_Address;
     public static int FeederMotorPDP_Port;
