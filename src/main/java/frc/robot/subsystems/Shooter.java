@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj.Spark;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
+  public boolean m_isActive = false;
   static Shooter m_Instance = null;
   private static Spark m_shooterMotorLeft = null;
   private static Spark m_shooterMotorRight = null;
@@ -22,6 +23,9 @@ public class Shooter extends SubsystemBase {
    * Creates a new Shooter.
    */
   public Shooter() {
+    if (m_isActive == false) {
+      return;
+    }
     //m_shooterMotorLeft = new WPI_Spark(); //TODO find out device number
     //m_shooterMotorRight = new WPI_Spark(); //TODO find out device number
     //m_storageKickerTALON = new WPI_TalonSRX(); //TODO find out device number and whether it's a VictorSPX or a TalonSRX
@@ -38,17 +42,26 @@ public class Shooter extends SubsystemBase {
   }
 
   public void setShooterRPM(double x) {
+    if (m_isActive == false) {
+      return;
+    }
     m_shooterMotorLeft.set(x);
     m_shooterMotorRight.set(x);
   }
 
-  public static void setStorageToShooterRPM(double x) {
+  public void setStorageToShooterRPM(double x) {
+    if (m_isActive == false) {
+      return;
+    }
     m_storageKickerTALON.set(x);
     m_storageKickerVICTOR.set(x);
   }
 
   @Override
   public void periodic() {
+    if (m_isActive == false) {
+      return;
+    }
     // This method will be called once per scheduler run
   }
 }

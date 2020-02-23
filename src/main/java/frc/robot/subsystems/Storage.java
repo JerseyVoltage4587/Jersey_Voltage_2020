@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Storage extends SubsystemBase {
+  public boolean m_isActive = false;
   static Storage m_Instance = null;
   private WPI_TalonSRX m_storageBeltMotor = null;
   private WPI_TalonSRX m_storageSeparatorMotor = null;
@@ -19,6 +20,9 @@ public class Storage extends SubsystemBase {
    * Creates a new Storage.
    */
   public Storage() {
+    if (m_isActive == false) {
+      return;
+    }
 	  //m_storageBeltMotor = new WPI_TalonSRX(0); //TODO find out device number
     //m_storageSeparatorMotor = new WPI_TalonSRX(); //TODO find out device number
   }
@@ -33,15 +37,24 @@ public class Storage extends SubsystemBase {
   }
 
   public void setStoragerBeltMotorLevel(double x) {
+    if (m_isActive == false) {
+      return;
+    }
     m_storageBeltMotor.set(x);
   }
 
   public void setStoragerSeparatorMotorLevel(double x) {
+    if (m_isActive == false) {
+      return;
+    }
     m_storageSeparatorMotor.set(x);
   }
 
   @Override
   public void periodic() {
+    if (m_isActive == false) {
+      return;
+    }
     // This method will be called once per scheduler run
   }
 }

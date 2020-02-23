@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.cameraserver.CameraServer;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -24,9 +25,17 @@ import frc.robot.util.Gyro;
  */
 public class Robot extends TimedRobot {
   private static Robot me;
-
+  
   public static Robot getInstance() {
     return me;
+  }
+
+private static PowerDistributionPanel m_PDP;
+  public static PowerDistributionPanel getPDP(){
+    if (m_PDP == null){
+      m_PDP = new PowerDistributionPanel();
+    }
+    return m_PDP;
   }
 
   public static DriveBase getDriveBase() {
@@ -120,12 +129,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    getDriveBase().setLeftSensor(0, 0, 10);
-    getDriveBase().setRightSensor(0, 0, 10);
-    getIntake().setIntakeArmSensor(0, 0, 10);
-    getIntake().setIntakeSensor(0, 0, 10);
-    getGyro();
-    Gyro.reset();
+    getDriveBase().zeroDriveSensors();
+    getIntake().zeroIntakeSensors();
     getDriveBase().setSafetyEnabled(true);
   }
 

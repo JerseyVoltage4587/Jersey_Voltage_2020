@@ -11,6 +11,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Climber extends SubsystemBase {
+  private Boolean m_isActive = false;
   static Climber m_Instance = null;
   private WPI_TalonSRX m_leftClimberMotor;
   private WPI_TalonSRX m_rightClimberMotor;
@@ -18,6 +19,9 @@ public class Climber extends SubsystemBase {
    * Creates a new Climber.
    */
   public Climber() {
+    if (m_isActive == false) {
+      return;
+    }
     //m_leftClimberMotor = new WPI_TalonSRX(); //TODO Device Number
     //m_rightClimberMotor = new WPI_TalonSRX(); //TODO Device Number
   }
@@ -32,15 +36,24 @@ public class Climber extends SubsystemBase {
   }
 
   public void setLeftClimberMotorLevel(double x) {
+    if (m_isActive == false) {
+      return;
+    }
     m_leftClimberMotor.set(x);
   }
 
   public void setRightClimberMotorLevel(double x) {
+    if (m_isActive == false) {
+      return;
+    }
     m_rightClimberMotor.set(x);
   }
 
   @Override
   public void periodic() {
+    if (m_isActive == false) {
+      return;
+    }
     // This method will be called once per scheduler run
   }
 }

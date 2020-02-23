@@ -7,14 +7,24 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
+import edu.wpi.first.hal.PDPJNI;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.OI;
+import frc.robot.Robot;
+import frc.robot.commands.defaultDriveBase;
+import frc.robot.util.AsyncStructuredLogger;
+import frc.robot.util.Gyro;
 
 public class DriveBase extends SubsystemBase {
+  private boolean m_isActive = false;
   DifferentialDrive m_drive = null;
   static DriveBase m_Instance = null;
   public WPI_TalonSRX m_lefttalon1;
@@ -23,15 +33,28 @@ public class DriveBase extends SubsystemBase {
   private WPI_VictorSPX m_rightvictor21;
   private double LeftMotorLevel;
   private double RightMotorLevel;
+  private LoggingData m_loggingData;
+  private AsyncStructuredLogger<LoggingData> m_logger;
+  private long m_lastLogTime = 0;
+
 
   /**
    * Creates a new DriveBase.
    */
   public DriveBase() {
-    m_lefttalon1 = new WPI_TalonSRX(1);
-    m_righttalon2 = new WPI_TalonSRX(2);
-    m_leftvictor11 = new WPI_VictorSPX(11);
-    m_rightvictor21 = new WPI_VictorSPX(21);
+    if (m_isActive == false) {
+      return;
+    }
+    m_lefttalon1 = new WPI_TalonSRX(Constants.LeftTalon1CAN_Address);
+    m_righttalon2 = new WPI_TalonSRX(Constants.RightTalon2CAN_Address);
+    m_leftvictor11 = new WPI_VictorSPX(Constants.LeftVictor1CAN_Address);
+    m_rightvictor21 = new WPI_VictorSPX(Constants.RightVictor21CAN_Address);
+    m_lefttalon1.configFactoryDefault();
+    m_leftvictor11.configFactoryDefault();
+    m_righttalon2.configFactoryDefault(); 
+    m_rightvictor21.configFactoryDefault();
+    m_lefttalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    m_righttalon2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_leftvictor11.follow(m_lefttalon1);
     m_rightvictor21.follow(m_righttalon2);
     m_lefttalon1.setInverted(false);
@@ -40,6 +63,10 @@ public class DriveBase extends SubsystemBase {
     m_rightvictor21.setInverted(InvertType.FollowMaster);
     m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
     m_drive.setRightSideInverted(false);
+    m_drive.setSafetyEnabled(false);
+    setDefaultCommand(new defaultDriveBase());
+    m_loggingData = new LoggingData();
+    m_logger = new AsyncStructuredLogger<LoggingData>("DriveBase", /*forceUnique=*/false, LoggingData.class);
   }
 
   public static DriveBase getInstance() {
@@ -52,40 +79,123 @@ public class DriveBase extends SubsystemBase {
   }
 
   public void setLeftMotorLevel(double x) {
+    if (m_isActive == false) {
+      return;
+    }
     LeftMotorLevel = x;
     m_lefttalon1.set(LeftMotorLevel);
   }
 
   public void setRightMotorLevel(double x) {
+    if (m_isActive == false) {
+      return;
+    }
     RightMotorLevel = x;
     m_righttalon2.set(RightMotorLevel);
   }
 
   public void setSafetyEnabled(boolean x){
+    if (m_isActive == false) {
+      return;
+    }
     m_drive.setSafetyEnabled(x);
   }
 
-  public void setLeftSensor(int a, int b, int c) {
-    m_lefttalon1.setSelectedSensorPosition(a, b, c);
+  public void zeroDriveSensors() {
+    if (m_isActive == false) {
+      return;
+    }
+    m_lefttalon1.setSelectedSensorPosition(0, 0, 10);
+    m_righttalon2.setSelectedSensorPosition(0, 0, 10);
+    Gyro.getInstance();
+    Gyro.reset();
   }
 
-  public void setRightSensor(int a, int b, int c) {
-    m_righttalon2.setSelectedSensorPosition(a, b, c);
+  public void arcadeDrive(double forward, double turn) {
+    if (m_isActive == false) {
+      return;
+    }
+    m_drive.arcadeDrive(forward, turn);
   }
 
   @Override
   public void periodic() {
-    // This method will be called once per scheduler run
-    double forward = 0;
-    double turn = 0;
-
-    if (Math.abs(OI.getInstance().getDrive()) < 0.10) {
-			forward = 0;
-		}
-		if (Math.abs(OI.getInstance().getTurn()) < 0.10) {
-			turn = 0;
+    if (m_isActive == false) {
+      return;
     }
-    
-    m_drive.arcadeDrive(forward, turn);
+    // This method will be called once per scheduler run
+    long now = System.nanoTime();
+    double lastLeftPosition = m_loggingData.LeftPosition;
+    double lastLeftVelocity = m_loggingData.LeftVelocity;
+    double lastRightPosition = m_loggingData.RightPosition;
+    double lastRightVelocity = m_loggingData.RightVelocity;
+
+    m_loggingData.LeftMotorLevel = m_lefttalon1.get();
+    m_loggingData.LeftMotor1_SupplyCurrent = m_lefttalon1.getSupplyCurrent();
+    m_loggingData.LeftMotor1_StatorCurrent = m_lefttalon1.getStatorCurrent();
+    m_loggingData.LeftMotor2_SupplyCurrent = Robot.getPDP().getCurrent(Constants.LeftVictor11PDP_Port);
+    m_loggingData.LeftEncoderReading = getLeftEncoder();
+    m_loggingData.LeftPosition = getLeftDistanceInches();
+    m_loggingData.LeftVelocity = getRateOfChange(lastLeftPosition, m_loggingData.LeftPosition, m_lastLogTime, now);
+    m_loggingData.LeftAcceleration = getRateOfChange(lastLeftVelocity, m_loggingData.LeftVelocity, m_lastLogTime, now);
+
+    m_loggingData.RightMotorLevel = m_righttalon2.get();
+    m_loggingData.RightMotor1_SupplyCurrent = m_righttalon2.getSupplyCurrent();
+    m_loggingData.RightMotor1_StatorCurrent = m_righttalon2.getStatorCurrent();
+    m_loggingData.RightMotor2_SupplyCurrent = Robot.getPDP().getCurrent(Constants.RightVictor21PDP_Port);
+    m_loggingData.RightEncoderReading = getRightEncoder();
+    m_loggingData.RightPosition = getRightDistanceInches();
+    m_loggingData.RightVelocity = getRateOfChange(lastRightPosition, m_loggingData.RightPosition, m_lastLogTime, now);
+    m_loggingData.RightAcceleration = getRateOfChange(lastRightVelocity, m_loggingData.RightVelocity, m_lastLogTime, now);
+
+    m_loggingData.Heading = Gyro.getYaw();
+    m_logger.queueData(m_loggingData);
+    m_lastLogTime = now;
+  }
+
+  public int getLeftEncoder() {
+    if (m_isActive == false) {
+      return 0;
+    }
+    return m_lefttalon1.getSelectedSensorPosition(0);
+  }
+
+  public double getLeftDistanceInches() {
+    return getLeftEncoder() * Constants.WheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
+  }
+
+  public int getRightEncoder() {
+    if (m_isActive == false) {
+      return 0;
+    }
+    return m_righttalon2.getSelectedSensorPosition(0);
+  }
+
+  public double getRightDistanceInches() {
+    return getRightEncoder() * Constants.WheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
+  }
+
+  private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
+    return (finalValue - initialValue) / (finalTime - initialTime);
+  }
+
+  public class LoggingData {
+    double LeftMotorLevel;
+    double LeftMotor1_SupplyCurrent;
+    double LeftMotor1_StatorCurrent;
+    double LeftMotor2_SupplyCurrent;
+    int LeftEncoderReading;
+    double LeftPosition;
+    double LeftVelocity;
+    double LeftAcceleration;
+    double RightMotorLevel;
+    double RightMotor1_SupplyCurrent;
+    double RightMotor1_StatorCurrent;
+    double RightMotor2_SupplyCurrent;
+    int RightEncoderReading;
+    double RightPosition;
+    double RightVelocity;
+    double RightAcceleration;
+    double Heading;
   }
 }

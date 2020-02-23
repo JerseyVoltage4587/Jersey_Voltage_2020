@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase {
+  public boolean m_isActive = false;
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotorTALON = null;
   private WPI_VictorSPX m_intakeMotorVICTOR = null;
@@ -22,6 +23,9 @@ public class Intake extends SubsystemBase {
    * Creates a new Intake.
    */
   public Intake() {
+    if (m_isActive == false) {
+      return;
+    }
     //m_intakeMotorTALON = new WPI_TalonSRX; //TODO find out device number and whether it's a VictorSPX or a TalonSRX
     //m_intakeMotorVICTOR = new WPI_VictorSPX();
     //m_intakeArmMotor = new WPI_TalonSRX(); //TODO find out device number
@@ -37,16 +41,25 @@ public class Intake extends SubsystemBase {
   }
 
   public void raiseIntake() {
+    if (m_isActive == false) {
+      return;
+    }
     m_intakeArmMotor.set(Constants.IntakeArmMotorLevel);
     intakeArmMotorStatus = "UP";
   }
 
   public void lowerIntake() {
+    if (m_isActive == false) {
+      return;
+    }
     m_intakeArmMotor.set(-1 * Constants.IntakeArmMotorLevel);
     intakeArmMotorStatus = "DOWN";
   }
 
   public void startIntakeMotors() {
+    if (m_isActive == false) {
+      return;
+    }
     if (intakeArmMotorStatus.equals("DOWN")) {
       m_intakeMotorTALON.set(0.7); //TODO Talon or Victor
       m_intakeMotorVICTOR.set(0.7);
@@ -54,22 +67,29 @@ public class Intake extends SubsystemBase {
   }
 
   public void stopIntakeMotors() {
+    if (m_isActive == false) {
+      return;
+    }
     if (intakeArmMotorStatus.equals("DOWN")) {
       m_intakeMotorTALON.set(0); //TODO Talon or Victor
       m_intakeMotorVICTOR.set(0);
     }
   }
 
-  public void setIntakeArmSensor(int a, int b, int c) {
-    m_intakeArmMotor.setSelectedSensorPosition(a, b, c);
-  }
-
-  public void setIntakeSensor(int a, int b, int c) {
-    m_intakeArmMotor.setSelectedSensorPosition(a, b, c);
+  public void zeroIntakeSensors() {
+    if (m_isActive == false) {
+      return;
+    }
+    m_intakeArmMotor.setSelectedSensorPosition(0, 0, 10);
+    m_intakeMotorTALON.setSelectedSensorPosition(0, 0, 10);
+    m_intakeMotorVICTOR.setSelectedSensorPosition(0, 0, 10);
   }
 
   @Override
   public void periodic() {
+    if (m_isActive == false) {
+      return;
+    }
     // This method will be called once per scheduler run
   }
 }
