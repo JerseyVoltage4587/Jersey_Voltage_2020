@@ -3,10 +3,6 @@ package frc.robot.util;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintStream;
-import java.io.PrintWriter;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
 public class AsyncAdHocLogger extends CrashTrackingRunnable
