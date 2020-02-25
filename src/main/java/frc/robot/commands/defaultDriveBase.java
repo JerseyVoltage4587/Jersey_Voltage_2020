@@ -11,11 +11,11 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
 
-public class defaultDriveBase extends CommandBase {
+public class DefaultDriveBase extends CommandBase {
   /**
-   * Creates a new defaultDriveBase.
+   * Creates a new DefaultDriveBase.
    */
-  public defaultDriveBase() {
+  public DefaultDriveBase() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getDriveBase());
   }

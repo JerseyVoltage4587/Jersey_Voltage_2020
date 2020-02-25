@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.commands.defaultDriveBase;
+import frc.robot.commands.DefaultDriveBase;
 import frc.robot.util.AsyncStructuredLogger;
 import frc.robot.util.Gyro;
 
@@ -61,7 +61,7 @@ public class DriveBase extends SubsystemBase {
     m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
     m_drive.setRightSideInverted(false);
     m_drive.setSafetyEnabled(false);
-    setDefaultCommand(new defaultDriveBase());
+    setDefaultCommand(new DefaultDriveBase());
     m_loggingData = new LoggingData();
     m_logger = new AsyncStructuredLogger<LoggingData>("DriveBase", /*forceUnique=*/false, LoggingData.class);
   }
