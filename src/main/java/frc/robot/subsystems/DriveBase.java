@@ -30,8 +30,8 @@ public class DriveBase extends SubsystemBase {
   private WPI_VictorSPX m_rightvictor21;
   private double LeftMotorLevel;
   private double RightMotorLevel;
-  private LoggingData m_loggingData;
-  private AsyncStructuredLogger<LoggingData> m_logger;
+  private DriveBaseLoggingData m_loggingData;
+  private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
   private long m_lastLogTime = 0;
 
 
@@ -62,8 +62,8 @@ public class DriveBase extends SubsystemBase {
     m_drive.setRightSideInverted(false);
     m_drive.setSafetyEnabled(false);
     setDefaultCommand(new DefaultDriveBase());
-    m_loggingData = new LoggingData();
-    m_logger = new AsyncStructuredLogger<LoggingData>("DriveBase", /*forceUnique=*/false, LoggingData.class);
+    m_loggingData = new DriveBaseLoggingData();
+    m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
   }
 
   public static DriveBase getInstance() {
@@ -158,7 +158,7 @@ public class DriveBase extends SubsystemBase {
   }
 
   public double getLeftDistanceInches() {
-    return getLeftEncoder() * Constants.WheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
+    return getLeftEncoder() * Constants.DriveBaseWheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
   }
 
   public int getRightEncoder() {
@@ -169,14 +169,14 @@ public class DriveBase extends SubsystemBase {
   }
 
   public double getRightDistanceInches() {
-    return getRightEncoder() * Constants.WheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
+    return getRightEncoder() * Constants.DriveBaseWheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
   }
 
   private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
     return (finalValue - initialValue) / (finalTime - initialTime);
   }
 
-  public class LoggingData {
+  public class DriveBaseLoggingData {
     double LeftMotorLevel;
     double LeftMotor1_SupplyCurrent;
     double LeftMotor1_StatorCurrent;

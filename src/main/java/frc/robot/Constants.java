@@ -30,13 +30,17 @@ public final class Constants {
     public static int IntakePDP_Port;
     public static final double IntakeArmMotorLevel = 0.65;
     public static double IntakeMotorLevel;
-    public static int ShooterMotorPWM_Address;
+    public static final int LeftShooterMotorCAN_Address = 9;
+    public static int LeftShooterMotorPDP_Port = 5; //TODO Find Actual PDP Port
+    public static final int RightShooterMotorCAN_Address = 8;
+    public static int RightShooterMotorPDP_Port = 6; //TODO Find Actual PDP Port
     public static final double ShooterMotorLevel = 0.7;
-    public static int ShooterMotorPDP_Port;
     public static int FeederMotorPWM_Address;
     public static int FeederMotorPDP_Port;
     public static int ClimberMotorPWM_Address;
     public static int ClimberMotorPDP_Port;
     public static final int DriveBaseEncoderTics = 4096;
-    public static final double WheelDiameter = 6; // inches
+    public static final int ShooterEncoderTics = 4096;
+    public static final double DriveBaseWheelDiameter = 6; // inches
+    public static final double ShooterWheelDiameter = 6; // inches
 }

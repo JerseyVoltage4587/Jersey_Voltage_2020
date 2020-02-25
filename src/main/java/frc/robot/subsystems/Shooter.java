@@ -7,18 +7,27 @@
 
 package frc.robot.subsystems;
 
+import frc.robot.Robot;
+import frc.robot.Constants;
+import frc.robot.util.AsyncStructuredLogger;
+import com.revrobotics.CANEncoder;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.wpilibj.Spark;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
   public boolean m_isActive = false;
   static Shooter m_Instance = null;
-  private static Spark m_shooterMotorLeft = null;
-  private static Spark m_shooterMotorRight = null;
+  private static CANSparkMax m_leftShooterMotor = null;
+  private static CANSparkMax m_rightShooterMotor = null;
   private static WPI_TalonSRX m_storageKickerTALON = null;
   private static WPI_VictorSPX m_storageKickerVICTOR = null;
+  private ShooterLoggingData m_loggingData;
+  private AsyncStructuredLogger<ShooterLoggingData> m_logger;
+  private CANEncoder m_leftShooterEncoder;
+  private CANEncoder m_rightShooterEncoder;
   /**
    * Creates a new Shooter.
    */
@@ -26,10 +35,14 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    //m_shooterMotorLeft = new WPI_Spark(); //TODO find out device number
-    //m_shooterMotorRight = new WPI_Spark(); //TODO find out device number
+    m_leftShooterMotor = new CANSparkMax(9, MotorType.kBrushless);
+    m_rightShooterMotor = new CANSparkMax(8, MotorType.kBrushless);
     //m_storageKickerTALON = new WPI_TalonSRX(); //TODO find out device number and whether it's a VictorSPX or a TalonSRX
     //m_storageKickerVICTOR = new WPI_VictorSPX();
+    m_leftShooterEncoder = m_leftShooterMotor.getEncoder();
+    m_rightShooterEncoder = m_rightShooterMotor.getEncoder();
+    m_loggingData = new ShooterLoggingData();
+    m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/false, ShooterLoggingData.class);
   }
 
   public static Shooter getInstance() {
@@ -41,12 +54,26 @@ public class Shooter extends SubsystemBase {
 		return m_Instance;
   }
 
+  public double getLeftShooterEncoder() {
+    if (m_isActive == false) {
+      return 0;
+    }
+    return m_leftShooterEncoder.getPosition();
+  }
+
+  public double getRightShooterEncoder() {
+    if (m_isActive == false) {
+      return 0;
+    }
+    return m_rightShooterEncoder.getPosition();
+  }
+
   public void setShooterRPM(double x) {
     if (m_isActive == false) {
       return;
     }
-    m_shooterMotorLeft.set(x);
-    m_shooterMotorRight.set(x);
+    m_leftShooterMotor.set(x);
+    m_rightShooterMotor.set(x);
   }
 
   public void setStorageToShooterRPM(double x) {
@@ -63,5 +90,22 @@ public class Shooter extends SubsystemBase {
       return;
     }
     // This method will be called once per scheduler run
+    m_loggingData.LeftShooterMotorLevel = m_leftShooterMotor.get();
+    m_loggingData.RightShooterMotorLevel = m_rightShooterMotor.get();
+    m_loggingData.LeftMotorCurrent = Robot.getPDP().getCurrent(Constants.LeftShooterMotorPDP_Port);
+    m_loggingData.RightMotorCurrent = Robot.getPDP().getCurrent(Constants.RightShooterMotorPDP_Port);
+    m_loggingData.LeftEncoderPosition = getLeftShooterEncoder();
+    m_loggingData.RightEncoderPosition = getRightShooterEncoder();
+    m_loggingData.ShooterMotorRPM = Constants.ShooterWheelDiameter * Math.PI / Constants.ShooterEncoderTics;
+  }
+
+  public class ShooterLoggingData {
+    double LeftShooterMotorLevel;
+    double RightShooterMotorLevel;
+    double LeftMotorCurrent;
+    double RightMotorCurrent;
+    double LeftEncoderPosition;
+    double RightEncoderPosition;
+    double ShooterMotorRPM;
   }
 }
