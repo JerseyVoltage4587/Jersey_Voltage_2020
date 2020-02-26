@@ -9,12 +9,17 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
+import frc.robot.Robot;
+import frc.robot.util.AsyncStructuredLogger;
 
 public class Climber extends SubsystemBase {
   private Boolean m_isActive = false;
   static Climber m_Instance = null;
-  private WPI_TalonSRX m_leftClimberMotor;
-  private WPI_TalonSRX m_rightClimberMotor;
+  private WPI_TalonSRX m_leftClimberMotor = null;
+  private WPI_TalonSRX m_rightClimberMotor = null;
+  private ClimberLoggingData m_loggingData;
+  private AsyncStructuredLogger<ClimberLoggingData> m_logger;
   /**
    * Creates a new Climber.
    */
@@ -22,8 +27,11 @@ public class Climber extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    //m_leftClimberMotor = new WPI_TalonSRX(); //TODO Device Number
-    //m_rightClimberMotor = new WPI_TalonSRX(); //TODO Device Number
+    m_leftClimberMotor = new WPI_TalonSRX(Constants.LeftClimberMotorPWM_Address);
+    m_rightClimberMotor = new WPI_TalonSRX(Constants.RightClimberMotorPWM_Address);
+    
+    m_loggingData = new ClimberLoggingData();
+    m_logger = new AsyncStructuredLogger<ClimberLoggingData>("Storage", /*forceUnique=*/false, ClimberLoggingData.class);
   }
 
   public static Climber getInstance() {
@@ -55,5 +63,16 @@ public class Climber extends SubsystemBase {
       return;
     }
     // This method will be called once per scheduler run
+    m_loggingData.LeftClimberMotorLevel = m_leftClimberMotor.get();
+    m_loggingData.RightClimberMotorLevel = m_rightClimberMotor.get();
+    m_loggingData.LeftClimberMotorCurrent = Robot.getPDP().getCurrent(Constants.LeftClimberMotorPDP_Port);
+    m_loggingData.RightClimberMotorCurrent = Robot.getPDP().getCurrent(Constants.RightClimberMotorPDP_Port);
+  }
+
+  public class ClimberLoggingData {
+    double LeftClimberMotorLevel;
+    double RightClimberMotorLevel;
+    double LeftClimberMotorCurrent;
+    double RightClimberMotorCurrent;
   }
 }
