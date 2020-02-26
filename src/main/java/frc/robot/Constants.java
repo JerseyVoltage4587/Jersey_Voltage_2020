@@ -25,9 +25,9 @@ public final class Constants {
     public static final int RightTalon2CAN_Address = 2;
     public static final int RightVictor21CAN_Address = 21;
     public static int IntakeArmPWM_Address;
-    public static int IntakeArmPDP_Port;
+    public static int IntakeArmPDP_Port; //TODO Find PDP Port
     public static int IntakePWM_Address;
-    public static int IntakePDP_Port;
+    public static int IntakePDP_Port; //TODO Find PDP Port
     public static final double IntakeArmMotorLevel = 0.65;
     public static double IntakeMotorLevel;
     public static final int LeftShooterMotorCAN_Address = 9;
@@ -35,10 +35,12 @@ public final class Constants {
     public static final int RightShooterMotorCAN_Address = 8;
     public static int RightShooterMotorPDP_Port = 6; //TODO Find Actual PDP Port
     public static final double ShooterMotorLevel = 0.7;
-    public static int FeederMotorPWM_Address;
-    public static int FeederMotorPDP_Port;
+    public static int StorageBeltMotorPWM_Address = 3;
+    public static int StorageBeltMotorPDP_Port = 3; //TODO Find Actual PDP Port
+    public static int StorageSeparatorMotorPWM_Address = 4;
+    public static int StorageSeparatorMotorPDP_Port = 2; //TODO Find Actual PDP Port
     public static int ClimberMotorPWM_Address;
-    public static int ClimberMotorPDP_Port;
+    public static int ClimberMotorPDP_Port; //TODO Find PDP Port
     public static final int DriveBaseEncoderTics = 4096;
     public static final int ShooterEncoderTics = 4096;
     public static final double DriveBaseWheelDiameter = 6; // inches
