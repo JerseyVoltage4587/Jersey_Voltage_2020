@@ -22,8 +22,7 @@ public class Shooter extends SubsystemBase {
   static Shooter m_Instance = null;
   private static CANSparkMax m_leftShooterMotor = null;
   private static CANSparkMax m_rightShooterMotor = null;
-  private static WPI_TalonSRX m_storageKickerTALON = null;
-  private static WPI_VictorSPX m_storageKickerVICTOR = null;
+  private static WPI_TalonSRX m_storageToShooterMotor = null;
   private ShooterLoggingData m_loggingData;
   private AsyncStructuredLogger<ShooterLoggingData> m_logger;
   private CANEncoder m_leftShooterEncoder;
@@ -37,8 +36,7 @@ public class Shooter extends SubsystemBase {
     }
     m_leftShooterMotor = new CANSparkMax(9, MotorType.kBrushless);
     m_rightShooterMotor = new CANSparkMax(8, MotorType.kBrushless);
-    //m_storageKickerTALON = new WPI_TalonSRX(); //TODO find out device number and whether it's a VictorSPX or a TalonSRX
-    //m_storageKickerVICTOR = new WPI_VictorSPX();
+    m_storageToShooterMotor = new WPI_TalonSRX(7);
     m_leftShooterEncoder = m_leftShooterMotor.getEncoder();
     m_rightShooterEncoder = m_rightShooterMotor.getEncoder();
     m_loggingData = new ShooterLoggingData();
@@ -80,8 +78,7 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_storageKickerTALON.set(x);
-    m_storageKickerVICTOR.set(x);
+    m_storageToShooterMotor.set(x);
   }
 
   @Override

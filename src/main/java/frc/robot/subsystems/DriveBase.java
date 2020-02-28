@@ -21,7 +21,7 @@ import frc.robot.util.AsyncStructuredLogger;
 import frc.robot.util.Gyro;
 
 public class DriveBase extends SubsystemBase {
-  private boolean m_isActive = false;
+  private boolean m_isActive = true;
   DifferentialDrive m_drive = null;
   static DriveBase m_Instance = null;
   public WPI_TalonSRX m_lefttalon1;

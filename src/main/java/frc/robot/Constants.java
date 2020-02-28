@@ -23,8 +23,9 @@ public final class Constants {
     public static final int RightVictor21CAN_Address = 21;
     public static int StorageSeparatorMotorPWM_Address = 3;
     public static int StorageBeltMotorPWM_Address = 4;
-    public static int IntakeArmPWM_Address = 5;
-    public static int IntakePWM_Address = 6;
+    public static int IntakeMotorArmPWM_Address = 5;
+    public static int IntakeMotorPWM_Address = 6;
+    public static int StorageToShooterMotorPWM_Address = 12;
     public static int LeftClimberMotorPWM_Address = 7;
     public static int RightClimberMotorPWM_Address = 8;
     public static int RightShooterMotorCAN_Address = 9;
@@ -35,17 +36,21 @@ public final class Constants {
     public static int StorageSeparatorMotorPDP_Port = 2; //TODO Find Actual PDP Port
     public static int StorageBeltMotorPDP_Port = 3; //TODO Find Actual PDP Port
     public static int IntakeArmPDP_Port = 4; //TODO Find Actual PDP Port
-    public static int LeftShooterMotorPDP_Port = 5; //TODO Find Actual PDP Port
-    public static int RightShooterMotorPDP_Port = 6; //TODO Find Actual PDP Port
-    public static int IntakePDP_Port = 7; //TODO Find Actual PDP Port
-    public static int LeftClimberMotorPDP_Port = 8; //TODO Find Actual PDP Port
-    public static int RightClimberMotorPDP_Port = 9; //TODO Find Actual PDP Port
+    public static int IntakePDP_Port = 5; //TODO Find Actual PDP Port
+    public static int StorageToShooterMotorPDP_Port = 6; //TODO Find Actual PDP Port
+    public static int LeftShooterMotorPDP_Port = 7; //TODO Find Actual PDP Port
+    public static int RightShooterMotorPDP_Port = 8; //TODO Find Actual PDP Port
+    public static int LeftClimberMotorPDP_Port = 9; //TODO Find Actual PDP Port
+    public static int RightClimberMotorPDP_Port = 10; //TODO Find Actual PDP Port
     public static final int LeftVictor11PDP_Port = 14;
     public static final int LeftTalon1PDP_Port = 15;
     //Motor Levels
-    public static double IntakeArmMotorLevel = 0.65; //TODO Ask Mechanical or Drivers what they want the Motor Level to be
-    public static double IntakeMotorLevel; //TODO Ask Mechanical or Drivers what they want the Motor Level to be
-    public static double ShooterMotorLevel = 0.7; //TODO Ask Mechanical or Drivers what they want the Motor Level to be
+    public static double IntakeArmMotorLevel = 0.65;
+    public static double IntakeMotorLevel = 0.8;
+    public static double ShooterMotorLevel = 0.8;
+    public static double StorageBeltMotorLevel = 0.8;
+    public static double StorageSeparatorMotorLevel = 0.7;
+    public static double StorageToShooterMotorLevel = 0.7;
     //Encoder Tics
     public static final int DriveBaseEncoderTics = 4096;
     public static final int ShooterEncoderTics = 4096;

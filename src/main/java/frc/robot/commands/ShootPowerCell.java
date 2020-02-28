@@ -22,6 +22,8 @@ public class ShootPowerCell extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.getStorage().setStoragerBeltMotorLevel(Constants.StorageBeltMotorLevel);
+    Robot.getShooter().setStorageToShooterRPM(Constants.StorageToShooterMotorLevel);
     Robot.getShooter().setShooterRPM(Constants.ShooterMotorLevel);
   }
 
