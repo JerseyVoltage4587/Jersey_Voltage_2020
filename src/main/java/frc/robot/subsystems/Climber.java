@@ -29,7 +29,6 @@ public class Climber extends SubsystemBase {
     }
     m_leftClimberMotor = new WPI_TalonSRX(Constants.LeftClimberMotorPWM_Address);
     m_rightClimberMotor = new WPI_TalonSRX(Constants.RightClimberMotorPWM_Address);
-    
     m_loggingData = new ClimberLoggingData();
     m_logger = new AsyncStructuredLogger<ClimberLoggingData>("Storage", /*forceUnique=*/false, ClimberLoggingData.class);
   }
@@ -43,18 +42,12 @@ public class Climber extends SubsystemBase {
 		return m_Instance;
   }
 
-  public void setLeftClimberMotorLevel(double x) {
+  public void RunClimberMotor() {
     if (m_isActive == false) {
       return;
     }
-    m_leftClimberMotor.set(x);
-  }
-
-  public void setRightClimberMotorLevel(double x) {
-    if (m_isActive == false) {
-      return;
-    }
-    m_rightClimberMotor.set(x);
+    m_leftClimberMotor.set(Constants.ClimberMotorLevel);
+    m_rightClimberMotor.set(Constants.ClimberMotorLevel);
   }
 
   @Override

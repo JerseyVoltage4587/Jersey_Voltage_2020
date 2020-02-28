@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Aim;
+import frc.robot.commands.ShootPowerCell;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -80,7 +81,7 @@ public class OI extends CommandBase {
     //leftStickButton1.whenPressed();
     //rightStickButton1.whenPressed();
     //leftTrigger1.whenPressed();
-    //rightTrigger1.whenPressed();
+    rightTrigger1.whenPressed(new ShootPowerCell());
 
     //buttonA2.whenPressed();
     //buttonB2.whenPressed();
