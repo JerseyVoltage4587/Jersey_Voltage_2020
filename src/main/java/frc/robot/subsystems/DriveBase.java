@@ -30,9 +30,9 @@ public class DriveBase extends SubsystemBase {
   private WPI_VictorSPX m_rightvictor21;
   private double LeftMotorLevel;
   private double RightMotorLevel;
-  private DriveBaseLoggingData m_loggingData;
-  private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
-  private long m_lastLogTime = 0;
+  //private DriveBaseLoggingData m_loggingData;
+  //private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
+  //private long m_lastLogTime = 0;
 
 
   /**
@@ -62,8 +62,8 @@ public class DriveBase extends SubsystemBase {
     m_drive.setRightSideInverted(false);
     m_drive.setSafetyEnabled(false);
     setDefaultCommand(new DefaultDriveBase());
-    m_loggingData = new DriveBaseLoggingData();
-    m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
+    //m_loggingData = new DriveBaseLoggingData();
+    //m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
   }
 
   public static DriveBase getInstance() {
@@ -121,7 +121,7 @@ public class DriveBase extends SubsystemBase {
       return;
     }
     // This method will be called once per scheduler run
-    long now = System.nanoTime();
+    /*long now = System.nanoTime();
     double lastLeftPosition = m_loggingData.LeftPosition;
     double lastLeftVelocity = m_loggingData.LeftVelocity;
     double lastRightPosition = m_loggingData.RightPosition;
@@ -147,7 +147,7 @@ public class DriveBase extends SubsystemBase {
 
     m_loggingData.Heading = Gyro.getYaw();
     m_logger.queueData(m_loggingData);
-    m_lastLogTime = now;
+    m_lastLogTime = now;*/
   }
 
   public int getLeftEncoder() {
@@ -172,11 +172,11 @@ public class DriveBase extends SubsystemBase {
     return getRightEncoder() * Constants.DriveBaseWheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
   }
 
-  private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
+  /*private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
     return (finalValue - initialValue) / (finalTime - initialTime);
-  }
+  }*/
 
-  public class DriveBaseLoggingData {
+  /*public class DriveBaseLoggingData {
     double LeftMotorLevel;
     double LeftMotor1_SupplyCurrent;
     double LeftMotor1_StatorCurrent;
@@ -194,5 +194,5 @@ public class DriveBase extends SubsystemBase {
     double RightVelocity;
     double RightAcceleration;
     double Heading;
-  }
+  }*/
 }
