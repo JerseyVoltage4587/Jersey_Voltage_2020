@@ -60,6 +60,7 @@ public class Climber extends SubsystemBase {
     m_loggingData.RightClimberMotorLevel = m_rightClimberMotor.get();
     m_loggingData.LeftClimberMotorCurrent = Robot.getPDP().getCurrent(Constants.LeftClimberMotorPDP_Port);
     m_loggingData.RightClimberMotorCurrent = Robot.getPDP().getCurrent(Constants.RightClimberMotorPDP_Port);
+    m_logger.queueData(m_loggingData);
   }
 
   public class ClimberLoggingData {

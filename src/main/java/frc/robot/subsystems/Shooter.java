@@ -15,7 +15,6 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 public class Shooter extends SubsystemBase {
   public boolean m_isActive = false;
@@ -94,6 +93,7 @@ public class Shooter extends SubsystemBase {
     m_loggingData.LeftEncoderPosition = getLeftShooterEncoder();
     m_loggingData.RightEncoderPosition = getRightShooterEncoder();
     m_loggingData.ShooterMotorRPM = Constants.ShooterWheelDiameter * Math.PI / Constants.ShooterEncoderTics;
+    m_logger.queueData(m_loggingData);
   }
 
   public class ShooterLoggingData {

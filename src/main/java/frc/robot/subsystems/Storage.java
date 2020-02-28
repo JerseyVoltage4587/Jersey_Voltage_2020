@@ -66,6 +66,7 @@ public class Storage extends SubsystemBase {
     m_loggingData.SeparatorMotorLevel = m_storageSeparatorMotor.get();
     m_loggingData.BeltMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageBeltMotorPDP_Port);
     m_loggingData.SeparatorMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageSeparatorMotorPDP_Port);
+    m_logger.queueData(m_loggingData);
   }
 
   public class StorageLoggingData {
