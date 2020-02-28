@@ -16,42 +16,42 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    //CAN and PWM Addresses
+    //CAN Addresses
     public static final int LeftTalon1CAN_Address = 1;
     public static final int LeftVictor1CAN_Address = 11;
     public static final int RightTalon2CAN_Address = 2;
     public static final int RightVictor21CAN_Address = 21;
-    public static int StorageSeparatorMotorPWM_Address = 3;
-    public static int StorageBeltMotorPWM_Address = 4;
-    public static int IntakeMotorArmPWM_Address = 5;
-    public static int IntakeMotorPWM_Address = 6;
-    public static int StorageToShooterMotorPWM_Address = 12;
-    public static int LeftClimberMotorPWM_Address = 7;
-    public static int RightClimberMotorPWM_Address = 8;
-    public static int RightShooterMotorCAN_Address = 9;
-    public static int LeftShooterMotorCAN_Address = 10;
+    public static int StorageSeparatorMotorCAN_Address = 3; //Final for now
+    public static int StorageBeltMotorCAN_Address = 4; //Final for now
+    public static int IntakeMotorArmCAN_Address = 5; //Final for now
+    public static int IntakeMotorCAN_Address = 6; //Final for now
+    public static int StorageToShooterMotorCAN_Address = 12; //Final for now
+    public static int LeftClimberMotorCAN_Address = 7; //Final for now
+    public static int RightClimberMotorCAN_Address = 8; //Final for now
+    public static int RightShooterMotorCAN_Address = 9; //Final for now
+    public static int LeftShooterMotorCAN_Address = 10; //Final for now
     //PDP Ports
     public static final int RightTalon2PDP_Port = 0;
     public static final int RightVictor21PDP_Port = 1;
-    public static int StorageSeparatorMotorPDP_Port = 2; //TODO Find Actual PDP Port
-    public static int StorageBeltMotorPDP_Port = 3; //TODO Find Actual PDP Port
-    public static int IntakeArmPDP_Port = 4; //TODO Find Actual PDP Port
-    public static int IntakePDP_Port = 5; //TODO Find Actual PDP Port
-    public static int StorageToShooterMotorPDP_Port = 6; //TODO Find Actual PDP Port
-    public static int LeftShooterMotorPDP_Port = 7; //TODO Find Actual PDP Port
-    public static int RightShooterMotorPDP_Port = 8; //TODO Find Actual PDP Port
-    public static int LeftClimberMotorPDP_Port = 9; //TODO Find Actual PDP Port
-    public static int RightClimberMotorPDP_Port = 10; //TODO Find Actual PDP Port
+    public static int StorageSeparatorMotorPDP_Port = 12; //Final for now
+    public static int StorageBeltMotorPDP_Port = 3; //Final for now
+    public static int IntakeArmPDP_Port = 11; //Final for now
+    public static int IntakePDP_Port = 4; //Final for now
+    public static int StorageToShooterMotorPDP_Port = 6; //Not enough Motor Controllers
+    public static int LeftShooterMotorPDP_Port = 6; //Final for now
+    public static int RightShooterMotorPDP_Port = 8; //Not enough Motor Controllers
+    public static int LeftClimberMotorPDP_Port = 10; //Final for now
+    public static int RightClimberMotorPDP_Port = 5; //Final for now
     public static final int LeftVictor11PDP_Port = 14;
     public static final int LeftTalon1PDP_Port = 15;
     //Motor Levels
-    public static double IntakeArmMotorLevel = 0.65;
     public static double IntakeMotorLevel = 0.8;
     public static double ShooterMotorLevel = 0.8;
-    public static double ClimberMotorLevel = 0.7;
     public static double StorageBeltMotorLevel = 0.8;
+    public static double ClimberMotorLevel = 0.7;
     public static double StorageSeparatorMotorLevel = 0.7;
     public static double StorageToShooterMotorLevel = 0.7;
+    public static double IntakeArmMotorLevel = 0.65;
     //Encoder Tics
     public static final int DriveBaseEncoderTics = 4096;
     public static final int ShooterEncoderTics = 4096;
