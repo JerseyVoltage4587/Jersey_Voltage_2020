@@ -29,8 +29,8 @@ public class DefaultDriveBaseCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double forward = 0;
-    double turn = 0;
+    double forward = Math.abs(OI.getInstance().getDrive());
+    double turn = Math.abs(OI.getInstance().getTurn());
 
     if (Math.abs(OI.getInstance().getDrive()) < 0.10) {
 			forward = 0;
@@ -39,7 +39,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
 			turn = 0;
     }
 
-    Robot.getDriveBase().arcadeDrive(forward, turn);
+    Robot.getDriveBase().m_drive.arcadeDrive(forward, turn);
   }
 
   // Called once the command ends or is interrupted.

@@ -140,6 +140,7 @@ private static PowerDistributionPanel m_PDP;
    */
   @Override
   public void teleopPeriodic() {
+    getDriveBase();
   }
 
   @Override

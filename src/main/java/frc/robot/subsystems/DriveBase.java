@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -19,7 +20,7 @@ import frc.robot.util.Gyro;
 
 public class DriveBase extends SubsystemBase {
   private boolean m_isActive = true;
-  DifferentialDrive m_drive = null;
+  public DifferentialDrive m_drive = null;
   static DriveBase m_Instance = null;
   public WPI_TalonSRX m_lefttalon1;
   public WPI_TalonSRX m_righttalon2;
@@ -43,19 +44,19 @@ public class DriveBase extends SubsystemBase {
     m_righttalon2 = new WPI_TalonSRX(Constants.RightTalon2CAN_Address);
     m_leftvictor11 = new WPI_VictorSPX(Constants.LeftVictor1CAN_Address);
     m_rightvictor21 = new WPI_VictorSPX(Constants.RightVictor21CAN_Address);
-    m_lefttalon1.configFactoryDefault();
+    /*m_lefttalon1.configFactoryDefault();
     m_leftvictor11.configFactoryDefault();
     m_righttalon2.configFactoryDefault(); 
     m_rightvictor21.configFactoryDefault();
-    //m_lefttalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    //m_righttalon2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    m_leftvictor11.follow(m_lefttalon1);
+    m_lefttalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    m_righttalon2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    */m_leftvictor11.follow(m_lefttalon1);
     m_rightvictor21.follow(m_righttalon2);
     m_lefttalon1.setInverted(false);
     m_righttalon2.setInverted(true);
     m_leftvictor11.setInverted(InvertType.FollowMaster);
     m_rightvictor21.setInverted(InvertType.FollowMaster);
-    m_drive.setRightSideInverted(false);
+    //m_drive.setRightSideInverted(false);
     m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
     m_drive.setSafetyEnabled(false);
     setDefaultCommand(new DefaultDriveBaseCommand());
