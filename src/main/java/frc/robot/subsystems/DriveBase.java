@@ -15,9 +15,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.Robot;
-import frc.robot.commands.DefaultDriveBase;
-import frc.robot.util.AsyncStructuredLogger;
+import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.util.Gyro;
 
 public class DriveBase extends SubsystemBase {
@@ -50,8 +48,8 @@ public class DriveBase extends SubsystemBase {
     m_leftvictor11.configFactoryDefault();
     m_righttalon2.configFactoryDefault(); 
     m_rightvictor21.configFactoryDefault();
-    m_lefttalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    m_righttalon2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    //m_lefttalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    //m_righttalon2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_leftvictor11.follow(m_lefttalon1);
     m_rightvictor21.follow(m_righttalon2);
     m_lefttalon1.setInverted(false);
@@ -61,7 +59,7 @@ public class DriveBase extends SubsystemBase {
     m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
     m_drive.setRightSideInverted(false);
     m_drive.setSafetyEnabled(false);
-    setDefaultCommand(new DefaultDriveBase());
+    setDefaultCommand(new DefaultDriveBaseCommand());
     //m_loggingData = new DriveBaseLoggingData();
     //m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
   }
