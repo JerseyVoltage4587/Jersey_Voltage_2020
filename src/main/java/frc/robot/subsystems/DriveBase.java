@@ -7,7 +7,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
@@ -56,8 +55,8 @@ public class DriveBase extends SubsystemBase {
     m_righttalon2.setInverted(true);
     m_leftvictor11.setInverted(InvertType.FollowMaster);
     m_rightvictor21.setInverted(InvertType.FollowMaster);
-    m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
     m_drive.setRightSideInverted(false);
+    m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
     m_drive.setSafetyEnabled(false);
     setDefaultCommand(new DefaultDriveBaseCommand());
     //m_loggingData = new DriveBaseLoggingData();
