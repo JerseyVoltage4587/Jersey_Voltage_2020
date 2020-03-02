@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class StartShooterFoward extends CommandBase {
+public class StartShooterBackward extends CommandBase {
   double lastLeftEncoder = 0;
   double lastRightEncoder = 0;
   int leftInitialEncoder = 0;
@@ -30,7 +30,7 @@ public class StartShooterFoward extends CommandBase {
   /**
    * Creates a new StartShooter.
    */
-  public StartShooterFoward() {
+  public StartShooterBackward() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getShooter());
   }
