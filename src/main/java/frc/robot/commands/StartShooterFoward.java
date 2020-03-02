@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class StartShooter extends CommandBase {
+public class StartShooterFoward extends CommandBase {
   double lastLeftEncoder = 0;
   double lastRightEncoder = 0;
   int leftInitialEncoder = 0;
@@ -30,7 +30,7 @@ public class StartShooter extends CommandBase {
   /**
    * Creates a new StartShooter.
    */
-  public StartShooter() {
+  public StartShooterFoward() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getShooter());
   }
@@ -38,7 +38,8 @@ public class StartShooter extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getShooter().setShooterRPM(Constants.ShooterMotorLevel);
+    motorLevel = Constants.ShooterMotorLevel;
+    Robot.getShooter().setShooterRPM(motorLevel);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
