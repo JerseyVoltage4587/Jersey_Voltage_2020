@@ -9,13 +9,15 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.InvertType;
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.commands.DefaultDriveBaseCommand;
+import frc.robot.Robot;
+import frc.robot.util.AsyncStructuredLogger;
 import frc.robot.util.Gyro;
 
 public class DriveBase extends SubsystemBase {
@@ -28,9 +30,9 @@ public class DriveBase extends SubsystemBase {
   private WPI_VictorSPX m_rightvictor21;
   private double LeftMotorLevel;
   private double RightMotorLevel;
-  //private DriveBaseLoggingData m_loggingData;
-  //private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
-  //private long m_lastLogTime = 0;
+  private DriveBaseLoggingData m_loggingData;
+  private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
+  private long m_lastLogTime = 0;
 
 
   /**
@@ -44,30 +46,39 @@ public class DriveBase extends SubsystemBase {
     m_righttalon2 = new WPI_TalonSRX(Constants.RightTalon2CAN_Address);
     m_leftvictor11 = new WPI_VictorSPX(Constants.LeftVictor1CAN_Address);
     m_rightvictor21 = new WPI_VictorSPX(Constants.RightVictor21CAN_Address);
-    /*m_lefttalon1.configFactoryDefault();
+    m_lefttalon1.configFactoryDefault();
     m_leftvictor11.configFactoryDefault();
     m_righttalon2.configFactoryDefault(); 
     m_rightvictor21.configFactoryDefault();
     m_lefttalon1.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_righttalon2.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    */m_leftvictor11.follow(m_lefttalon1);
+    m_lefttalon1.setNeutralMode(NeutralMode.Brake);
+    m_leftvictor11.setNeutralMode(NeutralMode.Brake);
+    m_righttalon2.setNeutralMode(NeutralMode.Brake);
+    m_rightvictor21.setNeutralMode(NeutralMode.Brake);
+    m_leftvictor11.follow(m_lefttalon1);
     m_rightvictor21.follow(m_righttalon2);
     m_lefttalon1.setInverted(false);
     m_righttalon2.setInverted(true);
     m_leftvictor11.setInverted(InvertType.FollowMaster);
     m_rightvictor21.setInverted(InvertType.FollowMaster);
-    //m_drive.setRightSideInverted(false);
     m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
     m_drive.setSafetyEnabled(false);
-    setDefaultCommand(new DefaultDriveBaseCommand());
-    //m_loggingData = new DriveBaseLoggingData();
-    //m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
+    m_drive.setRightSideInverted(false);
+    System.out.println("Creating DriveBase LoggingData");
+    m_loggingData = new DriveBaseLoggingData();
+    System.out.println("Created DriveBase LoggingData");
+    System.out.println("Creating DriveBase Logger");
+    m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
+    System.out.println("Created DriveBase Logger");
   }
 
   public static DriveBase getInstance() {
     if (m_Instance == null) {
       synchronized (DriveBase.class) {
-        m_Instance = new DriveBase();
+        if (m_Instance == null) {
+          m_Instance = new DriveBase();
+        }
       }
     }
     return m_Instance;
@@ -118,8 +129,9 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
+
     // This method will be called once per scheduler run
-    /*long now = System.nanoTime();
+    long now = System.nanoTime();
     double lastLeftPosition = m_loggingData.LeftPosition;
     double lastLeftVelocity = m_loggingData.LeftVelocity;
     double lastRightPosition = m_loggingData.RightPosition;
@@ -145,7 +157,7 @@ public class DriveBase extends SubsystemBase {
 
     m_loggingData.Heading = Gyro.getYaw();
     m_logger.queueData(m_loggingData);
-    m_lastLogTime = now;*/
+    m_lastLogTime = now;
   }
 
   public int getLeftEncoder() {
@@ -170,11 +182,14 @@ public class DriveBase extends SubsystemBase {
     return getRightEncoder() * Constants.DriveBaseWheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
   }
 
-  /*private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
+  private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
     return (finalValue - initialValue) / (finalTime - initialTime);
-  }*/
+  }
 
-  /*public class DriveBaseLoggingData {
+  public class DriveBaseLoggingData {
+    public DriveBaseLoggingData() {
+
+    }
     double LeftMotorLevel;
     double LeftMotor1_SupplyCurrent;
     double LeftMotor1_StatorCurrent;
@@ -192,5 +207,5 @@ public class DriveBase extends SubsystemBase {
     double RightVelocity;
     double RightAcceleration;
     double Heading;
-  }*/
+  }
 }

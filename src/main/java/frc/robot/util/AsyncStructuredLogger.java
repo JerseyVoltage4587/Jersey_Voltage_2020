@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 
 public class AsyncStructuredLogger<T> extends CrashTrackingRunnable
 {
@@ -132,6 +131,7 @@ public class AsyncStructuredLogger<T> extends CrashTrackingRunnable
                         case SHORT:  f.setShort  ( target, f.getShort (dataObject) ); break;
                         case STRING: f.set       ( target, f.get      (dataObject) ); break;
                         case BOOLEAN:f.setBoolean( target,f.getBoolean(dataObject) ); break;
+                        case UNRECOGNIZED: break;
                     }
                 } catch ( Exception ex ) {
                     System.err.println("AsyncStructuredLogger<"+m_dataClassName+">  E R R O R !!");
@@ -154,6 +154,7 @@ public class AsyncStructuredLogger<T> extends CrashTrackingRunnable
             file_name.append(".csv");
             File log_path = new File ( LogDirectory, file_name.toString() );
             m_writer = new PrintWriter ( log_path );
+            System.out.println("Opened File " + log_path);
         } catch ( FileNotFoundException ex ) {
             System.err.println("AsyncStructuredLogger<"+m_dataClassName+">  E R R O R !!");
             System.err.println("... Unable to create log file!");
@@ -187,6 +188,7 @@ public class AsyncStructuredLogger<T> extends CrashTrackingRunnable
                                 case SHORT:   f.setShort  (m_transferObject,f.getShort  (data_object)); break;
                                 case STRING:  f.set       (m_transferObject,f.get       (data_object)); break;
                                 case BOOLEAN: f.setBoolean(m_transferObject,f.getBoolean(data_object)); break;
+                                case UNRECOGNIZED: break;
                             }
                         } catch ( Exception ex ) {
                         }
@@ -208,6 +210,7 @@ public class AsyncStructuredLogger<T> extends CrashTrackingRunnable
                                              .append(f.get(m_transferObject).toString())
                                              .append("\"");                          break;
                             case BOOLEAN:line.append(f.getBoolean(m_transferObject));break;
+                            case UNRECOGNIZED: break;
                         }
                     } catch ( Exception ex ) {
                     }
@@ -280,7 +283,6 @@ public class AsyncStructuredLogger<T> extends CrashTrackingRunnable
             tdc.i2 = i_loop * 20;
             tdc.i3 = i_loop * 30;
             tdc.s1 = Integer.toString(i_loop);
-            int npo = asl.m_nextPendingObject;
             t0 = System.nanoTime();
             asl.queueData ( tdc );
             t1 = System.nanoTime();

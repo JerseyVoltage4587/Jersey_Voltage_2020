@@ -14,14 +14,12 @@ import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 public class Shooter extends SubsystemBase {
   public boolean m_isActive = false;
   static Shooter m_Instance = null;
   private static CANSparkMax m_leftShooterMotor = null;
   private static CANSparkMax m_rightShooterMotor = null;
-  private static WPI_TalonSRX m_storageToShooterMotor = null;
   private ShooterLoggingData m_loggingData;
   private AsyncStructuredLogger<ShooterLoggingData> m_logger;
   private CANEncoder m_leftShooterEncoder;
@@ -35,7 +33,6 @@ public class Shooter extends SubsystemBase {
     }
     m_leftShooterMotor = new CANSparkMax(9, MotorType.kBrushless);
     m_rightShooterMotor = new CANSparkMax(8, MotorType.kBrushless);
-    m_storageToShooterMotor = new WPI_TalonSRX(7);
     m_leftShooterEncoder = m_leftShooterMotor.getEncoder();
     m_rightShooterEncoder = m_rightShooterMotor.getEncoder();
     m_loggingData = new ShooterLoggingData();
@@ -73,13 +70,6 @@ public class Shooter extends SubsystemBase {
     m_rightShooterMotor.set(x);
   }
 
-  public void setStorageToShooterRPM(double x) {
-    if (m_isActive == false) {
-      return;
-    }
-    m_storageToShooterMotor.set(x);
-  }
-
   @Override
   public void periodic() {
     if (m_isActive == false) {
@@ -92,7 +82,7 @@ public class Shooter extends SubsystemBase {
     m_loggingData.RightMotorCurrent = Robot.getPDP().getCurrent(Constants.RightShooterMotorPDP_Port);
     m_loggingData.LeftEncoderPosition = getLeftShooterEncoder();
     m_loggingData.RightEncoderPosition = getRightShooterEncoder();
-    m_loggingData.ShooterMotorRPM = Constants.ShooterWheelDiameter * Math.PI / Constants.ShooterEncoderTics;
+    m_loggingData.ShooterMotorRPM = (((m_leftShooterMotor.get() + m_rightShooterMotor.get()) / 2) / (Math.PI * Constants.ShooterWheelDiameter));
     m_logger.queueData(m_loggingData);
   }
 

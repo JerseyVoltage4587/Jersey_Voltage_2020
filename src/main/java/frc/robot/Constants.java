@@ -47,11 +47,15 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = 0.8;
     public static double ShooterMotorLevel = 0.8;
-    public static double StorageBeltMotorLevel = 0.8;
+    public static double StorageBeltMotorLevelFull = 0.8;
+    public static double StorageBeltMotorLevelFeed = 0.6;
     public static double ClimberMotorLevel = 0.7;
     public static double StorageSeparatorMotorLevel = 0.7;
-    public static double StorageToShooterMotorLevel = 0.7;
+    public static double StorageToShooterMotorLevelForward = 0.7;
+    public static double StorageToShooterMotorLevelBackward = -0.3;
     public static double IntakeArmMotorLevel = 0.65;
+    //Motor Stall Currents
+    public static final double IntakeArmStallCurrent = 20;
     //Encoder Tics
     public static final int DriveBaseEncoderTics = 4096;
     public static final int ShooterEncoderTics = 4096;

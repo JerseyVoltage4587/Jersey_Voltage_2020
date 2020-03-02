@@ -10,6 +10,7 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.subsystems.DriveBase;
 
 public class DefaultDriveBaseCommand extends CommandBase {
   /**
@@ -17,7 +18,7 @@ public class DefaultDriveBaseCommand extends CommandBase {
    */
   public DefaultDriveBaseCommand() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getDriveBase());
+    addRequirements(DriveBase.getInstance());
   }
 
   // Called when the command is initially scheduled.
@@ -29,13 +30,13 @@ public class DefaultDriveBaseCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double forward = Math.abs(OI.getInstance().getDrive());
-    double turn = Math.abs(OI.getInstance().getTurn());
+    double forward = OI.getInstance().getDrive();
+    double turn = OI.getInstance().getTurn();
 
-    if (Math.abs(OI.getInstance().getDrive()) < 0.10) {
+    if (Math.abs(forward) < 0.10) {
 			forward = 0;
 		}
-		if (Math.abs(OI.getInstance().getTurn()) < 0.10) {
+		if (Math.abs(turn) < 0.10) {
 			turn = 0;
     }
 

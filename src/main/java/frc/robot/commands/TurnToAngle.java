@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.OI;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.util.Gyro;
 
@@ -89,14 +90,25 @@ public class TurnToAngle extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (Math.abs(OI.getInstance().getDrive()) > 0.10) {
+      return true;
+    }
+
+    if (Math.abs(OI.getInstance().getTurn()) > 0.10) {
+      return true;
+    }
+
     if (m_ifInitialized == false) {
       return false;
     }
+
     double heading = Gyro.getYaw();
     double delta = Math.abs(heading - m_finalAngle);
+    
     if (delta > 180){
       delta = 360 - delta;
     }
+
     if (delta <= 2){
       return true;
     }

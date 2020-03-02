@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Aim;
 import frc.robot.commands.AutoTurnAround;
+import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.subsystems.*;
 import frc.robot.util.Gyro;
 
@@ -30,7 +31,8 @@ public class Robot extends TimedRobot {
     return me;
   }
 
-private static PowerDistributionPanel m_PDP;
+  private static PowerDistributionPanel m_PDP;
+
   public static PowerDistributionPanel getPDP(){
     if (m_PDP == null){
       m_PDP = new PowerDistributionPanel();
@@ -76,6 +78,8 @@ private static PowerDistributionPanel m_PDP;
    */
   @Override
   public void robotInit() {
+    getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
+    getIntake();
     CameraServer.getInstance();
   }
 
@@ -92,7 +96,7 @@ private static PowerDistributionPanel m_PDP;
     // commands, running already-scheduled commands, removing finished or interrupted commands,
     // and running subsystem periodic() methods.  This must be called from the robot's periodic
     // block in order for anything in the Command-based framework to work.
-    getDriveBase();
+    CommandScheduler.getInstance().run();
   }
 
   /**
@@ -125,14 +129,13 @@ private static PowerDistributionPanel m_PDP;
    */
   @Override
   public void autonomousPeriodic() {
-    CommandScheduler.getInstance().run();
+    
   }
 
   @Override
   public void teleopInit() {
     getDriveBase().zeroDriveSensors();
     getIntake().zeroIntakeSensors();
-    getDriveBase().setSafetyEnabled(true);
   }
 
   /**
@@ -140,7 +143,7 @@ private static PowerDistributionPanel m_PDP;
    */
   @Override
   public void teleopPeriodic() {
-    getDriveBase();
+    
   }
 
   @Override

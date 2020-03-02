@@ -18,6 +18,10 @@ public class Storage extends SubsystemBase {
   static Storage m_Instance = null;
   private WPI_TalonSRX m_storageBeltMotor = null;
   private WPI_TalonSRX m_storageSeparatorMotor = null;
+  private static WPI_TalonSRX m_storageToShooterMotor = null;
+  private boolean m_isIntakeRunning = false;
+  private boolean m_isShooterRunning = false;
+  private boolean m_isShooterReady = false;
   private StorageLoggingData m_loggingData;
   private AsyncStructuredLogger<StorageLoggingData> m_logger;
   /**
@@ -29,6 +33,7 @@ public class Storage extends SubsystemBase {
     }
 	  m_storageBeltMotor = new WPI_TalonSRX(3);
     m_storageSeparatorMotor = new WPI_TalonSRX(3);
+    m_storageToShooterMotor = new WPI_TalonSRX(7);
     m_loggingData = new StorageLoggingData();
     m_logger = new AsyncStructuredLogger<StorageLoggingData>("Storage", /*forceUnique=*/false, StorageLoggingData.class);
   }
@@ -36,24 +41,61 @@ public class Storage extends SubsystemBase {
   public static Storage getInstance() {
     if(m_Instance == null) {
 			synchronized (Storage.class) {
-				m_Instance = new Storage();
+        if (m_Instance == null) {
+          m_Instance = new Storage();
+        }
 			}
 		}
 		return m_Instance;
   }
 
-  public void setStoragerBeltMotorLevel(double x) {
-    if (m_isActive == false) {
-      return;
-    }
-    m_storageBeltMotor.set(x);
+  public void setIntakeRunning(boolean x) {
+    m_isIntakeRunning = x;
+    updateStorageMotors();
   }
 
-  public void setStoragerSeparatorMotorLevel(double x) {
+  public void setShooterRunning(boolean x) {
+    m_isShooterRunning = x;
+    updateStorageMotors();
+  }
+
+  public void setShooterReady(boolean x) {
+    m_isShooterReady = x;
+    updateStorageMotors();
+  }
+
+  private void updateStorageMotors() {
+    
     if (m_isActive == false) {
       return;
     }
-    m_storageSeparatorMotor.set(x);
+
+    if (m_isIntakeRunning) {
+      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
+      m_storageSeparatorMotor.set(Constants.StorageSeparatorMotorLevel);
+    }
+
+    else if (m_isShooterRunning) {
+      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFeed);
+      m_storageSeparatorMotor.set(0);
+    }
+
+    else {
+      m_storageBeltMotor.set(0);
+      m_storageSeparatorMotor.set(0);
+    }
+
+    if (m_isShooterReady) {
+      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelForward);
+    }
+
+    else if (m_isIntakeRunning || m_isShooterRunning) {
+      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
+    }
+
+    else {
+      m_storageToShooterMotor.set(0);
+    }
   }
 
   @Override
