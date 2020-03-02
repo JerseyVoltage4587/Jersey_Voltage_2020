@@ -7,27 +7,43 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
 import frc.robot.Robot;
 
-public class ShootPowerCell extends CommandBase {
+public class MoveToShootingPosition extends CommandBase {
+  double ty = 0;
   /**
-   * Creates a new ShootPowerCell.
+   * Creates a new MoveToShootingPosition.
    */
-  public ShootPowerCell() {
+  public MoveToShootingPosition() {
+    
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.getDriveBase());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getShooter().setShooterRPM(Constants.ShooterMotorLevel);
+    ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    while (ty > 3 || ty < -3) {
+      if (ty < -3) {
+        Robot.getDriveBase().setLeftMotorLevel(-0.2);
+        Robot.getDriveBase().setRightMotorLevel(-0.2);
+      }
+
+      if (ty > 3) {
+        Robot.getDriveBase().setLeftMotorLevel(0.2);
+        Robot.getDriveBase().setRightMotorLevel(0.2);
+      }
+
+      ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    }
   }
 
   // Called once the command ends or is interrupted.

@@ -28,7 +28,7 @@ public class StartShooterForward extends CommandBase {
   double motorLevel = 0;
   long lastNanoSeconds = 0;
   /**
-   * Creates a new StartShooter.
+   * Creates a new StartShooterForward.
    */
   public StartShooterForward() {
     // Use addRequirements() here to declare subsystem dependencies.

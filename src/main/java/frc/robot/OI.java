@@ -13,35 +13,36 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Aim;
-import frc.robot.commands.ShootPowerCell;
+import frc.robot.commands.ShootPowerCellForward;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
   static OI m_Instance = null;
   private Joystick m_joy1 = null;
   private Joystick m_joy2 = null;
-  Button	  buttonA1, buttonB1, buttonX1, buttonY1, leftBumper1, rightBumper1, backButton1, startButton1, leftStickButton1, rightStickButton1;
-	JoyButton leftTrigger1, rightTrigger1;
-	Joystick  stick2;
-	Button	  buttonA2, buttonB2, buttonX2, buttonY2, leftBumper2, rightBumper2, backButton2, startButton2, leftStickButton2, rightStickButton2;
+  Button buttonA1, buttonB1, buttonX1, buttonY1, leftBumper1, rightBumper1, backButton1, startButton1, leftStickButton1,
+      rightStickButton1;
+  JoyButton leftTrigger1, rightTrigger1;
+  Joystick stick2;
+  Button buttonA2, buttonB2, buttonX2, buttonY2, leftBumper2, rightBumper2, backButton2, startButton2, leftStickButton2,
+      rightStickButton2;
   JoyButton leftTrigger2, rightTrigger2;
-  
-  public static OI getInstance()
-	{
-		if(m_Instance == null) {
-			synchronized ( OI.class ) {
-				m_Instance = new OI();
-			}
-		}
-		return m_Instance;
-	}
-  
+
+  public static OI getInstance() {
+    if (m_Instance == null) {
+      synchronized (OI.class) {
+        m_Instance = new OI();
+      }
+    }
+    return m_Instance;
+  }
+
   /**
    * Creates a new OI.
    */
   public OI() {
     m_joy1 = new Joystick(0);
-    
+
     buttonA1 = new JoystickButton(m_joy1, 1);
     buttonB1 = new JoystickButton(m_joy1, 2);
     buttonX1 = new JoystickButton(m_joy1, 3);
@@ -54,9 +55,9 @@ public class OI extends CommandBase {
     rightStickButton1 = new JoystickButton(m_joy1, 10);
     leftTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 2);
     rightTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 3);
-    
+
     m_joy2 = new Joystick(1);
-    
+
     buttonA2 = new JoystickButton(m_joy2, 1);
     buttonB2 = new JoystickButton(m_joy2, 2);
     buttonX2 = new JoystickButton(m_joy2, 3);
@@ -71,17 +72,17 @@ public class OI extends CommandBase {
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
     buttonA1.whenPressed(new Aim());
-    //buttonB1.whenPressed();
-    //buttonX1.whenPressed();
-    //buttonY1.whenPressed();
-    //leftBumper1.whenPressed();
-    //rightBumper1.whenPressed();
-    //startButton1.whenPressed();
-    //backButton1.whenPressed();
-    //leftStickButton1.whenPressed();
-    //rightStickButton1.whenPressed();
-    //leftTrigger1.whenPressed();
-    rightTrigger1.whenPressed(new ShootPowerCell());
+    // buttonB1.whenPressed();
+    // buttonX1.whenPressed();
+    // buttonY1.whenPressed();
+    // leftBumper1.whenPressed();
+    // rightBumper1.whenPressed();
+    // startButton1.whenPressed();
+    // backButton1.whenPressed();
+    // leftStickButton1.whenPressed();
+    // rightStickButton1.whenPressed();
+    // leftTrigger1.whenPressed();
+    rightTrigger1.whenPressed(new ShootPowerCellForward());
 
     //buttonA2.whenPressed();
     //buttonB2.whenPressed();
