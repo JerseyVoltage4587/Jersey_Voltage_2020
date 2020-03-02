@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
-import frc.robot.util.Gyro;
 
 public class StartShooter extends CommandBase {
   double lastLeftEncoder = 0;
@@ -26,7 +25,6 @@ public class StartShooter extends CommandBase {
   double lastAverageRPM = 0;
   double totalRPM = 0;
   double elapsedTime = 0;
-  double initialHeading = 0;
   double motorLevel = 0;
   long lastNanoSeconds = 0;
   /**
