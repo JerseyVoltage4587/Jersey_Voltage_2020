@@ -12,15 +12,13 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Aim;
-import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.PositionRobotToShootBackward;
 import frc.robot.commands.PositionRobotToShootForward;
-import frc.robot.commands.RaiseIntakeArm;
 import frc.robot.commands.ShootBackward;
 import frc.robot.commands.ShootForward;
 import frc.robot.commands.StartShooterBackward;
 import frc.robot.commands.StartShooterForward;
+import frc.robot.commands.ToggleIntakeArm;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -95,8 +93,8 @@ public class OI extends CommandBase {
     buttonB2.whenPressed(new StartShooterForward());
     buttonX2.whenPressed(new StartShooterBackward());
     buttonY2.whenPressed(new PositionRobotToShootBackward());
-    leftBumper2.whenPressed(new LowerIntakeArm());
-    rightBumper2.whenPressed(new RaiseIntakeArm());
+    //leftBumper2.whenPressed();
+    rightBumper2.whenPressed(new ToggleIntakeArm());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();
