@@ -73,14 +73,14 @@ public class ShootBackward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.getStorage().setShooterReady(true);
+    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    
     if (lastAverageRPM > 2818 && lastAverageRPM < 2858) {
+      Robot.getStorage().setShooterReady(true);
       return true;
     }
 

@@ -10,36 +10,38 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class LowerIntakeArm extends CommandBase {
+public class StopShooter extends CommandBase {
   /**
-   * Creates a new LowerIntakeArm.
+   * Creates a new StopShooter.
    */
-  public LowerIntakeArm() {
+  public StopShooter() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getIntake());
+    addRequirements(Robot.getShooter());
+    addRequirements(Robot.getStorage());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().lowerIntake();
-    Robot.getIntake().startIntakeMotors();
+    Robot.getShooter().setShooterMotorLevel(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.getIntake().stopIntakeArmMotor();
+    Robot.getStorage().setShooterRunning(false);
+    Robot.getStorage().setShooterReady(false);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.getIntake().IsArmMotorStalled();
+    return true;
   }
 }

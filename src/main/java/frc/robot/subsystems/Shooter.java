@@ -36,7 +36,7 @@ public class Shooter extends SubsystemBase {
     m_leftShooterEncoder = m_leftShooterMotor.getEncoder();
     m_rightShooterEncoder = m_rightShooterMotor.getEncoder();
     m_loggingData = new ShooterLoggingData();
-    m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/false, ShooterLoggingData.class);
+    m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/ false, ShooterLoggingData.class);
   }
 
   public static Shooter getInstance() {

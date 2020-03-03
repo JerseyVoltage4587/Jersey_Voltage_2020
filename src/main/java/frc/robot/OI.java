@@ -13,7 +13,14 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.Aim;
+import frc.robot.commands.LowerIntakeArm;
+import frc.robot.commands.PositionRobotToShootBackward;
 import frc.robot.commands.PositionRobotToShootForward;
+import frc.robot.commands.RaiseIntakeArm;
+import frc.robot.commands.ShootBackward;
+import frc.robot.commands.ShootForward;
+import frc.robot.commands.StartShooterBackward;
+import frc.robot.commands.StartShooterForward;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -71,31 +78,31 @@ public class OI extends CommandBase {
     leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
-    buttonA1.whenPressed(new PositionRobotToShootForward());
-    // buttonB1.whenPressed();
-    // buttonX1.whenPressed();
-    // buttonY1.whenPressed();
-    // leftBumper1.whenPressed();
-    // rightBumper1.whenPressed();
-    // startButton1.whenPressed();
-    // backButton1.whenPressed();
-    // leftStickButton1.whenPressed();
-    // rightStickButton1.whenPressed();
-    // leftTrigger1.whenPressed();
+    //buttonA1.whenPressed();
+    //buttonB1.whenPressed();
+    //buttonX1.whenPressed();
+    //buttonY1.whenPressed();
+    //leftBumper1.whenPressed();
+    //rightBumper1.whenPressed();
+    //startButton1.whenPressed();
+    //backButton1.whenPressed();
+    //leftStickButton1.whenPressed();
+    //rightStickButton1.whenPressed();
+    //leftTrigger1.whenPressed();
     //rightTrigger1.whenPressed(;
 
-    //buttonA2.whenPressed();
-    //buttonB2.whenPressed();
-    //buttonX2.whenPressed();
-    //buttonY2.whenPressed();
-    //leftBumper2.whenPressed();
-    //rightBumper2.whenPressed();
+    buttonA2.whenPressed(new PositionRobotToShootForward());
+    buttonB2.whenPressed(new StartShooterForward());
+    buttonX2.whenPressed(new StartShooterBackward());
+    buttonY2.whenPressed(new PositionRobotToShootBackward());
+    leftBumper2.whenPressed(new LowerIntakeArm());
+    rightBumper2.whenPressed(new RaiseIntakeArm());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();
     //rightStickButton2.whenPressed();
-    //leftTrigger2.whenPressed();
-    //rightTrigger2.whenPressed();
+    leftTrigger2.whenPressed(new ShootBackward());
+    rightTrigger2.whenPressed(new ShootForward());
     // Use addRequirements() here to declare subsystem dependencies.
   }
 

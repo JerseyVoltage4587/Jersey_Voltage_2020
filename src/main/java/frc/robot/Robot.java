@@ -13,8 +13,12 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Aim;
+import frc.robot.commands.AutoMoveFoward;
 import frc.robot.commands.AutoTurnAround;
 import frc.robot.commands.DefaultDriveBaseCommand;
+import frc.robot.commands.PositionRobotToShootBackward;
+import frc.robot.commands.ShootBackward;
+import frc.robot.commands.ShootForward;
 import frc.robot.subsystems.*;
 import frc.robot.util.Gyro;
 
@@ -79,7 +83,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
-    getIntake();
     CameraServer.getInstance();
   }
 
@@ -121,7 +124,7 @@ public class Robot extends TimedRobot {
     //if (m_autonomousCommand != null) {
 //      m_autonomousCommand.schedule();
     //}
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new AutoTurnAround()));
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new AutoMoveFoward(), new PositionRobotToShootBackward(),new ShootBackward()));
   }
 
   /**

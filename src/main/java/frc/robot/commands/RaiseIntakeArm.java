@@ -23,6 +23,7 @@ public class RaiseIntakeArm extends CommandBase {
   @Override
   public void initialize() {
     Robot.getIntake().raiseIntake();
+    Robot.getIntake().stopIntakeMotors();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

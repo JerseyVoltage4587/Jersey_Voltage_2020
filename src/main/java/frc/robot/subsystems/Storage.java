@@ -52,16 +52,19 @@ public class Storage extends SubsystemBase {
   public void setIntakeRunning(boolean x) {
     m_isIntakeRunning = x;
     updateStorageMotors();
+    updateStorageToShooterMotor();
   }
 
   public void setShooterRunning(boolean x) {
     m_isShooterRunning = x;
     updateStorageMotors();
+    updateStorageToShooterMotor();
   }
 
   public void setShooterReady(boolean x) {
     m_isShooterReady = x;
     updateStorageMotors();
+    updateStorageToShooterMotor();
   }
 
   private void updateStorageMotors() {
@@ -72,7 +75,6 @@ public class Storage extends SubsystemBase {
 
     if (m_isIntakeRunning) {
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
-      m_storageSeparatorMotor.set(Constants.StorageSeparatorMotorLevel);
     }
 
     else if (m_isShooterRunning) {
@@ -83,6 +85,13 @@ public class Storage extends SubsystemBase {
     else {
       m_storageBeltMotor.set(0);
       m_storageSeparatorMotor.set(0);
+    }
+  }
+
+  private void updateStorageToShooterMotor() {
+    
+    if (m_isActive == false) {
+      return;
     }
 
     if (m_isShooterReady) {
