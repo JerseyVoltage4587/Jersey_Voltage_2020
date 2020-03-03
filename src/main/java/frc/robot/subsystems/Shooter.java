@@ -62,7 +62,7 @@ public class Shooter extends SubsystemBase {
     return m_rightShooterEncoder.getPosition();
   }
 
-  public void setShooterRPM(double x) {
+  public void setShooterMotorLevel(double x) {
     if (m_isActive == false) {
       return;
     }
@@ -82,7 +82,7 @@ public class Shooter extends SubsystemBase {
     m_loggingData.RightMotorCurrent = Robot.getPDP().getCurrent(Constants.RightShooterMotorPDP_Port);
     m_loggingData.LeftEncoderPosition = getLeftShooterEncoder();
     m_loggingData.RightEncoderPosition = getRightShooterEncoder();
-    m_loggingData.ShooterMotorRPM = (((m_leftShooterMotor.get() + m_rightShooterMotor.get()) / 2) / (Math.PI * Constants.ShooterWheelDiameter));
+    m_loggingData.ShooterMotorMotorLevel = (((m_leftShooterMotor.get() + m_rightShooterMotor.get()) / 2) / (Math.PI * Constants.ShooterWheelDiameter));
     m_logger.queueData(m_loggingData);
   }
 
@@ -93,6 +93,6 @@ public class Shooter extends SubsystemBase {
     double RightMotorCurrent;
     double LeftEncoderPosition;
     double RightEncoderPosition;
-    double ShooterMotorRPM;
+    double ShooterMotorMotorLevel;
   }
 }

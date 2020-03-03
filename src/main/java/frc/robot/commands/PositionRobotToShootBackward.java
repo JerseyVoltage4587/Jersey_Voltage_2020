@@ -8,24 +8,25 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
 
-public class StartShooterForward extends CommandBase {
-  double motorLevel = 0;
+public class PositionRobotToShootBackward extends CommandBase {
   /**
-   * Creates a new StartShooterForward.
+   * Creates a new PositionRobotToShootBackward.
    */
-  public StartShooterForward() {
+  public PositionRobotToShootBackward() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getShooter());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    motorLevel = Constants.ShooterMotorLevel;
-    Robot.getShooter().setShooterMotorLevel(motorLevel);
+    CommandScheduler.getInstance().schedule(new StartShooterBackward());
+    Robot.getStorage().setShooterRunning(true);
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new Aim(), new WaitCommand(.2), new MoveToShootingPosition(), new WaitCommand(0.2)));        
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -41,6 +42,6 @@ public class StartShooterForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return true;
+    return false;
   }
 }
