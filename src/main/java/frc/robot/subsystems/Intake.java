@@ -102,8 +102,8 @@ public class Intake extends SubsystemBase {
     return m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent;
   }
 
-  public double getIntakeArmeMotorLevel() {
-    return m_intakeArmMotor.get();
+  public String getIntakeArmMotorStatus() {
+    return intakeArmMotorStatus;
   }
 
   @Override
