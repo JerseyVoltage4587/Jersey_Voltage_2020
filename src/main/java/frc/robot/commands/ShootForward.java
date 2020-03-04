@@ -40,7 +40,8 @@ public class ShootForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  Robot.getShooter().setShooterMotorLevel(Constants.ShooterMotorLevel);
+    motorLevel = Constants.ShooterMotorLevel;
+  Robot.getShooter().setShooterMotorLevel(motorLevel);
   Robot.getStorage().setShooterRunning(true);
   }
 

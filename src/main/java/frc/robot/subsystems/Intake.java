@@ -61,7 +61,7 @@ public class Intake extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_intakeArmMotor.set(-1 * Constants.IntakeArmMotorLevel);
+    m_intakeArmMotor.set(Math.abs(Constants.IntakeArmMotorLevel));
     intakeArmMotorStatus = "DOWN";
   }
 
@@ -78,7 +78,7 @@ public class Intake extends SubsystemBase {
       return;
     }
     if (intakeArmMotorStatus.equals("DOWN")) {
-      m_intakeMotor.set(0.7);
+      m_intakeMotor.set(Constants.IntakeMotorLevel);
     }
     Robot.getStorage().setIntakeRunning(true);
   }

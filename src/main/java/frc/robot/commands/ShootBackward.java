@@ -39,7 +39,8 @@ public class ShootBackward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getShooter().setShooterMotorLevel(-1.0 * Constants.ShooterMotorLevel);
+    motorLevel = -1.0 * Constants.ShooterMotorLevel;
+    Robot.getShooter().setShooterMotorLevel(motorLevel);
     Robot.getStorage().setShooterRunning(true);
   }
 
