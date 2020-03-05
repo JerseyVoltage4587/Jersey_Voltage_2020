@@ -15,6 +15,7 @@ import frc.robot.Robot;
 import frc.robot.util.AsyncStructuredLogger;
 
 public class Intake extends SubsystemBase {
+  private double IntakeArmMotorStatorCurrent;
   public boolean m_isActive = false;
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotor = null;
@@ -99,7 +100,8 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean IsArmMotorStalled() {
-    return m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent;
+    IntakeArmMotorStatorCurrent = m_intakeArmMotor.getStatorCurrent();
+    return IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent;
   }
 
   public String getIntakeArmMotorStatus() {
