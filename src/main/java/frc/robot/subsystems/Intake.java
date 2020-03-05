@@ -23,9 +23,11 @@ public class Intake extends SubsystemBase {
   private String intakeArmMotorStatus = null;
   private IntakeLoggingData m_loggingData;
   private AsyncStructuredLogger<IntakeLoggingData> m_logger;
+
   /**
    * Creates a new Intake.
    */
+  
   public Intake() {
     if (m_isActive == false) {
       return;
