@@ -60,7 +60,7 @@ public class Intake extends SubsystemBase {
       return;
     }
     stopIntakeMotors();
-    m_intakeArmMotor.set(Constants.IntakeArmMotorLevel);
+    m_intakeArmMotor.set(Constants.IntakeArmMotorLevelUp);
     intakeArmMotorStatus = "UP";
   }
 

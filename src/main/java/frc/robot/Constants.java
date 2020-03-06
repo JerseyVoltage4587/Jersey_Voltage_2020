@@ -53,7 +53,8 @@ public final class Constants {
     public static double StorageSeparatorMotorLevel = 0.4;
     public static double StorageToShooterMotorLevelForward = 0.7;
     public static double StorageToShooterMotorLevelBackward = -0.7;
-    public static double IntakeArmMotorLevel = -0.4;
+    public static double IntakeArmMotorLevelUp = -0.4;
+    public static double IntakeArmMotorLevelDown = 0.3;
     //Motor Stall Currents
     public static final double IntakeArmStallCurrent = 20;
     //Encoder Tics
