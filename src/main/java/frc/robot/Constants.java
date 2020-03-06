@@ -21,13 +21,13 @@ public final class Constants {
     public static final int LeftVictor1CAN_Address = 11;
     public static final int RightTalon2CAN_Address = 2;
     public static final int RightVictor21CAN_Address = 21;
-    public static int StorageSeparatorMotorCAN_Address = 3; //Final for now
-    public static int StorageBeltMotorCAN_Address = 0; //Final for now
-    public static int IntakeMotorArmCAN_Address = 3; //Final for now
-    public static int IntakeMotorCAN_Address = 6; //Final for now
-    public static int StorageToShooterMotorCAN_Address = 4; //Final for now
+    public static int StorageSeparatorMotorCAN_Address = 6; //Final
+    public static int StorageBeltMotorCAN_Address = 4; //Final
+    public static int IntakeMotorArmCAN_Address = 3; //Final
+    public static int IntakeMotorCAN_Address = 8; //Final
+    public static int StorageToShooterMotorCAN_Address = 0; //Final for now
     public static int LeftClimberMotorCAN_Address = 7; //Final for now
-    public static int RightClimberMotorCAN_Address = 8; //Final for now
+    public static int RightClimberMotorCAN_Address = 0; //Final for now
     public static int RightShooterMotorCAN_Address = 9; //Final for now
     public static int LeftShooterMotorCAN_Address = 10; //Final for now
     //PDP Ports
@@ -36,7 +36,7 @@ public final class Constants {
     public static int StorageSeparatorMotorPDP_Port = 12; //Final for now
     public static int StorageBeltMotorPDP_Port = 3; //Final for now
     public static int IntakeArmPDP_Port = 12; //Final for now
-    public static int IntakePDP_Port = 4; //Final for now
+    public static int IntakePDP_Port = 5; //Final for now
     public static int StorageToShooterMotorPDP_Port = 6; //Not enough Motor Controllers
     public static int LeftShooterMotorPDP_Port = 6; //Final for now
     public static int RightShooterMotorPDP_Port = 8; //Not enough Motor Controllers
@@ -53,9 +53,9 @@ public final class Constants {
     public static double StorageSeparatorMotorLevel = 0.4;
     public static double StorageToShooterMotorLevelForward = 0.7;
     public static double StorageToShooterMotorLevelBackward = -0.7;
-    public static double IntakeArmMotorLevel = -0.65;
+    public static double IntakeArmMotorLevel = -0.4;
     //Motor Stall Currents
-    public static final double IntakeArmStallCurrent = 15;
+    public static final double IntakeArmStallCurrent = 20;
     //Encoder Tics
     public static final int DriveBaseEncoderTics = 4096;
     public static final int ShooterEncoderTics = 4096;

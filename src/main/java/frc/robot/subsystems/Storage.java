@@ -14,7 +14,7 @@ import frc.robot.Robot;
 import frc.robot.util.AsyncStructuredLogger;
 
 public class Storage extends SubsystemBase {
-  public boolean m_isActive = false;
+  public boolean m_isActive = true;
   static Storage m_Instance = null;
   private WPI_TalonSRX m_storageBeltMotor = null;
   private WPI_TalonSRX m_storageSeparatorMotor = null;
@@ -31,9 +31,9 @@ public class Storage extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-	  m_storageBeltMotor = new WPI_TalonSRX(3);
-    m_storageSeparatorMotor = new WPI_TalonSRX(3);
-    m_storageToShooterMotor = new WPI_TalonSRX(7);
+	  m_storageBeltMotor = new WPI_TalonSRX(Constants.StorageBeltMotorCAN_Address);
+    m_storageSeparatorMotor = new WPI_TalonSRX(Constants.StorageSeparatorMotorCAN_Address);
+    m_storageToShooterMotor = new WPI_TalonSRX(Constants.StorageToShooterMotorCAN_Address);
     m_loggingData = new StorageLoggingData();
     m_logger = new AsyncStructuredLogger<StorageLoggingData>("Storage", /*forceUnique=*/false, StorageLoggingData.class);
   }
@@ -49,42 +49,52 @@ public class Storage extends SubsystemBase {
 		return m_Instance;
   }
 
+  public void setSeparatorMotorLevel(double x) {
+    m_storageSeparatorMotor.set(x);
+  }
+
+  public double getSeparatorMotorLevel() {
+    return m_storageSeparatorMotor.get();
+  }
+
   public void setIntakeRunning(boolean x) {
     m_isIntakeRunning = x;
     updateStorageMotors();
-    updateStorageToShooterMotor();
+    //updateStorageToShooterMotor();
   }
 
   public void setShooterRunning(boolean x) {
     m_isShooterRunning = x;
     updateStorageMotors();
-    updateStorageToShooterMotor();
+    //updateStorageToShooterMotor();
   }
 
   public void setShooterReady(boolean x) {
     m_isShooterReady = x;
     updateStorageMotors();
-    updateStorageToShooterMotor();
+    //updateStorageToShooterMotor();
   }
 
   private void updateStorageMotors() {
+    System.out.println("Updating Motors");
     
     if (m_isActive == false) {
       return;
     }
 
     if (m_isIntakeRunning) {
+      System.out.println("Belt Motor On");
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
     }
 
     else if (m_isShooterRunning) {
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFeed);
-      m_storageSeparatorMotor.set(0);
+      //m_storageSeparatorMotor.set(0);
     }
 
     else {
       m_storageBeltMotor.set(0);
-      m_storageSeparatorMotor.set(0);
+      //m_storageSeparatorMotor.set(0);
     }
   }
 
@@ -120,7 +130,7 @@ public class Storage extends SubsystemBase {
     m_logger.queueData(m_loggingData);
   }
 
-  public class StorageLoggingData {
+  public static class StorageLoggingData {
     double BeltMotorLevel;
     double SeparatorMotorLevel;
     double BeltMotorCurrent;

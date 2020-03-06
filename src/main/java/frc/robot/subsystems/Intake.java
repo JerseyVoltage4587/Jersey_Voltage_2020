@@ -9,6 +9,8 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -21,13 +23,14 @@ public class Intake extends SubsystemBase {
   private WPI_TalonSRX m_intakeMotor = null;
   private WPI_TalonSRX m_intakeArmMotor = null;
   private String intakeArmMotorStatus = null;
+  private int m_numberOfTimesStalled = 0;
   private IntakeLoggingData m_loggingData;
   private AsyncStructuredLogger<IntakeLoggingData> m_logger;
 
   /**
    * Creates a new Intake.
    */
-  
+
   public Intake() {
     if (m_isActive == false) {
       return;
@@ -36,6 +39,7 @@ public class Intake extends SubsystemBase {
     m_intakeArmMotor = new WPI_TalonSRX(Constants.IntakeMotorArmCAN_Address);
     m_intakeArmMotor.setNeutralMode(NeutralMode.Brake);
     m_loggingData = new IntakeLoggingData();
+    intakeArmMotorStatus = "UP";
     m_logger = new AsyncStructuredLogger<IntakeLoggingData>("Intake", /*forceUnique=*/false, IntakeLoggingData.class);
   
   }
@@ -64,7 +68,7 @@ public class Intake extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_intakeArmMotor.set(Math.abs(Constants.IntakeArmMotorLevel));
+    m_intakeArmMotor.set(0.3);
     intakeArmMotorStatus = "DOWN";
   }
 
@@ -74,6 +78,7 @@ public class Intake extends SubsystemBase {
     }
     m_intakeArmMotor.set(0);
     Robot.getStorage().setIntakeRunning(false);
+    intakeArmMotorStatus = "STOPPED";
   }
 
   public void startIntakeMotors() {
@@ -81,9 +86,9 @@ public class Intake extends SubsystemBase {
       return;
     }
     if (intakeArmMotorStatus.equals("DOWN")) {
-      m_intakeMotor.set(Constants.IntakeMotorLevel);
+      m_intakeMotor.set(-1 * Constants.IntakeMotorLevel);
+      Robot.getStorage().setIntakeRunning(true);
     }
-    Robot.getStorage().setIntakeRunning(true);
   }
 
   public void stopIntakeMotors() {
@@ -102,11 +107,10 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean IsArmMotorStalled() {
-    IntakeArmMotorStatorCurrent = m_intakeArmMotor.getStatorCurrent();
-    return IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent;
+    return (m_numberOfTimesStalled > 3);
   }
 
-  public String getIntakeArmMotorStatus() {
+  public String getIntakeArmMotorStatus() { 
     return intakeArmMotorStatus;
   }
 
@@ -124,9 +128,19 @@ public class Intake extends SubsystemBase {
     m_loggingData.IntakeArmMotorStatorCurrent = m_intakeArmMotor.getStatorCurrent();
     m_loggingData.IntakeArmMotorSupplyCurrent = m_intakeArmMotor.getSupplyCurrent();
     m_logger.queueData(m_loggingData);
+    if (m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent) {
+      m_numberOfTimesStalled += 1;
+    }
+
+    else {
+      m_numberOfTimesStalled = 0;
+    }
+    SmartDashboard.putNumber("Stator Current", m_loggingData.IntakeArmMotorStatorCurrent);
+    SmartDashboard.putNumber("Times Stalled", m_numberOfTimesStalled);
+    SmartDashboard.putString("Arm Status", intakeArmMotorStatus);
   }
 
-  public class IntakeLoggingData {
+  public static class IntakeLoggingData {
     String IntakeArmState;
     double IntakeMotorLevel;
     double IntakeArmMotorLevel;

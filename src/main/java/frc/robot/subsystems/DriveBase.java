@@ -186,10 +186,7 @@ public class DriveBase extends SubsystemBase {
     return (finalValue - initialValue) / (finalTime - initialTime);
   }
 
-  public class DriveBaseLoggingData {
-    public DriveBaseLoggingData() {
-
-    }
+  public static class DriveBaseLoggingData {
     double LeftMotorLevel;
     double LeftMotor1_SupplyCurrent;
     double LeftMotor1_StatorCurrent;

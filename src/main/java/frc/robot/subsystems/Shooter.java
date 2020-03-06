@@ -31,8 +31,8 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_leftShooterMotor = new CANSparkMax(9, MotorType.kBrushless);
-    m_rightShooterMotor = new CANSparkMax(8, MotorType.kBrushless);
+    m_leftShooterMotor = new CANSparkMax(Constants.LeftShooterMotorCAN_Address, MotorType.kBrushless);
+    m_rightShooterMotor = new CANSparkMax(Constants.RightShooterMotorCAN_Address, MotorType.kBrushless);
     m_leftShooterEncoder = m_leftShooterMotor.getEncoder();
     m_rightShooterEncoder = m_rightShooterMotor.getEncoder();
     m_loggingData = new ShooterLoggingData();
@@ -86,7 +86,7 @@ public class Shooter extends SubsystemBase {
     m_logger.queueData(m_loggingData);
   }
 
-  public class ShooterLoggingData {
+  public static class ShooterLoggingData {
     double LeftShooterMotorLevel;
     double RightShooterMotorLevel;
     double LeftMotorCurrent;

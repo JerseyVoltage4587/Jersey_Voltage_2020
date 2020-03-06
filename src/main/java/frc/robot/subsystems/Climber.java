@@ -8,6 +8,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
+import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -18,8 +20,13 @@ public class Climber extends SubsystemBase {
   static Climber m_Instance = null;
   private WPI_TalonSRX m_leftClimberMotor = null;
   private WPI_TalonSRX m_rightClimberMotor = null;
+  private double setPoint = 0;
+  private boolean isRobotOnTheGround;
+  private String RobotClimberState;
+  private Solenoid m_ClimberSolenoid = null;
   private ClimberLoggingData m_loggingData;
   private AsyncStructuredLogger<ClimberLoggingData> m_logger;
+  
   /**
    * Creates a new Climber.
    */
@@ -30,6 +37,9 @@ public class Climber extends SubsystemBase {
     m_leftClimberMotor = new WPI_TalonSRX(Constants.LeftClimberMotorCAN_Address);
     m_rightClimberMotor = new WPI_TalonSRX(Constants.RightClimberMotorCAN_Address);
     m_loggingData = new ClimberLoggingData();
+    RobotClimberState = "INITIAL";
+    setPoint = 0;
+    isRobotOnTheGround = true;
     m_logger = new AsyncStructuredLogger<ClimberLoggingData>("Storage", /*forceUnique=*/false, ClimberLoggingData.class);
   }
 
@@ -41,20 +51,21 @@ public class Climber extends SubsystemBase {
 		}
 		return m_Instance;
   }
-
-  public void RunClimberMotor() {
-    if (m_isActive == false) {
-      return;
-    }
-    m_leftClimberMotor.set(Constants.ClimberMotorLevel);
-    m_rightClimberMotor.set(Constants.ClimberMotorLevel);
-  }
-
   @Override
   public void periodic() {
     if (m_isActive == false) {
       return;
     }
+
+    if (RobotClimberState.equals("INITIAL")) {
+      m_leftClimberMotor.set(0);
+      m_rightClimberMotor.set(0);
+    }
+
+    if (RobotClimberState.equals("PUSH")) {
+
+    }
+
     // This method will be called once per scheduler run
     m_loggingData.LeftClimberMotorLevel = m_leftClimberMotor.get();
     m_loggingData.RightClimberMotorLevel = m_rightClimberMotor.get();
@@ -63,10 +74,16 @@ public class Climber extends SubsystemBase {
     m_logger.queueData(m_loggingData);
   }
 
-  public class ClimberLoggingData {
+  public static class ClimberLoggingData {
     double LeftClimberMotorLevel;
     double RightClimberMotorLevel;
     double LeftClimberMotorCurrent;
     double RightClimberMotorCurrent;
+    int LeftEncoderReading;
+    double LeftPosition;
+    double LeftVelocity;
+    int RightEncoderReading;
+    double RightPosition;
+    double RightVelocity;
   }
 }
