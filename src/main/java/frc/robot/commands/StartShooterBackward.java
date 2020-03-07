@@ -83,7 +83,7 @@ public class StartShooterBackward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (lastAverageRPM > 2818 && lastAverageRPM < 2858) {
+    if (averageRPM > 2818 && averageRPM < 2858) {
       Robot.getStorage().setShooterReady(true);
       SmartDashboard.putBoolean("Is Shooter Ready", true);
       return true;
