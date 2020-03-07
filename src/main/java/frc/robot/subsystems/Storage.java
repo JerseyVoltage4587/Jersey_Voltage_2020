@@ -122,13 +122,11 @@ public class Storage extends SubsystemBase {
     // This method will be called once per scheduler run
     m_loggingData.BeltMotorLevel = m_storageBeltMotor.get();
     m_loggingData.BeltMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageBeltMotorPDP_Port);
-    //m_loggingData.SeparatorMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageSeparatorMotorPDP_Port);
     m_logger.queueData(m_loggingData);
   }
 
   public static class StorageLoggingData {
-    double BeltMotorLevel;
-    double BeltMotorCurrent;
-    double SeparatorMotorCurrent;
+    public double BeltMotorLevel;
+    public double BeltMotorCurrent;
   }
 }

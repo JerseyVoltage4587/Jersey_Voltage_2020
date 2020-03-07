@@ -18,7 +18,6 @@ import frc.robot.Robot;
 import frc.robot.util.AsyncStructuredLogger;
 
 public class Intake extends SubsystemBase {
-  private double IntakeArmMotorStatorCurrent;
   public boolean m_isActive = false;
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotor = null;
@@ -163,12 +162,12 @@ public class Intake extends SubsystemBase {
   }
 
   public static class IntakeLoggingData {
-    String IntakeArmState;
-    double IntakeMotorLevel;
-    double IntakeArmMotorLevel;
-    double IntakeMotorStatorCurrent;
-    double IntakeMotorSupplyCurrent;
-    double IntakeArmMotorStatorCurrent;
-    double IntakeArmMotorSupplyCurrent;
+    public String IntakeArmState;
+    public double IntakeMotorLevel;
+    public double IntakeArmMotorLevel;
+    public double IntakeMotorStatorCurrent;
+    public double IntakeMotorSupplyCurrent;
+    public double IntakeArmMotorStatorCurrent;
+    public double IntakeArmMotorSupplyCurrent;
   }
 }

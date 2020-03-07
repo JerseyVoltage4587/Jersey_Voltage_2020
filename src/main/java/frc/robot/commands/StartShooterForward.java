@@ -40,13 +40,8 @@ public class StartShooterForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (Robot.getShooter().getRightShooter() < 0.1) {
-      System.out.println("Foward = Positive");
-      motorLevel = Constants.ShooterMotorLevel;
-      Robot.getShooter().setShooterMotorLevel(0);
-    }
-    System.out.println("Foward = Negative");
-    //Robot.getShooter().setShooterMotorLevel(0);
+    motorLevel = Constants.ShooterMotorLevel;
+    Robot.getShooter().setShooterMotorLevel(motorLevel);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -84,11 +79,11 @@ public class StartShooterForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    //if (lastAverageRPM > 2818 && lastAverageRPM < 2858) {
-      //Robot.getStorage().setShooterReady(true);
+    if (lastAverageRPM > 2818 && lastAverageRPM < 2858) {
+      Robot.getStorage().setShooterReady(true);
       return true;
-    //}
+    }
 
-    //return false;
+    return false;
   }
 }
