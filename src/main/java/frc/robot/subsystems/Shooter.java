@@ -16,7 +16,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Shooter extends SubsystemBase {
-  public boolean m_isActive = false;
+  public boolean m_isActive = true;
   static Shooter m_Instance = null;
   private static CANSparkMax m_leftShooterMotor = null;
   private static CANSparkMax m_rightShooterMotor = null;
@@ -47,6 +47,20 @@ public class Shooter extends SubsystemBase {
 		}
 		return m_Instance;
   }
+  
+  public double getLeftShooter() {
+    if (m_isActive == false) {
+      return 0;
+    }
+    return m_leftShooterMotor.get();
+  }
+
+  public double getRightShooter() {
+    if (m_isActive == false) {
+      return 0;
+    }
+    return m_rightShooterMotor.get();
+  }
 
   public double getLeftShooterEncoder() {
     if (m_isActive == false) {
@@ -66,8 +80,9 @@ public class Shooter extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_leftShooterMotor.set(x);
+    m_leftShooterMotor.set(-1 * x);
     m_rightShooterMotor.set(x);
+    
   }
 
   @Override

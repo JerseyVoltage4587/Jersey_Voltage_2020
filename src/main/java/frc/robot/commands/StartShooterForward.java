@@ -34,14 +34,19 @@ public class StartShooterForward extends CommandBase {
    */
   public StartShooterForward() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getShooter(), Robot.getStorage());
+    addRequirements(Robot.getShooter()/*, Robot.getStorage()*/);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    motorLevel = Constants.ShooterMotorLevel;
-    Robot.getShooter().setShooterMotorLevel(motorLevel);
+    if (Robot.getShooter().getRightShooter() < 0.1) {
+      System.out.println("Foward = Positive");
+      motorLevel = Constants.ShooterMotorLevel;
+      Robot.getShooter().setShooterMotorLevel(0);
+    }
+    System.out.println("Foward = Negative");
+    //Robot.getShooter().setShooterMotorLevel(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -65,7 +70,7 @@ public class StartShooterForward extends CommandBase {
     
     Robot.getShooter().setShooterMotorLevel(motorLevel);
 
-    lastAverageRPM = RPM;
+    lastAverageRPM = RPM; 
     lastLeftEncoder = leftEncoder;
     lastRightEncoder = rightEncoder;
     lastNanoSeconds = nanoSeconds;
@@ -79,11 +84,11 @@ public class StartShooterForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (lastAverageRPM > 2818 && lastAverageRPM < 2858) {
-      Robot.getStorage().setShooterReady(true);
+    //if (lastAverageRPM > 2818 && lastAverageRPM < 2858) {
+      //Robot.getStorage().setShooterReady(true);
       return true;
-    }
+    //}
 
-    return false;
+    //return false;
   }
 }

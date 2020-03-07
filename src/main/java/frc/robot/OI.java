@@ -16,6 +16,8 @@ import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.PositionRobotToShootBackward;
 import frc.robot.commands.PositionRobotToShootForward;
 import frc.robot.commands.RaiseIntakeArm;
+import frc.robot.commands.SeparatorLeft;
+import frc.robot.commands.SeparatorRight;
 import frc.robot.commands.ShootBackward;
 import frc.robot.commands.ShootForward;
 import frc.robot.commands.StartShooterBackward;
@@ -91,12 +93,12 @@ public class OI extends CommandBase {
     //leftTrigger1.whenPressed();
     //rightTrigger1.whenPressed(;
 
-    //buttonA2.whenPressed(new ToggleIntakeArm());
-    //buttonB2.whenPressed(new StartShooterForward());
+    //buttonA2.whenPressed(new LowerIntakeArm());
+    buttonB2.whenPressed(new StartShooterForward());
     //buttonX2.whenPressed(new StartShooterBackward());
     //buttonY2.whenPressed(new PositionRobotToShootBackward());
-    //leftBumper2.whenPressed();
-    //rightBumper2.whenPressed();
+    //leftBumper2.whenPressed(new SeparatorLeft());
+    //rightBumper2.whenPressed(new SeparatorRight());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();

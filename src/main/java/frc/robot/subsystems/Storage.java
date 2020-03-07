@@ -8,17 +8,18 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
 import frc.robot.util.AsyncStructuredLogger;
 
 public class Storage extends SubsystemBase {
-  public boolean m_isActive = true;
+  public boolean m_isActive = false;
   static Storage m_Instance = null;
   private WPI_TalonSRX m_storageBeltMotor = null;
-  private WPI_TalonSRX m_storageSeparatorMotor = null;
-  private static WPI_TalonSRX m_storageToShooterMotor = null;
+  private WPI_TalonSRX m_storageToShooterMotor = null;
   private boolean m_isIntakeRunning = false;
   private boolean m_isShooterRunning = false;
   private boolean m_isShooterReady = false;
@@ -31,9 +32,10 @@ public class Storage extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-	  m_storageBeltMotor = new WPI_TalonSRX(Constants.StorageBeltMotorCAN_Address);
-    m_storageSeparatorMotor = new WPI_TalonSRX(Constants.StorageSeparatorMotorCAN_Address);
+    m_storageBeltMotor = new WPI_TalonSRX(Constants.StorageBeltMotorCAN_Address);
     m_storageToShooterMotor = new WPI_TalonSRX(Constants.StorageToShooterMotorCAN_Address);
+    m_storageBeltMotor.configFactoryDefault();
+    m_storageToShooterMotor.configFactoryDefault();
     m_loggingData = new StorageLoggingData();
     m_logger = new AsyncStructuredLogger<StorageLoggingData>("Storage", /*forceUnique=*/false, StorageLoggingData.class);
   }
@@ -49,30 +51,26 @@ public class Storage extends SubsystemBase {
 		return m_Instance;
   }
 
-  public void setSeparatorMotorLevel(double x) {
-    m_storageSeparatorMotor.set(x);
-  }
-
-  public double getSeparatorMotorLevel() {
-    return m_storageSeparatorMotor.get();
+  public void setStorageMotorLevel(double x) {
+    m_storageBeltMotor.set(x);
   }
 
   public void setIntakeRunning(boolean x) {
     m_isIntakeRunning = x;
+    updateStorageToShooterMotor();
     updateStorageMotors();
-    //updateStorageToShooterMotor();
   }
 
   public void setShooterRunning(boolean x) {
     m_isShooterRunning = x;
     updateStorageMotors();
-    //updateStorageToShooterMotor();
+    updateStorageToShooterMotor();
   }
 
   public void setShooterReady(boolean x) {
     m_isShooterReady = x;
     updateStorageMotors();
-    //updateStorageToShooterMotor();
+    updateStorageToShooterMotor();
   }
 
   private void updateStorageMotors() {
@@ -89,12 +87,10 @@ public class Storage extends SubsystemBase {
 
     else if (m_isShooterRunning) {
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFeed);
-      //m_storageSeparatorMotor.set(0);
     }
 
     else {
       m_storageBeltMotor.set(0);
-      //m_storageSeparatorMotor.set(0);
     }
   }
 
@@ -107,8 +103,9 @@ public class Storage extends SubsystemBase {
     if (m_isShooterReady) {
       m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelForward);
     }
-
-    else if (m_isIntakeRunning || m_isShooterRunning) {
+    
+    else if (m_isIntakeRunning) {
+      System.out.println("Run Storage To Shooter Motor");
       m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
     }
 
@@ -124,15 +121,13 @@ public class Storage extends SubsystemBase {
     }
     // This method will be called once per scheduler run
     m_loggingData.BeltMotorLevel = m_storageBeltMotor.get();
-    m_loggingData.SeparatorMotorLevel = m_storageSeparatorMotor.get();
     m_loggingData.BeltMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageBeltMotorPDP_Port);
-    m_loggingData.SeparatorMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageSeparatorMotorPDP_Port);
+    //m_loggingData.SeparatorMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageSeparatorMotorPDP_Port);
     m_logger.queueData(m_loggingData);
   }
 
   public static class StorageLoggingData {
     double BeltMotorLevel;
-    double SeparatorMotorLevel;
     double BeltMotorCurrent;
     double SeparatorMotorCurrent;
   }

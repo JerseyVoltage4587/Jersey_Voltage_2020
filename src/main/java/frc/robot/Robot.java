@@ -136,7 +136,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopInit() {
     getDriveBase().zeroDriveSensors();
-    getIntake().zeroIntakeSensors();
+    //getIntake().zeroIntakeSensors();
+    //getIntake().setIntakeMotorLevel(0);
+    //getStorage().setStorageMotorLevel(0);
   }
 
   /**

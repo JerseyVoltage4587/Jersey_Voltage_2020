@@ -36,7 +36,9 @@ public class Intake extends SubsystemBase {
       return;
     }
     m_intakeMotor = new WPI_TalonSRX(Constants.IntakeMotorCAN_Address);
+    m_intakeMotor.configFactoryDefault();
     m_intakeArmMotor = new WPI_TalonSRX(Constants.IntakeMotorArmCAN_Address);
+    m_intakeArmMotor.configFactoryDefault();
     m_intakeArmMotor.setNeutralMode(NeutralMode.Brake);
     m_loggingData = new IntakeLoggingData();
     intakeArmMotorStatus = "UP";
@@ -53,6 +55,14 @@ public class Intake extends SubsystemBase {
 			}
 		}
 		return m_Instance;
+  }
+
+  public void setIntakeMotorLevel(double x) {
+    m_intakeMotor.set(x);
+  }
+
+  public double getIntakeMotorLevel() {
+    return m_intakeMotor.get();
   }
 
   public void raiseIntake() {
