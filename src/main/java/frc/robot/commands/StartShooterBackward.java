@@ -42,6 +42,7 @@ public class StartShooterBackward extends CommandBase {
   public void initialize() {
     motorLevel = -1.0 * Constants.ShooterMotorLevel;
     Robot.getShooter().setShooterMotorLevel(motorLevel);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -82,6 +83,7 @@ public class StartShooterBackward extends CommandBase {
   public boolean isFinished() {
     if (lastAverageRPM > 2818 && lastAverageRPM < 2858) {
       Robot.getStorage().setShooterReady(true);
+      SmartDashboard.putBoolean("Is Shooter Ready", true);
       return true;
     }
 
