@@ -53,7 +53,7 @@ public class StartShooterForward extends CommandBase {
   @Override
   public void execute() {
     double leftEncoder = -1 * Robot.getShooter().getLeftShooterEncoder();
-    double rightEncoder = -1 * Robot.getShooter().getRightShooterEncoder();
+    double rightEncoder = Robot.getShooter().getRightShooterEncoder();
     long nanoSeconds = System.nanoTime();
 
     elapsedTime = ((nanoSeconds - lastNanoSeconds) / 1000000000.0) / 60.0;

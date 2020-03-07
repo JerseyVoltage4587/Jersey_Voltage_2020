@@ -47,7 +47,7 @@ public class StartShooterBackward extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    double leftEncoder = -1 * Robot.getShooter().getLeftShooterEncoder();
+    double leftEncoder = Robot.getShooter().getLeftShooterEncoder();
     double rightEncoder = -1 * Robot.getShooter().getRightShooterEncoder();
     long nanoSeconds = System.nanoTime();
 
