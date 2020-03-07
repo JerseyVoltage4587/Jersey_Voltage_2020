@@ -61,8 +61,8 @@ public class Climber extends SubsystemBase {
       m_rightClimberMotor.set(0);
     }
 
-    if (RobotClimberState.equals("PUSH")) {
-
+    else if (RobotClimberState.equals("PUSH")) {
+      
     }
 
     // This method will be called once per scheduler run
