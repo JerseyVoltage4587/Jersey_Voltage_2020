@@ -22,11 +22,11 @@ public class ToggleIntakeArm extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    if (Robot.getIntake().getIntakeArmMotorStatus().equals("DOWN")) {
+    if (Robot.getIntake().getSetPoint() > 0) {
       CommandScheduler.getInstance().schedule(new RaiseIntakeArm());
     }
 
-    else if (Robot.getIntake().getIntakeArmMotorStatus().equals("UP")) {
+    else if (Robot.getIntake().getSetPoint() < 88) {
       CommandScheduler.getInstance().schedule(new LowerIntakeArm());
     }
   }

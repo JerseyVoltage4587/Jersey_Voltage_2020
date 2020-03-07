@@ -8,7 +8,6 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
-import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -16,11 +15,11 @@ import frc.robot.Robot;
 import frc.robot.util.AsyncStructuredLogger;
 
 public class Storage extends SubsystemBase {
-  public boolean m_isActive = false;
+  public boolean m_isActive = true;
   static Storage m_Instance = null;
   private WPI_TalonSRX m_storageBeltMotor = null;
   private WPI_TalonSRX m_storageToShooterMotor = null;
-  private boolean m_isPassing = false;
+  public boolean m_isPassing = false;
   private boolean m_isIntakeRunning = false;
   private boolean m_isShooterRunning = false;
   private boolean m_isShooterReady = false;
@@ -81,14 +80,12 @@ public class Storage extends SubsystemBase {
   }
 
   private void updateStorageMotors() {
-    System.out.println("Updating Motors");
     
     if (m_isActive == false) {
       return;
     }
 
     if (m_isIntakeRunning) {
-      System.out.println("Belt Motor On");
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
     }
 
@@ -99,7 +96,7 @@ public class Storage extends SubsystemBase {
       m_storageBeltMotor.set(-1 * Constants.StorageBeltMotorLevelFull);
     }
     else {
-      m_storageBeltMotor.set(0);
+      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
     }
   }
 
@@ -109,21 +106,20 @@ public class Storage extends SubsystemBase {
       return;
     }
 
-    if (m_isShooterReady) {
-      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelForward);
+    if (m_isPassing) {
+      m_storageToShooterMotor.set(-1 * Constants.StorageToShooterMotorLevelForward);
     }
     
     else if (m_isIntakeRunning) {
-      System.out.println("Run Storage To Shooter Motor");
       m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
     }
 
-    else if (m_isPassing){
-      m_storageToShooterMotor.set(-1 * Constants.StorageToShooterMotorLevelForward);
+    else if (m_isShooterReady){
+      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelForward);
     }
 
     else {
-      m_storageToShooterMotor.set(0);
+      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelForward);
     }
   }
 

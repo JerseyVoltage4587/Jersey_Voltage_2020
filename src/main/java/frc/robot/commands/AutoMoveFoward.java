@@ -27,24 +27,17 @@ public class AutoMoveFoward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    leftEncoder = -1 * getDriveBase().m_lefttalon1.getSelectedSensorPosition(0);
-    rightEncoder = -1 * getDriveBase().m_righttalon2.getSelectedSensorPosition(0);
-    leftInches = leftEncoder / 4096.0 * Math.PI * 6;
-    rightInches = rightEncoder / 4096.0 * Math.PI * 6;
+    Robot.getDriveBase().setSafetyEnabled(false);
+    Robot.getDriveBase().setRightMotorLevel(0.5);
+    Robot.getDriveBase().setLeftMotorLevel(0.5);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
+  public void execute() {    
+    leftInches = Robot.getDriveBase().getLeftDistanceInches();
+    rightInches = Robot.getDriveBase().getRightDistanceInches();
     averageInches = (leftInches + rightInches) / 2;
-    if (averageInches < 24) {
-      Robot.getDriveBase().setLeftMotorLevel(0.75);
-      Robot.getDriveBase().setRightMotorLevel(0.75);
-      leftEncoder = -1 * getDriveBase().m_lefttalon1.getSelectedSensorPosition(0);
-      rightEncoder = -1 * getDriveBase().m_righttalon2.getSelectedSensorPosition(0);
-      leftInches = leftEncoder / 4096.0 * Math.PI * 6;
-      rightInches = rightEncoder / 4096.0 * Math.PI * 6;
-    }
   }
 
   public DriveBase getDriveBase() {
@@ -62,12 +55,13 @@ public class AutoMoveFoward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (averageInches < 24) {
-      return false;
-    }
-
-    else {
+    if (Robot.getOI().getDrive() > 0.7) {
       return true;
     }
+
+    if (averageInches >= 24) {
+      return true;
+    }
+    return false;
   }
 }

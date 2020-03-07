@@ -98,7 +98,7 @@ public class OI extends CommandBase {
     //buttonX2.whenPressed(new StartShooterBackward());
     //buttonY2.whenPressed(new PositionRobotToShootBackward());
     //leftBumper2.whenPressed(new StartShooterBackward());
-    //rightBumper2.whenPressed(new StartShooterForward());
+    rightBumper2.whenPressed(new StartShooterForward());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();

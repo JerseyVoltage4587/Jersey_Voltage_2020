@@ -22,7 +22,7 @@ public class RaiseIntakeArm extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().raiseIntake();
+    Robot.getIntake().setSetPoint(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -33,12 +33,11 @@ public class RaiseIntakeArm extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.getIntake().stopIntakeArmMotor();
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.getIntake().getIntakeArmAngle() <= 0;
+    return true;
   }
 }

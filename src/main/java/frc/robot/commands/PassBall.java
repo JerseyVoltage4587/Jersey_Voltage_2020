@@ -22,8 +22,8 @@ public class PassBall extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getStorage().setPassing(true);;
-    Robot.getIntake().startIntakeMotors();
+    Robot.getStorage().setPassing(true);
+    Robot.getIntake().raiseIntake();
   }
 
   // Called every time the scheduler runs while the command is scheduled.

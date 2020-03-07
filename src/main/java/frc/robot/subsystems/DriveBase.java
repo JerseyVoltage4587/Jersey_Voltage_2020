@@ -14,6 +14,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -158,6 +159,9 @@ public class DriveBase extends SubsystemBase {
     m_loggingData.Heading = Gyro.getYaw();
     m_logger.queueData(m_loggingData);
     m_lastLogTime = now;
+
+    SmartDashboard.putNumber("Left Encoder", m_loggingData.LeftEncoderReading);
+    SmartDashboard.putNumber("Right Encoder", m_loggingData.RightEncoderReading);
   }
 
   public int getLeftEncoder() {
