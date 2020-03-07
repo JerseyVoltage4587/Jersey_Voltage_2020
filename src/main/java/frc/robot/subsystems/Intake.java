@@ -23,7 +23,7 @@ public class Intake extends SubsystemBase {
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotor = null;
   private WPI_TalonSRX m_intakeArmMotor = null;
-  private String intakeArmMotorStatus = null;
+  private String intakeArmMotorStatus = "UP";
   private int m_numberOfTimesStalled = 0;
   private IntakeLoggingData m_loggingData;
   private AsyncStructuredLogger<IntakeLoggingData> m_logger;
@@ -118,7 +118,7 @@ public class Intake extends SubsystemBase {
     m_intakeMotor.setSelectedSensorPosition(0, 0, 10);
   }
   public double getIntakeArmAngle(){
-    return (getIntakeArmAngle()*360.0/4096.0)*(18.0/36.0)*(30/72);
+    return (getIntakeArmEncoder()*360.0/4096.0)*(18.0/36)*(30.0/72);
   }
 
   public int getIntakeArmEncoder() {
@@ -157,9 +157,9 @@ public class Intake extends SubsystemBase {
     else {
       m_numberOfTimesStalled = 0;
     }
-    SmartDashboard.putNumber("Stator Current", m_loggingData.IntakeArmMotorStatorCurrent);
-    SmartDashboard.putNumber("Times Stalled", m_numberOfTimesStalled);
-    SmartDashboard.putString("Arm Status", intakeArmMotorStatus);
+    SmartDashboard.putNumber("Arm Angle", getIntakeArmAngle());
+    SmartDashboard.putNumber("Encoder Value", getIntakeArmEncoder());
+  
   }
 
   public static class IntakeLoggingData {

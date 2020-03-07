@@ -20,6 +20,7 @@ public class Storage extends SubsystemBase {
   static Storage m_Instance = null;
   private WPI_TalonSRX m_storageBeltMotor = null;
   private WPI_TalonSRX m_storageToShooterMotor = null;
+  private boolean m_isPassing = false;
   private boolean m_isIntakeRunning = false;
   private boolean m_isShooterRunning = false;
   private boolean m_isShooterReady = false;
@@ -73,6 +74,12 @@ public class Storage extends SubsystemBase {
     updateStorageToShooterMotor();
   }
 
+  public void setPassing(boolean x){
+    m_isPassing = x;
+    updateStorageMotors();
+    updateStorageToShooterMotor();
+  }
+
   private void updateStorageMotors() {
     System.out.println("Updating Motors");
     
@@ -88,7 +95,9 @@ public class Storage extends SubsystemBase {
     else if (m_isShooterRunning) {
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFeed);
     }
-
+    else if(m_isPassing){
+      m_storageBeltMotor.set(-1 * Constants.StorageBeltMotorLevelFull);
+    }
     else {
       m_storageBeltMotor.set(0);
     }
@@ -107,6 +116,10 @@ public class Storage extends SubsystemBase {
     else if (m_isIntakeRunning) {
       System.out.println("Run Storage To Shooter Motor");
       m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
+    }
+
+    else if (m_isPassing){
+      m_storageToShooterMotor.set(-1 * Constants.StorageToShooterMotorLevelForward);
     }
 
     else {
