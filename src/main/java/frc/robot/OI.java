@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.Aim;
 import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.PositionRobotToShootBackward;
 import frc.robot.commands.PositionRobotToShootForward;
@@ -89,20 +90,20 @@ public class OI extends CommandBase {
     //leftStickButton1.whenPressed();
     //rightStickButton1.whenPressed();
     //leftTrigger1.whenPressed();
-    //rightTrigger1.whenPressed(;
+    //rightTrigger1.whenPressed();
 
-    //buttonA2.whenPressed(new LowerIntakeArm());
-    buttonB2.whenPressed(new StartShooterForward());
+    buttonA2.whenPressed(new Aim());
+    //buttonB2.whenPressed(new StartShooterForward());
     //buttonX2.whenPressed(new StartShooterBackward());
     //buttonY2.whenPressed(new PositionRobotToShootBackward());
-    //leftBumper2.whenPressed(new SeparatorLeft());
-    //rightBumper2.whenPressed(new SeparatorRight());
+    leftBumper2.whenPressed(new StartShooterBackward());
+    rightBumper2.whenPressed(new StartShooterForward());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();
     //rightStickButton2.whenPressed();
-    //leftTrigger2.whenPressed(new ShootBackward());
-    //rightTrigger2.whenPressed(new ShootForward());
+    leftTrigger2.whenPressed(new ShootBackward());
+    rightTrigger2.whenPressed(new ShootForward());
     // Use addRequirements() here to declare subsystem dependencies.
   }
 
