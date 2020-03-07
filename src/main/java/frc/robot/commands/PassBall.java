@@ -23,7 +23,7 @@ public class PassBall extends CommandBase {
   @Override
   public void initialize() {
     Robot.getStorage().setPassing(true);
-    Robot.getIntake().raiseIntake();
+    Robot.getIntake().setSetPoint(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

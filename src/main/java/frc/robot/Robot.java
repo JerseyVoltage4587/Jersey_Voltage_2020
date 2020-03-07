@@ -11,12 +11,9 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Aim;
 import frc.robot.commands.AutoMoveFoward;
 import frc.robot.commands.DefaultDriveBaseCommand;
-import frc.robot.commands.PositionRobotToShootBackward;
-import frc.robot.commands.ShootBackward;
 import frc.robot.subsystems.*;
 import frc.robot.util.Gyro;
 

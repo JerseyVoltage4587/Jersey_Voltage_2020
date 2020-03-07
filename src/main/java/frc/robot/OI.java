@@ -12,15 +12,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Aim;
-import frc.robot.commands.LowerIntakeArm;
-import frc.robot.commands.PassBall;
-import frc.robot.commands.PositionRobotToShootBackward;
-import frc.robot.commands.PositionRobotToShootForward;
-import frc.robot.commands.RaiseIntakeArm;
-import frc.robot.commands.ShootBackward;
-import frc.robot.commands.ShootForward;
-import frc.robot.commands.StartShooterBackward;
 import frc.robot.commands.StartShooterForward;
 import frc.robot.commands.ToggleIntakeArm;
 
