@@ -84,7 +84,7 @@ public class OI extends CommandBase {
     //buttonX1.whenPressed();
     //buttonY1.whenPressed();
     //leftBumper1.whenPressed();
-    //rightBumper1.whenPressed();
+    rightBumper1.whenPressed(new ToggleIntakeArm());
     //startButton1.whenPressed();
     //backButton1.whenPressed();
     //leftStickButton1.whenPressed();
