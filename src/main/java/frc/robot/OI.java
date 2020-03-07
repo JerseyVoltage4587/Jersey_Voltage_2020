@@ -12,6 +12,8 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.LowerIntakeArm;
+import frc.robot.commands.RaiseIntakeArm;
 import frc.robot.commands.StartShooterForward;
 import frc.robot.commands.ToggleIntakeArm;
 
@@ -71,18 +73,19 @@ public class OI extends CommandBase {
     leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
-    //buttonA1.whenPressed();
-    //buttonB1.whenPressed();
-    //buttonX1.whenPressed();
-    //buttonY1.whenPressed();
-    //leftBumper1.whenPressed();
-    //rightBumper1.whenPressed();
-    //startButton1.whenPressed();
-    //backButton1.whenPressed();
-    //leftStickButton1.whenPressed();
-    //rightStickButton1.whenPressed();
-    //leftTrigger1.whenPressed(new PassBall());
-    rightTrigger1.whenPressed(new ToggleIntakeArm());
+    // buttonA1.whenPressed();
+    // buttonB1.whenPressed();
+    // buttonX1.whenPressed();
+    // buttonY1.whenPressed();
+    // leftBumper1.whenPressed();
+    // rightBumper1.whenPressed();
+    // startButton1.whenPressed();
+    // backButton1.whenPressed();
+    // leftStickButton1.whenPressed();
+    // rightStickButton1.whenPressed();
+    // leftTrigger1.whenPressed(new PassBall());
+    rightTrigger1.whenPressed(new LowerIntakeArm());
+    rightTrigger1.whenReleased(new RaiseIntakeArm());
 
     //buttonA2.whenPressed(new Aim());
     //buttonB2.whenPressed(new StartShooterForward());
