@@ -40,6 +40,6 @@ public class LowerIntakeArm extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.getIntake().IsArmMotorStalled();
+    return Robot.getIntake().getIntakeArmAngle() >= 90;
   }
 }

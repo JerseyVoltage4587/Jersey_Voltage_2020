@@ -116,6 +116,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
+    getIntake().zeroIntakeSensors();
     //m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)

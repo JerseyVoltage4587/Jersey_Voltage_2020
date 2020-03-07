@@ -52,7 +52,7 @@ public final class Constants {
     public static double ClimberMotorLevel = 0.4;
     public static double StorageSeparatorMotorLevel = 0.4;
     public static double StorageToShooterMotorLevelForward = -0.4;
-    public static double StorageToShooterMotorLevelBackward = 0.4;
+    public static double StorageToShooterMotorLevelBackward = 0.27;
     public static double IntakeArmMotorLevelUp = -0.4;
     public static double IntakeArmMotorLevelDown = 0.3;
     //Motor Stall Currents

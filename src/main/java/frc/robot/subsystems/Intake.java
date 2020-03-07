@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
@@ -39,6 +40,7 @@ public class Intake extends SubsystemBase {
     m_intakeMotor.configFactoryDefault();
     m_intakeArmMotor = new WPI_TalonSRX(Constants.IntakeMotorArmCAN_Address);
     m_intakeArmMotor.configFactoryDefault();
+    m_intakeArmMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_intakeArmMotor.setNeutralMode(NeutralMode.Brake);
     m_loggingData = new IntakeLoggingData();
     intakeArmMotorStatus = "UP";
@@ -114,6 +116,16 @@ public class Intake extends SubsystemBase {
     }
     m_intakeArmMotor.setSelectedSensorPosition(0, 0, 10);
     m_intakeMotor.setSelectedSensorPosition(0, 0, 10);
+  }
+  public double getIntakeArmAngle(){
+    return (getIntakeArmAngle()*360.0/4096.0)*(18.0/36.0)*(30/72);
+  }
+
+  public int getIntakeArmEncoder() {
+    if (m_isActive == false) {
+      return 0;
+    }
+    return m_intakeArmMotor.getSelectedSensorPosition(0);
   }
 
   public boolean IsArmMotorStalled() {
