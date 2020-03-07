@@ -15,7 +15,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.RaiseIntakeArm;
 import frc.robot.commands.StartShooterForward;
-import frc.robot.commands.ToggleIntakeArm;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
