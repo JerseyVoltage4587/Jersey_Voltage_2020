@@ -187,22 +187,22 @@ public class DriveBase extends SubsystemBase {
   }
 
   public static class DriveBaseLoggingData {
-    double LeftMotorLevel;
-    double LeftMotor1_SupplyCurrent;
-    double LeftMotor1_StatorCurrent;
-    double LeftMotor2_SupplyCurrent;
-    int LeftEncoderReading;
-    double LeftPosition;
-    double LeftVelocity;
-    double LeftAcceleration;
-    double RightMotorLevel;
-    double RightMotor1_SupplyCurrent;
-    double RightMotor1_StatorCurrent;
-    double RightMotor2_SupplyCurrent;
-    int RightEncoderReading;
-    double RightPosition;
-    double RightVelocity;
-    double RightAcceleration;
-    double Heading;
+    public double LeftMotorLevel;
+    public double LeftMotor1_SupplyCurrent;
+    public double LeftMotor1_StatorCurrent;
+    public double LeftMotor2_SupplyCurrent;
+    public int LeftEncoderReading;
+    public double LeftPosition;
+    public double LeftVelocity;
+    public double LeftAcceleration;
+    public double RightMotorLevel;
+    public double RightMotor1_SupplyCurrent;
+    public double RightMotor1_StatorCurrent;
+    public double RightMotor2_SupplyCurrent;
+    public int RightEncoderReading;
+    public double RightPosition;
+    public double RightVelocity;
+    public double RightAcceleration;
+    public double Heading;
   }
 }

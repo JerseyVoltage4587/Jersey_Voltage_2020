@@ -64,5 +64,5 @@ public final class Constants {
     public static final double DriveBaseWheelDiameter = 6; // inches
     public static final double ShooterWheelDiameter = 6; // inches
     //Degrees
-    public static final double IntakeArmDegrees = 87; 
+    public static final double IntakeArmDegrees = 87;
 }

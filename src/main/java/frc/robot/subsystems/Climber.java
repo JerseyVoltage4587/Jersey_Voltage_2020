@@ -74,15 +74,15 @@ public class Climber extends SubsystemBase {
   }
 
   public static class ClimberLoggingData {
-    double LeftClimberMotorLevel;
-    double RightClimberMotorLevel;
-    double LeftClimberMotorCurrent;
-    double RightClimberMotorCurrent;
-    int LeftEncoderReading;
-    double LeftPosition;
-    double LeftVelocity;
-    int RightEncoderReading;
-    double RightPosition;
-    double RightVelocity;
+    public double LeftClimberMotorLevel;
+    public double RightClimberMotorLevel;
+    public double LeftClimberMotorCurrent;
+    public double RightClimberMotorCurrent;
+    public int LeftEncoderReading;
+    public double LeftPosition;
+    public double LeftVelocity;
+    public int RightEncoderReading;
+    public double RightPosition;
+    public double RightVelocity;
   }
 }
