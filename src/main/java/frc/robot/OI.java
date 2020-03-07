@@ -16,8 +16,6 @@ import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.PositionRobotToShootBackward;
 import frc.robot.commands.PositionRobotToShootForward;
 import frc.robot.commands.RaiseIntakeArm;
-import frc.robot.commands.SeparatorLeft;
-import frc.robot.commands.SeparatorRight;
 import frc.robot.commands.ShootBackward;
 import frc.robot.commands.ShootForward;
 import frc.robot.commands.StartShooterBackward;
