@@ -102,12 +102,12 @@ public class Shooter extends SubsystemBase {
   }
 
   public static class ShooterLoggingData {
-    double LeftShooterMotorLevel;
-    double RightShooterMotorLevel;
-    double LeftMotorCurrent;
-    double RightMotorCurrent;
-    double LeftEncoderPosition;
-    double RightEncoderPosition;
-    double ShooterMotorMotorLevel;
+    public double LeftShooterMotorLevel;
+    public double RightShooterMotorLevel;
+    public double LeftMotorCurrent;
+    public double RightMotorCurrent;
+    public double LeftEncoderPosition;
+    public double RightEncoderPosition;
+    public double ShooterMotorMotorLevel;
   }
 }

@@ -26,7 +26,6 @@ public class Climber extends SubsystemBase {
   private Solenoid m_ClimberSolenoid = null;
   private ClimberLoggingData m_loggingData;
   private AsyncStructuredLogger<ClimberLoggingData> m_logger;
-  
   /**
    * Creates a new Climber.
    */
@@ -62,8 +61,8 @@ public class Climber extends SubsystemBase {
       m_rightClimberMotor.set(0);
     }
 
-    if (RobotClimberState.equals("PUSH")) {
-
+    else if (RobotClimberState.equals("PUSH")) {
+      
     }
 
     // This method will be called once per scheduler run
@@ -75,15 +74,15 @@ public class Climber extends SubsystemBase {
   }
 
   public static class ClimberLoggingData {
-    double LeftClimberMotorLevel;
-    double RightClimberMotorLevel;
-    double LeftClimberMotorCurrent;
-    double RightClimberMotorCurrent;
-    int LeftEncoderReading;
-    double LeftPosition;
-    double LeftVelocity;
-    int RightEncoderReading;
-    double RightPosition;
-    double RightVelocity;
+    public double LeftClimberMotorLevel;
+    public double RightClimberMotorLevel;
+    public double LeftClimberMotorCurrent;
+    public double RightClimberMotorCurrent;
+    public int LeftEncoderReading;
+    public double LeftPosition;
+    public double LeftVelocity;
+    public int RightEncoderReading;
+    public double RightPosition;
+    public double RightVelocity;
   }
 }

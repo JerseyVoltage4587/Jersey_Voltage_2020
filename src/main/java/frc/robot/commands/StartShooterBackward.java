@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -42,6 +43,8 @@ public class StartShooterBackward extends CommandBase {
   public void initialize() {
     motorLevel = -1.0 * Constants.ShooterMotorLevel;
     Robot.getShooter().setShooterMotorLevel(motorLevel);
+    SmartDashboard.putBoolean("Is Shooter Ready", false);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -80,8 +83,9 @@ public class StartShooterBackward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (lastAverageRPM > 2818 && lastAverageRPM < 2858) {
+    if (averageRPM > 2818 && averageRPM < 2858) {
       Robot.getStorage().setShooterReady(true);
+      SmartDashboard.putBoolean("Is Shooter Ready", true);
       return true;
     }
 
