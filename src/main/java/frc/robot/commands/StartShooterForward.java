@@ -65,7 +65,7 @@ public class StartShooterForward extends CommandBase {
     
     if (lastAverageRPM < 2818 || lastAverageRPM > 2858) {
       double error = Math.abs(lastAverageRPM - 2838);
-       motorLevel = 0.7 + (.00009 * error);
+       motorLevel = 0.7 + (.00009 * error); //Figure out what to multiply the error by
     }
     
     Robot.getShooter().setShooterMotorLevel(motorLevel);

@@ -92,11 +92,11 @@ public class OI extends CommandBase {
     //rightTrigger1.whenPressed(;
 
     //buttonA2.whenPressed(new LowerIntakeArm());
-    buttonB2.whenPressed(new StartShooterForward());
+    //buttonB2.whenPressed();
     //buttonX2.whenPressed(new StartShooterBackward());
     //buttonY2.whenPressed(new PositionRobotToShootBackward());
     //leftBumper2.whenPressed(new SeparatorLeft());
-    //rightBumper2.whenPressed(new SeparatorRight());
+    rightBumper2.whenPressed(new StartShooterForward());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();

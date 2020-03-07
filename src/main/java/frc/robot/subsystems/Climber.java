@@ -26,7 +26,6 @@ public class Climber extends SubsystemBase {
   private Solenoid m_ClimberSolenoid = null;
   private ClimberLoggingData m_loggingData;
   private AsyncStructuredLogger<ClimberLoggingData> m_logger;
-  
   /**
    * Creates a new Climber.
    */
