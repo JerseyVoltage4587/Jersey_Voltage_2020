@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
-public class LowerClimberSolenoid extends CommandBase {
+public class PushClimber extends CommandBase {
   /**
-   * Creates a new LowerClimberSolenoid.
+   * Creates a new PushClimber.
    */
-  public LowerClimberSolenoid() {
+  public PushClimber() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getClimber());
   }
@@ -22,6 +22,8 @@ public class LowerClimberSolenoid extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.getClimber().setRobotClimberState("PUSH");
+    Robot.getClimber().setSetPoint(420);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -37,6 +39,6 @@ public class LowerClimberSolenoid extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

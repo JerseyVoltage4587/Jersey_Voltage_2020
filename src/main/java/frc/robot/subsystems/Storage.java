@@ -96,7 +96,7 @@ public class Storage extends SubsystemBase {
       m_storageBeltMotor.set(-1 * Constants.StorageBeltMotorLevelFull);
     }
     else {
-      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
+      m_storageBeltMotor.set(0);
     }
   }
 
@@ -119,12 +119,14 @@ public class Storage extends SubsystemBase {
     }
 
     else {
-      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelForward);
+      m_storageToShooterMotor.set(0);
     }
   }
 
   @Override
   public void periodic() {
+    //System.out.println("Storage Periodic");
+
     if (m_isActive == false) {
       return;
     }

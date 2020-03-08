@@ -26,33 +26,33 @@ public final class Constants {
     public static final int IntakeMotorArmCAN_Address = 3; //Final
     public static final int IntakeMotorCAN_Address = 8; //Final
     public static final int StorageToShooterMotorCAN_Address = 4; //Final
-    public static int LeftClimberMotorCAN_Address = 7; //Final for now
-    public static int RightClimberMotorCAN_Address = 0; //Final for now
-    public static int RightShooterMotorCAN_Address = 45; //Final
-    public static int LeftShooterMotorCAN_Address = 46; //Final
+    public static final int LeftClimberMotorCAN_Address = 7; //Final for now
+    public static final int RightClimberMotorCAN_Address = 10; //Final for now
+    public static final int RightShooterMotorCAN_Address = 45; //Final
+    public static final int LeftShooterMotorCAN_Address = 46; //Final
     //PDP Ports
     public static final int RightTalon2PDP_Port = 0;
     public static final int RightVictor21PDP_Port = 1;
-    public static final int StorageSeparatorMotorPDP_Port = 4; //Final
-    public static int StorageBeltMotorPDP_Port = 3; //Final for now
-    public static int IntakeArmPDP_Port = 12; //Final for now
-    public static int IntakePDP_Port = 5; //Final for now
-    public static final int StorageToShooterMotorPDP_Port = 3; //Final
-    public static int LeftShooterMotorPDP_Port = 6; //Final for now
-    public static int RightShooterMotorPDP_Port = 8; //Not enough Motor Controllers
-    public static int LeftClimberMotorPDP_Port = 10; //Final for now
-    public static int RightClimberMotorPDP_Port = 5; //Final for now
+    public static final int StorageSeparatorMotorPDP_Port = 4;
+    public static final int StorageBeltMotorPDP_Port = 3;
+    public static final int IntakeArmPDP_Port = 12;
+    public static final int IntakePDP_Port = 5;
+    public static final int StorageToShooterMotorPDP_Port = 3;
+    public static final int LeftShooterMotorPDP_Port = 13;
+    public static final int RightShooterMotorPDP_Port = 2;
+    public static final int LeftClimberMotorPDP_Port = 10;
+    public static final int RightClimberMotorPDP_Port = 6;
     public static final int LeftVictor11PDP_Port = 14;
     public static final int LeftTalon1PDP_Port = 15;
     //Motor Levels
-    public static double IntakeMotorLevel = 0.4;
-    public static double ShooterMotorLevel = 0.5;
-    public static double StorageBeltMotorLevelFull = 0.5;
+    public static double IntakeMotorLevel = -0.4;
+    public static double ShooterMotorLevel = 0.753;
+    public static double StorageBeltMotorLevelFull = 0.35;
     public static double StorageBeltMotorLevelFeed = 0.3;
-    public static double ClimberMotorLevel = 0.4;
+    public static double ClimberMotorLevel = 0.3;
     public static double StorageSeparatorMotorLevel = 0.4;
-    public static double StorageToShooterMotorLevelForward = -0.4;
-    public static double StorageToShooterMotorLevelBackward = 0.27;
+    public static double StorageToShooterMotorLevelForward = -0.5;
+    public static double StorageToShooterMotorLevelBackward = 0.15;
     public static double IntakeArmMotorLevelUp = -0.4;
     public static double IntakeArmMotorLevelDown = 0.3;
     //Motor Stall Currents
@@ -69,4 +69,18 @@ public final class Constants {
     public static final double ShooterMotorTolerance = 20;
 
     public static final double IntakeArmKp = 0.0125;
+
+    public static final double PushModeSlowDownOffset = 70;
+    public static final double PushModeSlowBaseLevel = 0.1;
+    public static final double PushModeSlowKp = 0.01;
+    public static final double PushModeFastVelocity = 100;
+    public static final double PushModeFastBaseLevel = 0.2;
+    public static final double PushModeFastKp = 0.015;
+
+    public static final double PullModeSlowDownOffset = 70;
+    public static final double PullModeSlowBaseLevel = 0.3;
+    public static final double PullModeSlowKp = 0.02;
+    public static final double PullModeFastVelocity = 100;
+    public static final double PullModeFastBaseLevel = 0.5;
+    public static final double PullModeFastKp = 0.03;
 }

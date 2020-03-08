@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.*;
 import frc.robot.Robot;
@@ -22,6 +23,7 @@ public class AutoMoveFoward extends CommandBase {
    */
   public AutoMoveFoward() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.getDriveBase());
   }
 
   // Called when the command is initially scheduled.
@@ -34,15 +36,12 @@ public class AutoMoveFoward extends CommandBase {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {    
+  public void execute() {
+    Robot.getDriveBase().setRightMotorLevel(0.5);
+    Robot.getDriveBase().setLeftMotorLevel(0.5);
     leftInches = Robot.getDriveBase().getLeftDistanceInches();
     rightInches = Robot.getDriveBase().getRightDistanceInches();
     averageInches = (leftInches + rightInches) / 2;
-  }
-
-  public DriveBase getDriveBase() {
-    Robot.getInstance();
-    return Robot.getDriveBase();
   }
 
   // Called once the command ends or is interrupted.
@@ -62,6 +61,7 @@ public class AutoMoveFoward extends CommandBase {
     if (averageInches >= 24) {
       return true;
     }
+
     return false;
   }
 }

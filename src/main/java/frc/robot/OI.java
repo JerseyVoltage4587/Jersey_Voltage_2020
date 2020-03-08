@@ -14,7 +14,9 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.RaiseIntakeArm;
+import frc.robot.commands.StartKicker;
 import frc.robot.commands.StartShooterForward;
+import frc.robot.commands.StopShooter;
 
 public class OI extends CommandBase {
   DifferentialDrive m_drive;
@@ -72,17 +74,17 @@ public class OI extends CommandBase {
     leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
-    // buttonA1.whenPressed();
-    // buttonB1.whenPressed();
-    // buttonX1.whenPressed();
-    // buttonY1.whenPressed();
-    // leftBumper1.whenPressed();
-    // rightBumper1.whenPressed();
-    // startButton1.whenPressed();
-    // backButton1.whenPressed();
-    // leftStickButton1.whenPressed();
-    // rightStickButton1.whenPressed();
-    // leftTrigger1.whenPressed(new PassBall());
+    //buttonA1.whenPressed(new PullClimber());
+    //buttonB1.whenPressed();
+    //buttonX1.whenPressed();
+    //buttonY1.whenPressed(new PushClimber());
+    //leftBumper1.whenPressed();
+    //rightBumper1.whenPressed();
+    //startButton1.whenPressed();
+    //backButton1.whenPressed();
+    //leftStickButton1.whenPressed();
+    //rightStickButton1.whenPressed();
+    //leftTrigger1.whenPressed(new PassBall());
     rightTrigger1.whenPressed(new LowerIntakeArm());
     rightTrigger1.whenReleased(new RaiseIntakeArm());
 
@@ -90,8 +92,9 @@ public class OI extends CommandBase {
     //buttonB2.whenPressed(new StartShooterForward());
     //buttonX2.whenPressed(new StartShooterBackward());
     //buttonY2.whenPressed(new PositionRobotToShootBackward());
-    //leftBumper2.whenPressed(new StartShooterBackward());
+    leftBumper2.whenPressed(new StartKicker());
     rightBumper2.whenPressed(new StartShooterForward());
+    rightBumper2.whenReleased(new StopShooter());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();

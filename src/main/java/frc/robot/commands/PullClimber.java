@@ -8,18 +8,22 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 
-public class EngageClimberSolenoid extends CommandBase {
+public class PullClimber extends CommandBase {
   /**
-   * Creates a new EngageClimberSolenoid.
+   * Creates a new PullClimber.
    */
-  public EngageClimberSolenoid() {
+  public PullClimber() {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.getClimber());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.getClimber().setRobotClimberState("PULL");
+    Robot.getClimber().setSetPoint(35);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -35,6 +39,6 @@ public class EngageClimberSolenoid extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }

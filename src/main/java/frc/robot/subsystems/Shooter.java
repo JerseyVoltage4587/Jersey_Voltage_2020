@@ -101,6 +101,8 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
+    //System.out.println("Shooter Periodic");
+
     if (m_isActive == false) {
       return;
     }

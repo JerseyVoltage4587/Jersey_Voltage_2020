@@ -93,6 +93,8 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
+    //System.out.println("Intake Periodic");
+
     if (m_isActive == false) {
       return;
     }
@@ -118,7 +120,17 @@ public class Intake extends SubsystemBase {
     }
 
     double error = m_setPoint - m_loggingData.ArmAngle;
-    m_intakeArmMotor.set(-1 * (error * Constants.IntakeArmKp));
+    double level = error * Constants.IntakeArmKp;
+
+    if (level > 0.3) {
+      level = 0.3;
+    }
+
+    else if (level < -0.4) {
+      level = -0.4;
+    }
+
+    m_intakeArmMotor.set(level);
     
     if (m_setPoint > 0) {
       m_intakeMotor.set(Constants.IntakeMotorLevel);

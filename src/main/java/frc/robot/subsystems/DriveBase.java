@@ -66,12 +66,8 @@ public class DriveBase extends SubsystemBase {
     m_drive = new DifferentialDrive(m_lefttalon1, m_righttalon2);
     m_drive.setSafetyEnabled(false);
     m_drive.setRightSideInverted(false);
-    System.out.println("Creating DriveBase LoggingData");
     m_loggingData = new DriveBaseLoggingData();
-    System.out.println("Created DriveBase LoggingData");
-    System.out.println("Creating DriveBase Logger");
     m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
-    System.out.println("Created DriveBase Logger");
   }
 
   public static DriveBase getInstance() {
@@ -127,6 +123,8 @@ public class DriveBase extends SubsystemBase {
 
   @Override
   public void periodic() {
+    //System.out.println("DriveBase Periodic");
+
     if (m_isActive == false) {
       return;
     }
@@ -162,13 +160,17 @@ public class DriveBase extends SubsystemBase {
 
     SmartDashboard.putNumber("Left Encoder", m_loggingData.LeftEncoderReading);
     SmartDashboard.putNumber("Right Encoder", m_loggingData.RightEncoderReading);
+    SmartDashboard.putNumber("Left Distance", m_loggingData.LeftPosition);
+    SmartDashboard.putNumber("Right Distance", m_loggingData.RightPosition);
+    SmartDashboard.putNumber("Left Motor Level", m_loggingData.LeftMotorLevel);
+    SmartDashboard.putNumber("Right Motor Level", m_loggingData.RightMotorLevel);
   }
 
   public int getLeftEncoder() {
     if (m_isActive == false) {
       return 0;
     }
-    return m_lefttalon1.getSelectedSensorPosition(0);
+    return -1 * m_lefttalon1.getSelectedSensorPosition(0);
   }
 
   public double getLeftDistanceInches() {
@@ -179,7 +181,7 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return 0;
     }
-    return m_righttalon2.getSelectedSensorPosition(0);
+    return -1 * m_righttalon2.getSelectedSensorPosition(0);
   }
 
   public double getRightDistanceInches() {
