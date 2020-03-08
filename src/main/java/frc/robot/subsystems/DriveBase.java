@@ -32,7 +32,7 @@ public class DriveBase extends SubsystemBase {
   private double LeftMotorLevel;
   private double RightMotorLevel;
   private DriveBaseLoggingData m_loggingData;
-  private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
+  //private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
   private long m_lastLogTime = 0;
 
 
@@ -67,7 +67,7 @@ public class DriveBase extends SubsystemBase {
     m_drive.setSafetyEnabled(false);
     m_drive.setRightSideInverted(false);
     m_loggingData = new DriveBaseLoggingData();
-    m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
+    //m_logger = new AsyncStructuredLogger<DriveBaseLoggingData>("DriveBase", /*forceUnique=*/false, DriveBaseLoggingData.class);
   }
 
   public static DriveBase getInstance() {
@@ -155,7 +155,7 @@ public class DriveBase extends SubsystemBase {
     m_loggingData.RightAcceleration = getRateOfChange(lastRightVelocity, m_loggingData.RightVelocity, m_lastLogTime, now);
 
     m_loggingData.Heading = Gyro.getYaw();
-    m_logger.queueData(m_loggingData);
+    //m_logger.queueData(m_loggingData);
     m_lastLogTime = now;
 
     SmartDashboard.putNumber("Left Encoder", m_loggingData.LeftEncoderReading);

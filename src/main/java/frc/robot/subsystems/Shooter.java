@@ -24,7 +24,7 @@ public class Shooter extends SubsystemBase {
   private static CANSparkMax m_rightShooterMotor = null;
   private ShooterLoggingData m_loggingData;
   private double setPoint = 0;
-  private AsyncStructuredLogger<ShooterLoggingData> m_logger;
+  //private AsyncStructuredLogger<ShooterLoggingData> m_logger;
   private CANEncoder m_leftShooterEncoder;
   private CANEncoder m_rightShooterEncoder;
   /**
@@ -38,10 +38,12 @@ public class Shooter extends SubsystemBase {
     m_rightShooterMotor = new CANSparkMax(Constants.RightShooterMotorCAN_Address, MotorType.kBrushless);
     m_leftShooterEncoder = m_leftShooterMotor.getEncoder();
     m_rightShooterEncoder = m_rightShooterMotor.getEncoder();
+    m_leftShooterMotor.restoreFactoryDefaults();
+    m_rightShooterMotor.restoreFactoryDefaults();
     m_loggingData = new ShooterLoggingData();
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
-    m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/ false, ShooterLoggingData.class);
+    //m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/ false, ShooterLoggingData.class);
   }
 
   public static Shooter getInstance() {
@@ -143,7 +145,7 @@ public class Shooter extends SubsystemBase {
     
     Robot.getShooter().setShooterMotorLevel(m_loggingData.ShooterMotorLevel);
 
-    m_logger.queueData(m_loggingData);
+    //m_logger.queueData(m_loggingData);
   }
 
   public static class ShooterLoggingData {

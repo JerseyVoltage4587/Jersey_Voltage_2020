@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.Solenoid;
@@ -36,10 +37,14 @@ public class Climber extends SubsystemBase {
     }
     m_leftClimberMotor = new WPI_TalonSRX(Constants.LeftClimberMotorCAN_Address);
     m_rightClimberMotor = new WPI_TalonSRX(Constants.RightClimberMotorCAN_Address);
+    m_leftClimberMotor.configFactoryDefault();
+    m_rightClimberMotor.configFactoryDefault();
+    m_rightClimberMotor.setNeutralMode(NeutralMode.Brake);
+    m_leftClimberMotor.setNeutralMode(NeutralMode.Brake);
     m_loggingData = new ClimberLoggingData();
     RobotClimberState = "STARTUP";
     setPoint = 0;
-    //m_logger = new AsyncStructuredLogger<ClimberLoggingData>("Storage", /*forceUnique=*/false, ClimberLoggingData.class);
+    m_logger = new AsyncStructuredLogger<ClimberLoggingData>("Storage", /*forceUnique=*/false, ClimberLoggingData.class);
   }
 
   public static Climber getInstance() {
@@ -86,7 +91,6 @@ public class Climber extends SubsystemBase {
     double lastRightPosition;
     double seconds;
 
-    if (!RobotClimberState.equals("STARTUP")) {
       lastLeftPosition = m_loggingData.LeftPosition;
       lastRightPosition = m_loggingData.RightPosition;
       seconds = (m_lastLogTime - now) / 1000000000.0;
@@ -98,13 +102,13 @@ public class Climber extends SubsystemBase {
       m_loggingData.ClimberState = RobotClimberState;
       m_loggingData.LeftEncoderReading = m_leftClimberMotor.getSelectedSensorPosition(0);
       m_loggingData.LeftPosition = m_loggingData.LeftEncoderReading / 4096.0;
-      m_loggingData.LeftVelocity = (m_loggingData.LeftPosition - lastLeftPosition) / seconds;
+      m_loggingData.LeftVelocity = Math.abs(m_loggingData.LeftPosition - lastLeftPosition) / seconds;
       m_loggingData.RightEncoderReading = m_rightClimberMotor.getSelectedSensorPosition(0);
       m_loggingData.RightPosition = m_loggingData.RightEncoderReading / 4096.0;
-      m_loggingData.RightVelocity = (m_loggingData.RightPosition - lastRightPosition) / seconds;
-    //m_logger.queueData(m_loggingData);
-    }
-    if (RobotClimberState.equals("INITIAL")) {
+      m_loggingData.RightVelocity = Math.abs(m_loggingData.RightPosition - lastRightPosition) / seconds;
+      m_logger.queueData(m_loggingData);
+
+      if (RobotClimberState.equals("INITIAL")) {
       m_leftClimberMotor.set(0);
       m_rightClimberMotor.set(0);
     }

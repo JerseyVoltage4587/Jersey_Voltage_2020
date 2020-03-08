@@ -78,25 +78,25 @@ public class OI extends CommandBase {
     leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
-    buttonA1.whenPressed(new PullClimber());
+    //buttonA1.whenPressed();
     //buttonB1.whenPressed();
     //buttonX1.whenPressed();
-    buttonY1.whenPressed(new PushClimber());
+    //buttonY1.whenPressed();
     //leftBumper1.whenPressed();
     //rightBumper1.whenPressed();
     //startButton1.whenPressed();
     //backButton1.whenPressed();
     //leftStickButton1.whenPressed();
     //rightStickButton1.whenPressed();
-    leftTrigger1.whenPressed(new PassBall());
-    leftTrigger1.whenReleased(new EndPassBall());
+    //leftTrigger1.whenPressed();
+    //leftTrigger1.whenReleased();
     rightTrigger1.whenPressed(new LowerIntakeArm());
     rightTrigger1.whenReleased(new RaiseIntakeArm());
 
-    //buttonA2.whenPressed(new Aim());
+    buttonA2.whenPressed(new PullClimber());
     //buttonB2.whenPressed(new StartShooterForward());
     //buttonX2.whenPressed(new StartShooterBackward());
-    //buttonY2.whenPressed(new PositionRobotToShootBackward());
+    buttonY2.whenPressed(new PushClimber());
     leftBumper2.whenPressed(new StartKicker());
     rightBumper2.whenPressed(new StartShooterForward());
     rightBumper2.whenReleased(new StopShooter());
@@ -104,7 +104,8 @@ public class OI extends CommandBase {
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();
     //rightStickButton2.whenPressed();
-    //leftTrigger2.whenPressed(new ShootBackward());
+    leftTrigger2.whenPressed(new PassBall());
+    leftTrigger2.whenReleased(new EndPassBall());
     //rightTrigger2.whenPressed(new ShootForward());
     // Use addRequirements() here to declare subsystem dependencies.
   }

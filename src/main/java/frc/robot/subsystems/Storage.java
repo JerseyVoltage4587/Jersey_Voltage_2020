@@ -24,7 +24,7 @@ public class Storage extends SubsystemBase {
   private boolean m_isShooterRunning = false;
   private boolean m_isShooterReady = false;
   private StorageLoggingData m_loggingData;
-  private AsyncStructuredLogger<StorageLoggingData> m_logger;
+  //private AsyncStructuredLogger<StorageLoggingData> m_logger;
   /**
    * Creates a new Storage.
    */
@@ -37,7 +37,7 @@ public class Storage extends SubsystemBase {
     m_storageBeltMotor.configFactoryDefault();
     m_storageToShooterMotor.configFactoryDefault();
     m_loggingData = new StorageLoggingData();
-    m_logger = new AsyncStructuredLogger<StorageLoggingData>("Storage", /*forceUnique=*/false, StorageLoggingData.class);
+    //m_logger = new AsyncStructuredLogger<StorageLoggingData>("Storage", /*forceUnique=*/false, StorageLoggingData.class);
   }
 
   public static Storage getInstance() {
@@ -133,7 +133,7 @@ public class Storage extends SubsystemBase {
     // This method will be called once per scheduler run
     m_loggingData.BeltMotorLevel = m_storageBeltMotor.get();
     m_loggingData.BeltMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageBeltMotorPDP_Port);
-    m_logger.queueData(m_loggingData);
+    //m_logger.queueData(m_loggingData);
   }
 
   public static class StorageLoggingData {
