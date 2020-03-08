@@ -23,7 +23,7 @@ public class PullClimber extends CommandBase {
   @Override
   public void initialize() {
     Robot.getClimber().setRobotClimberState("PULL");
-    Robot.getClimber().setSetPoint(70);
+    Robot.getClimber().setSetPoint(50);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
