@@ -58,6 +58,9 @@ public class Intake extends SubsystemBase {
   }
 
   public double getIntakeMotorLevel() {
+    if (m_isActive == false) {
+      return 0;
+    }
     return m_intakeMotor.get();
   }
 
@@ -69,6 +72,9 @@ public class Intake extends SubsystemBase {
   }
 
   public double getIntakeArmAngle() {
+    if (m_isActive == false) {
+      return 0;
+    }
     return m_loggingData.ArmAngle;
   }
 
@@ -80,14 +86,26 @@ public class Intake extends SubsystemBase {
   }
 
   public boolean IsArmMotorStalled() {
+    if (m_isActive == false) {
+      return false;
+    }
+    
     return (m_numberOfTimesStalled > 3);
   }
 
   public void setSetPoint(double x) {
+    if (m_isActive == false) {
+      return;
+    }
+
     m_setPoint = x;
   }
 
   public double getSetPoint() {
+    if (m_isActive == false) {
+      return 0;
+    }
+
     return m_setPoint;
   }
 

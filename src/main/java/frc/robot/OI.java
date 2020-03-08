@@ -12,7 +12,9 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import frc.robot.commands.EndPassBall;
 import frc.robot.commands.LowerIntakeArm;
+import frc.robot.commands.PassBall;
 import frc.robot.commands.RaiseIntakeArm;
 import frc.robot.commands.StartKicker;
 import frc.robot.commands.StartShooterForward;
@@ -84,7 +86,8 @@ public class OI extends CommandBase {
     //backButton1.whenPressed();
     //leftStickButton1.whenPressed();
     //rightStickButton1.whenPressed();
-    //leftTrigger1.whenPressed(new PassBall());
+    leftTrigger1.whenPressed(new PassBall());
+    leftTrigger1.whenReleased(new EndPassBall());
     rightTrigger1.whenPressed(new LowerIntakeArm());
     rightTrigger1.whenReleased(new RaiseIntakeArm());
 
