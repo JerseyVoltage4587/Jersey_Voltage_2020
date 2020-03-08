@@ -7,9 +7,7 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.*;
 import frc.robot.Robot;
 
 public class AutoMoveFoward extends CommandBase {
@@ -30,6 +28,7 @@ public class AutoMoveFoward extends CommandBase {
   @Override
   public void initialize() {
     Robot.getDriveBase().setSafetyEnabled(false);
+    Robot.getDriveBase().zeroDriveSensors();
     Robot.getDriveBase().setRightMotorLevel(0.5);
     Robot.getDriveBase().setLeftMotorLevel(0.5);
   }
@@ -58,7 +57,7 @@ public class AutoMoveFoward extends CommandBase {
       return true;
     }
 
-    if (averageInches >= 24) {
+    if (averageInches >= 66) {
       return true;
     }
 

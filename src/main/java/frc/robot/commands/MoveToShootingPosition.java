@@ -25,35 +25,39 @@ public class MoveToShootingPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(0);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    while (ty > 3 || ty < -3) {
-      if (ty < -3) {
-        Robot.getDriveBase().setLeftMotorLevel(-0.2);
-        Robot.getDriveBase().setRightMotorLevel(-0.2);
-      }
+    ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
 
-      if (ty > 3) {
-        Robot.getDriveBase().setLeftMotorLevel(0.2);
-        Robot.getDriveBase().setRightMotorLevel(0.2);
-      }
+    if (ty < -3) {
+      Robot.getDriveBase().setLeftMotorLevel(-0.2);
+      Robot.getDriveBase().setRightMotorLevel(-0.2);
+    }
 
-      ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    if (ty > 3) {
+      Robot.getDriveBase().setLeftMotorLevel(0.2);
+      Robot.getDriveBase().setRightMotorLevel(0.2);
     }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    Robot.getDriveBase().setLeftMotorLevel(0);
+    Robot.getDriveBase().setRightMotorLevel(0);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (ty > 3 || ty < -3) {
+      return false;
+    }
+    return true;
   }
 }

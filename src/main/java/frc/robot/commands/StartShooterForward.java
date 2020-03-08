@@ -23,6 +23,7 @@ public class StartShooterForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    Robot.getStorage().setShooterRunning(true);
     Robot.getShooter().setSetPoint(2838);
   }
 
@@ -35,6 +36,7 @@ public class StartShooterForward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    
   }
 
   // Returns true when the command should end.

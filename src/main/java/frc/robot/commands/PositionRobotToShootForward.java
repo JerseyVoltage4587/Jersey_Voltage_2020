@@ -26,7 +26,7 @@ public class PositionRobotToShootForward extends CommandBase {
   public void initialize() {
     CommandScheduler.getInstance().schedule(new StartShooterForward());
     Robot.getStorage().setShooterRunning(true);
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new Aim(), new WaitCommand(.2), new MoveToShootingPosition(), new WaitCommand(0.2)));        
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new Aim(), new WaitCommand(.2), new MoveToShootingPosition(), new WaitCommand(0.2), new StartKicker()));        
   }
 
   // Called every time the scheduler runs while the command is scheduled.

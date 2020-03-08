@@ -71,10 +71,10 @@ public final class Constants {
     public static final double IntakeArmKp = 0.0125;
 
     public static final double PushModeSlowDownOffset = 70;
-    public static final double PushModeSlowBaseLevel = 0.1;
+    public static final double PushModeSlowBaseLevel = 0.07;
     public static final double PushModeSlowKp = 0.01;
     public static final double PushModeFastVelocity = 100;
-    public static final double PushModeFastBaseLevel = 0.1 ;
+    public static final double PushModeFastBaseLevel = 0.07;
     public static final double PushModeFastKp = 0.015;
 
     public static final double PullModeSlowDownOffset = 70;
