@@ -15,6 +15,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.EndPassBall;
 import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.PassBall;
+import frc.robot.commands.PullClimber;
+import frc.robot.commands.PushClimber;
 import frc.robot.commands.RaiseIntakeArm;
 import frc.robot.commands.StartKicker;
 import frc.robot.commands.StartShooterForward;
@@ -76,10 +78,10 @@ public class OI extends CommandBase {
     leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
-    //buttonA1.whenPressed(new PullClimber());
+    buttonA1.whenPressed(new PullClimber());
     //buttonB1.whenPressed();
     //buttonX1.whenPressed();
-    //buttonY1.whenPressed(new PushClimber());
+    buttonY1.whenPressed(new PushClimber());
     //leftBumper1.whenPressed();
     //rightBumper1.whenPressed();
     //startButton1.whenPressed();

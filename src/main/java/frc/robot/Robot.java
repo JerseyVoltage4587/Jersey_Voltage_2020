@@ -81,7 +81,7 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance();
     getDriveBase().zeroDriveSensors();
     getIntake().zeroIntakeSensors();
-    //getClimber().zeroClimberMotors();
+    getClimber();
   }
 
   /**
@@ -136,7 +136,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    
+    getClimber().setRobotClimberState("INITIAL");
+    getClimber().zeroClimberMotors();
   }
 
   /**

@@ -93,7 +93,7 @@ public class Storage extends SubsystemBase {
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFeed);
     }
     else if(m_isPassing){
-      m_storageBeltMotor.set(-1 * Constants.StorageBeltMotorLevelFull);
+      m_storageBeltMotor.set(-0.8 * Constants.StorageBeltMotorLevelFull);
     }
     else {
       m_storageBeltMotor.set(0);
