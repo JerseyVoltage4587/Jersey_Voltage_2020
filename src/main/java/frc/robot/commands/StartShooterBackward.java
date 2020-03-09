@@ -36,14 +36,12 @@ public class StartShooterBackward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    if (Robot.getShooter().isShooterReady()) {
-      Robot.getStorage().setShooterReady(true);
-    }
+    
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return Robot.getShooter().isShooterReady();
+    return true;
   }
 }
