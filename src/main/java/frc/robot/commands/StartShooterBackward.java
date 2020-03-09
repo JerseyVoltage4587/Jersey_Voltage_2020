@@ -24,7 +24,7 @@ public class StartShooterBackward extends CommandBase {
   @Override
   public void initialize() {
     Robot.getShooter().setSetPoint(-2838);
-    
+    Robot.getStorage().setShooterReady(true);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

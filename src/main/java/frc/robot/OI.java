@@ -20,7 +20,9 @@ import frc.robot.commands.PullClimber;
 import frc.robot.commands.PushClimber;
 import frc.robot.commands.RaiseIntakeArm;
 import frc.robot.commands.StartKicker;
+import frc.robot.commands.StartShooterBackward;
 import frc.robot.commands.StartShooterForward;
+import frc.robot.commands.StopKicker;
 import frc.robot.commands.StopShooter;
 
 public class OI extends CommandBase {
@@ -98,9 +100,12 @@ public class OI extends CommandBase {
     //buttonB2.whenPressed(new StartShooterForward());
     //buttonX2.whenPressed(new StartShooterBackward());
     buttonY2.whenPressed(new PushClimber());
-    leftBumper2.whenPressed(new StartKicker());
+    rightTrigger2.whenPressed(new StartKicker());
+    rightTrigger2.whenReleased(new StopKicker());
     rightBumper2.whenPressed(new StartShooterForward());
     rightBumper2.whenReleased(new StopShooter());
+    leftBumper2.whenPressed(new StartShooterBackward());
+    leftBumper2.whenReleased(new StopShooter());
     //startButton2.whenPressed();
     //backButton2.whenPressed();
     //leftStickButton2.whenPressed();

@@ -22,6 +22,7 @@ public class Storage extends SubsystemBase {
   public boolean m_isPassing = false;
   private boolean m_isIntakeRunning = false;
   private boolean m_isShooterRunning = false;
+  private boolean m_isShooterShooting = false;
   private boolean m_isShooterReady = false;
   private StorageLoggingData m_loggingData;
   //private AsyncStructuredLogger<StorageLoggingData> m_logger;
@@ -66,7 +67,11 @@ public class Storage extends SubsystemBase {
     updateStorageMotors();
     updateStorageToShooterMotor();
   }
-
+  public void setShooterShooting(boolean x) {
+    m_isShooterShooting = x;
+    updateStorageMotors();
+    updateStorageToShooterMotor();
+  }
   public void setShooterReady(boolean x) {
     m_isShooterReady = x;
     updateStorageMotors();
@@ -79,7 +84,7 @@ public class Storage extends SubsystemBase {
     updateStorageToShooterMotor();
   }
 
-  private void updateStorageMotors() {
+  public void updateStorageMotors() {
     
     if (m_isActive == false) {
       return;
@@ -89,9 +94,10 @@ public class Storage extends SubsystemBase {
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
     }
 
-    else if (m_isShooterRunning) {
-      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFeed);
+    else if (m_isShooterShooting){
+      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
     }
+  
     else if(m_isPassing){
       m_storageBeltMotor.set(-0.8 * Constants.StorageBeltMotorLevelFull);
     }
@@ -109,12 +115,12 @@ public class Storage extends SubsystemBase {
     if (m_isPassing) {
       m_storageToShooterMotor.set(-1 * Constants.StorageToShooterMotorLevelForward);
     }
-    
+
     else if (m_isIntakeRunning) {
       m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
     }
 
-    else if (m_isShooterReady){
+    else if (m_isShooterShooting){
       m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelForward);
     }
 

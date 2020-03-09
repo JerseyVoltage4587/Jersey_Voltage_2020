@@ -23,7 +23,7 @@ public class StartShooterForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getStorage().setShooterRunning(true);
+    Robot.getStorage().setShooterReady(true);
     Robot.getShooter().setSetPoint(2838);
   }
 
