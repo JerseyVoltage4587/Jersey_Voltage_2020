@@ -137,13 +137,17 @@ public class Shooter extends SubsystemBase {
       m_loggingData.ShooterMotorLevel = 0;
     }
 
-    else {
-      double error = setPoint - m_loggingData.AverageRPM;
-       m_loggingData.ShooterMotorLevel = Constants.ShooterMotorLevel + (.00018 * error); //Figure out what to multiply the error by
-       SmartDashboard.putNumber("Error", error);
-       
+    else {       
        if (setPoint < 0) {
-         m_loggingData.ShooterMotorLevel = -1 * m_loggingData.ShooterMotorLevel;
+        double error = setPoint - m_loggingData.AverageRPM;
+        m_loggingData.ShooterMotorLevel = (-1 * Constants.ShooterMotorLevel) + (.00018 * error);
+         SmartDashboard.putNumber("Error", error);
+       }
+
+       else if (setPoint > 0) {
+         double error = setPoint - m_loggingData.AverageRPM;
+         m_loggingData.ShooterMotorLevel = Constants.ShooterMotorLevel + (.00018 * error);
+         SmartDashboard.putNumber("Error", error);
        }
     }
     
