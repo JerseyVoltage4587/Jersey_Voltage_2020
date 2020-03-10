@@ -92,12 +92,14 @@ public class Storage extends SubsystemBase {
       m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
     }
 
-    else if (m_isShooterRunning) {
-      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFeed);
-    }
-    else if(m_isPassing){
+    else if (m_isPassing) {
       m_storageBeltMotor.set(-0.8 * Constants.StorageBeltMotorLevelFull);
     }
+
+    else if (m_isShooterReady) {
+      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
+    }
+
     else {
       m_storageBeltMotor.set(0);
     }
@@ -110,7 +112,7 @@ public class Storage extends SubsystemBase {
     }
 
     if (m_isPassing) {
-      m_storageToShooterMotor.set(-1 * Constants.StorageToShooterMotorLevelForward);
+      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
     }
     
     else if (m_isIntakeRunning) {

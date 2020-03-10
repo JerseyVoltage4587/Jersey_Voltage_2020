@@ -45,9 +45,9 @@ public final class Constants {
     public static final int LeftVictor11PDP_Port = 14;
     public static final int LeftTalon1PDP_Port = 15;
     //Motor Levels
-    public static double IntakeMotorLevel = -0.4;
+    public static double IntakeMotorLevel = -0.42;
     public static double ShooterMotorLevel = 0.753;
-    public static double StorageBeltMotorLevelFull = 0.35;
+    public static double StorageBeltMotorLevelFull = 0.38;
     public static double StorageBeltMotorLevelFeed = 0.28;
     public static double ClimberMotorLevel = 0.3;
     public static double StorageSeparatorMotorLevel = 0.4;
