@@ -39,6 +39,7 @@ public class Storage extends SubsystemBase {
     m_storageBeltMotor.configFactoryDefault();
     m_storageToShooterMotor.configFactoryDefault();
     m_loggingData = new StorageLoggingData();
+     
     m_logger = new AsyncStructuredLogger<StorageLoggingData>("Storage", /*forceUnique=*/false, StorageLoggingData.class);
   }
 

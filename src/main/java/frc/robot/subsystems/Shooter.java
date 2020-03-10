@@ -138,12 +138,16 @@ public class Shooter extends SubsystemBase {
     }
 
     else {
-      Robot.getStorage().setShooterRunning(true);
       double error = setPoint - m_loggingData.AverageRPM;
        m_loggingData.ShooterMotorLevel = Constants.ShooterMotorLevel + (.00018 * error); //Figure out what to multiply the error by
+       SmartDashboard.putNumber("Error", error);
+       
+       if (setPoint < 0) {
+         m_loggingData.ShooterMotorLevel = -1 * m_loggingData.ShooterMotorLevel;
+       }
     }
     
-    Robot.getShooter().setShooterMotorLevel(m_loggingData.ShooterMotorLevel);
+    setShooterMotorLevel(m_loggingData.ShooterMotorLevel);
 
     m_logger.queueData(m_loggingData);
   }
