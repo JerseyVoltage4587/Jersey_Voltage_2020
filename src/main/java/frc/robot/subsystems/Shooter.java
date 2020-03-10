@@ -1,3 +1,5 @@
+
+  
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -129,26 +131,19 @@ public class Shooter extends SubsystemBase {
     m_loggingData.AverageRPM = (RPM + lastAverageRPM) / 2;
     SmartDashboard.putNumber("RPM", m_loggingData.AverageRPM);
     SmartDashboard.putBoolean("Is Shooter Ready", isShooterReady());
-    SmartDashboard.putNumber("Shooter Set Point", m_loggingData.SetPoint);
 
     if (setPoint == 0) {
       Robot.getStorage().setShooterRunning(false);
-      m_loggingData.ShooterMotorLevel = 0; 
+      m_loggingData.ShooterMotorLevel = 0;
     }
 
     else {
       Robot.getStorage().setShooterRunning(true);
-      double error = Math.abs(setPoint - m_loggingData.AverageRPM);
+      double error = setPoint - m_loggingData.AverageRPM;
        m_loggingData.ShooterMotorLevel = Constants.ShooterMotorLevel + (.00018 * error); //Figure out what to multiply the error by
-      
-      if (setPoint < 0) {
-        Robot.getShooter().setShooterMotorLevel(-1 * m_loggingData.ShooterMotorLevel);
-      }
-
-      else {
-        Robot.getShooter().setShooterMotorLevel(m_loggingData.ShooterMotorLevel);
-      }
     }
+    
+    Robot.getShooter().setShooterMotorLevel(m_loggingData.ShooterMotorLevel);
 
     m_logger.queueData(m_loggingData);
   }

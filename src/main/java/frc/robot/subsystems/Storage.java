@@ -9,7 +9,6 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -30,6 +29,7 @@ public class Storage extends SubsystemBase {
   /**
    * Creates a new Storage.
    */
+
   public Storage() {
     if (m_isActive == false) {
       return;
@@ -81,26 +81,21 @@ public class Storage extends SubsystemBase {
     updateStorageToShooterMotor();
   }
 
-  public void updateStorageMotors() {
+  private void updateStorageMotors() {
     
     if (m_isActive == false) {
       return;
     }
 
     if (m_isIntakeRunning) {
-      setStorageMotorLevel(Constants.StorageBeltMotorLevelFull);
-    }
-
-    else if (m_isShooterReady)  {
-      setStorageMotorLevel(Constants.StorageBeltMotorLevelFull);
+      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFull);
     }
 
     else if (m_isShooterRunning) {
-      setStorageMotorLevel(Constants.StorageBeltMotorLevelFeed);
+      m_storageBeltMotor.set(Constants.StorageBeltMotorLevelFeed);
     }
-  
-    else if(m_isPassing) {
-      setStorageMotorLevel(-1 * Constants.StorageBeltMotorLevelFeed);
+    else if(m_isPassing){
+      m_storageBeltMotor.set(-0.8 * Constants.StorageBeltMotorLevelFull);
     }
     else {
       m_storageBeltMotor.set(0);
@@ -114,19 +109,15 @@ public class Storage extends SubsystemBase {
     }
 
     if (m_isPassing) {
-      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
+      m_storageToShooterMotor.set(-1 * Constants.StorageToShooterMotorLevelForward);
     }
-
+    
     else if (m_isIntakeRunning) {
       m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
     }
 
     else if (m_isShooterReady){
       m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelForward);
-    }
-
-    else if (m_isShooterRunning) {
-      m_storageToShooterMotor.set(Constants.StorageToShooterMotorLevelBackward);
     }
 
     else {
@@ -141,7 +132,6 @@ public class Storage extends SubsystemBase {
       return;
     }
     // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Kicker Motor Level", m_storageToShooterMotor.get());
     m_loggingData.BeltMotorLevel = m_storageBeltMotor.get();
     m_loggingData.BeltMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageBeltMotorPDP_Port);
     m_logger.queueData(m_loggingData);

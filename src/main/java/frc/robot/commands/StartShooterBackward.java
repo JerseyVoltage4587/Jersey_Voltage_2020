@@ -17,14 +17,14 @@ public class StartShooterBackward extends CommandBase {
    */
   public StartShooterBackward() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getShooter(), Robot.getStorage());
+    addRequirements(Robot.getShooter());
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getStorage().setShooterRunning(true);
     Robot.getShooter().setSetPoint(-2838);
+    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
