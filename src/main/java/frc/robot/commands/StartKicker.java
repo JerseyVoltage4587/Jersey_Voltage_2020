@@ -21,8 +21,8 @@ public class StartKicker extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getStorage().setShooterShooting(true);
-    Robot.getStorage().updateStorageMotors();
+    Robot.getStorage().setShooterReady(false);
+    Robot.getStorage().setShooterRunning(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

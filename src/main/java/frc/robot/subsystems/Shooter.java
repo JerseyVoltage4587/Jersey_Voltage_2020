@@ -13,7 +13,6 @@ import frc.robot.util.AsyncStructuredLogger;
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
@@ -24,7 +23,7 @@ public class Shooter extends SubsystemBase {
   private static CANSparkMax m_rightShooterMotor = null;
   private ShooterLoggingData m_loggingData;
   private double setPoint = 0;
-  //private AsyncStructuredLogger<ShooterLoggingData> m_logger;
+  private AsyncStructuredLogger<ShooterLoggingData> m_logger;
   private CANEncoder m_leftShooterEncoder;
   private CANEncoder m_rightShooterEncoder;
   /**
@@ -43,7 +42,7 @@ public class Shooter extends SubsystemBase {
     m_loggingData = new ShooterLoggingData();
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
-    //m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/ false, ShooterLoggingData.class);
+    m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/ false, ShooterLoggingData.class);
   }
 
   public static Shooter getInstance() {
@@ -103,7 +102,6 @@ public class Shooter extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //System.out.println("Shooter Periodic");
 
     if (m_isActive == false) {
       return;
@@ -131,21 +129,28 @@ public class Shooter extends SubsystemBase {
     m_loggingData.AverageRPM = (RPM + lastAverageRPM) / 2;
     SmartDashboard.putNumber("RPM", m_loggingData.AverageRPM);
     SmartDashboard.putBoolean("Is Shooter Ready", isShooterReady());
+    SmartDashboard.putNumber("Shooter Set Point", m_loggingData.SetPoint);
 
     if (setPoint == 0) {
       Robot.getStorage().setShooterRunning(false);
-      m_loggingData.ShooterMotorLevel = 0;
+      m_loggingData.ShooterMotorLevel = 0; 
     }
 
     else {
       Robot.getStorage().setShooterRunning(true);
-      double error = setPoint - m_loggingData.AverageRPM;
+      double error = Math.abs(setPoint - m_loggingData.AverageRPM);
        m_loggingData.ShooterMotorLevel = Constants.ShooterMotorLevel + (.00018 * error); //Figure out what to multiply the error by
-    }
-    
-    Robot.getShooter().setShooterMotorLevel(m_loggingData.ShooterMotorLevel);
+      
+      if (setPoint < 0) {
+        Robot.getShooter().setShooterMotorLevel(-1 * m_loggingData.ShooterMotorLevel);
+      }
 
-    //m_logger.queueData(m_loggingData);
+      else {
+        Robot.getShooter().setShooterMotorLevel(m_loggingData.ShooterMotorLevel);
+      }
+    }
+
+    m_logger.queueData(m_loggingData);
   }
 
   public static class ShooterLoggingData {

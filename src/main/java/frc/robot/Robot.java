@@ -11,7 +11,6 @@ import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.networktables.NetworkTable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -86,12 +85,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(0);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     CameraServer.getInstance();
     getDriveBase().zeroDriveSensors();
     getIntake().zeroIntakeSensors();
-    // getClimber();
   }
 
   /**
@@ -134,14 +132,13 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    // getIntake().zeroIntakeSensors();
     // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
     // if (m_autonomousCommand != null) {
     // m_autonomousCommand.schedule();
     // }
-    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
     getStorage().setShooterRunning(false);
     getStorage().setShooterReady(false);
     CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(),new WaitCommand(1), new StartKicker()));
@@ -157,7 +154,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(2);
     CommandScheduler.getInstance().schedule(new StopShooter());
     getClimber().setRobotClimberState("INITIAL");
     getClimber().zeroClimberMotors();

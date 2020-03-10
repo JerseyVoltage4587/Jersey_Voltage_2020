@@ -25,7 +25,7 @@ public class Intake extends SubsystemBase {
   private int m_numberOfTimesStalled = 0;
   private double m_setPoint = 0;
   private IntakeLoggingData m_loggingData;
-  //private AsyncStructuredLogger<IntakeLoggingData> m_logger;
+  private AsyncStructuredLogger<IntakeLoggingData> m_logger;
 
   /**
    * Creates a new Intake.
@@ -42,7 +42,7 @@ public class Intake extends SubsystemBase {
     m_intakeArmMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
     m_intakeArmMotor.setNeutralMode(NeutralMode.Brake);
     m_loggingData = new IntakeLoggingData();
-    //m_logger = new AsyncStructuredLogger<IntakeLoggingData>("Intake", /*forceUnique=*/false, IntakeLoggingData.class);
+    m_logger = new AsyncStructuredLogger<IntakeLoggingData>("Intake", /*forceUnique=*/false, IntakeLoggingData.class);
   
   }
 
@@ -127,7 +127,7 @@ public class Intake extends SubsystemBase {
     m_loggingData.IntakeMotorSupplyCurrent = m_intakeMotor.getSupplyCurrent();
     m_loggingData.IntakeArmMotorStatorCurrent = m_intakeArmMotor.getStatorCurrent();
     m_loggingData.IntakeArmMotorSupplyCurrent = m_intakeArmMotor.getSupplyCurrent();
-    //m_logger.queueData(m_loggingData);
+    m_logger.queueData(m_loggingData);
 
     if (m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent) {
       m_numberOfTimesStalled += 1;
