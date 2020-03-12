@@ -85,7 +85,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(1);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     CameraServer.getInstance();
     getDriveBase().zeroDriveSensors();
@@ -145,7 +144,6 @@ public class Robot extends TimedRobot {
     // if (m_autonomousCommand != null) {
     // m_autonomousCommand.schedule();
     // }
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(1);
     getStorage().setShooterRunning(false);
     getStorage().setShooterReady(false);
     CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(),new WaitCommand(1), new StartKicker()));
@@ -161,7 +159,6 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(1);
     CommandScheduler.getInstance().schedule(new StopShooter());
     getClimber().setRobotClimberState("INITIAL");
     getClimber().zeroClimberMotors();
