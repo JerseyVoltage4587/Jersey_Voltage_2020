@@ -120,7 +120,6 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("tv", NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0));
     SmartDashboard.putNumber("ty", NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0));
     SmartDashboard.putNumber("tx", NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0));
-    SmartDashboard.putNumber("Led Mode", NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").getDouble(0));
   }
 
   /**

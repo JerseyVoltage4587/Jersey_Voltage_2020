@@ -35,7 +35,7 @@ public class Aim extends CommandBase {
   public void initialize() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
     double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-    tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+    tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
 
     if (tv == 0) {
 

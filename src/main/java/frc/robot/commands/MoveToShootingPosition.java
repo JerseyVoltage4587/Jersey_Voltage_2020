@@ -26,7 +26,7 @@ public class MoveToShootingPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(0);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
