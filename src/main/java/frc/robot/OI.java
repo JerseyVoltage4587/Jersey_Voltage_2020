@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.commands.Aim;
 import frc.robot.commands.EndPassBall;
 import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.PassBall;

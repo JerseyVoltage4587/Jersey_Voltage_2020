@@ -30,7 +30,6 @@ public class Shooter extends SubsystemBase {
   private CANEncoder m_rightShooterEncoder;
   private CANPIDController m_pidController;
   private double setPoint = 0;
-  private static final int deviceID = 45;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
   /**
    * Creates a new Shooter.
@@ -78,7 +77,6 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("Feed Forward", kFF);
     SmartDashboard.putNumber("Max Output", kMaxOutput);
     SmartDashboard.putNumber("Min Output", kMinOutput);
-    SmartDashboard.putNumber("Shooter Motor Level", ((m_leftShooterMotor.get() + m_rightShooterMotor.get()) / 2));
 
     m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/ false, ShooterLoggingData.class);
   }
@@ -126,8 +124,6 @@ public class Shooter extends SubsystemBase {
     }
     m_leftShooterMotor.set(-1 * x);
     m_rightShooterMotor.set(x);
-    SmartDashboard.putNumber("Left motor level", m_leftShooterMotor.get());
-    SmartDashboard.putNumber("Right motor level", m_rightShooterMotor.get());
   }
 
   public void setSetPoint(double x) {
