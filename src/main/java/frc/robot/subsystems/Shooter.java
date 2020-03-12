@@ -1,5 +1,4 @@
 
-  
 /*----------------------------------------------------------------------------*/
 /* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
 /* Open Source Software - may be modified and shared by FRC teams. The code   */
@@ -13,7 +12,9 @@ import frc.robot.Robot;
 import frc.robot.Constants;
 import frc.robot.util.AsyncStructuredLogger;
 import com.revrobotics.CANEncoder;
+import com.revrobotics.CANPIDController;
 import com.revrobotics.CANSparkMax;
+import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -21,13 +22,16 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 public class Shooter extends SubsystemBase {
   public boolean m_isActive = true;
   static Shooter m_Instance = null;
+  private ShooterLoggingData m_loggingData;
+  private AsyncStructuredLogger<ShooterLoggingData> m_logger;
   private static CANSparkMax m_leftShooterMotor = null;
   private static CANSparkMax m_rightShooterMotor = null;
-  private ShooterLoggingData m_loggingData;
-  private double setPoint = 0;
-  private AsyncStructuredLogger<ShooterLoggingData> m_logger;
   private CANEncoder m_leftShooterEncoder;
   private CANEncoder m_rightShooterEncoder;
+  private CANPIDController m_pidController;
+  private double setPoint = 0;
+  private static final int deviceID = 45;
+  public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
   /**
    * Creates a new Shooter.
    */
@@ -37,6 +41,7 @@ public class Shooter extends SubsystemBase {
     }
     m_leftShooterMotor = new CANSparkMax(Constants.LeftShooterMotorCAN_Address, MotorType.kBrushless);
     m_rightShooterMotor = new CANSparkMax(Constants.RightShooterMotorCAN_Address, MotorType.kBrushless);
+    m_leftShooterMotor.follow(m_rightShooterMotor, /*invert=*/ true);
     m_leftShooterEncoder = m_leftShooterMotor.getEncoder();
     m_rightShooterEncoder = m_rightShooterMotor.getEncoder();
     m_leftShooterMotor.restoreFactoryDefaults();
@@ -44,6 +49,37 @@ public class Shooter extends SubsystemBase {
     m_loggingData = new ShooterLoggingData();
     m_leftShooterMotor.set(0);
     m_rightShooterMotor.set(0);
+    m_leftShooterMotor.follow(m_rightShooterMotor, /*invert=*/ true);
+    m_pidController = m_rightShooterMotor.getPIDController();
+
+    //PID coefficients
+    kP = 6e-5; 
+    kI = 0;
+    kD = 0; 
+    kIz = 0; 
+    kFF = 0.0002; 
+    kMaxOutput = 1; 
+    kMinOutput = -1;
+    maxRPM = 5700;
+
+    //Set PID coefficients
+    m_pidController.setP(kP);
+    m_pidController.setI(kI);
+    m_pidController.setD(kD);
+    m_pidController.setIZone(kIz);
+    m_pidController.setFF(kFF);
+    m_pidController.setOutputRange(kMinOutput, kMaxOutput);
+
+    //Display PID coefficients on SmartDashboard
+    SmartDashboard.putNumber("P Gain", kP);
+    SmartDashboard.putNumber("I Gain", kI);
+    SmartDashboard.putNumber("D Gain", kD);
+    SmartDashboard.putNumber("I Zone", kIz);
+    SmartDashboard.putNumber("Feed Forward", kFF);
+    SmartDashboard.putNumber("Max Output", kMaxOutput);
+    SmartDashboard.putNumber("Min Output", kMinOutput);
+    SmartDashboard.putNumber("Shooter Motor Level", ((m_leftShooterMotor.get() + m_rightShooterMotor.get()) / 2));
+
     m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/ false, ShooterLoggingData.class);
   }
 
@@ -98,22 +134,57 @@ public class Shooter extends SubsystemBase {
     setPoint = x;
   }
 
-  public boolean isShooterReady() {
-    return (Math.abs(setPoint - m_loggingData.AverageRPM)) <= Constants.ShooterMotorTolerance;
-  }
-
   @Override
   public void periodic() {
 
     if (m_isActive == false) {
       return;
     }
+
+    //Read PID coefficients from SmartDashboard
+    double p = SmartDashboard.getNumber("P Gain", 0);
+    double i = SmartDashboard.getNumber("I Gain", 0);
+    double d = SmartDashboard.getNumber("D Gain", 0);
+    double iz = SmartDashboard.getNumber("I Zone", 0);
+    double ff = SmartDashboard.getNumber("Feed Forward", 0);
+    double max = SmartDashboard.getNumber("Max Output", 0);
+    double min = SmartDashboard.getNumber("Min Output", 0);
+
+    //If PID coefficients on SmartDashboard have changed, write new values to controller
+    if (p != kP) {
+      m_pidController.setP(p);
+      kP = p;
+    }
+
+    if (i != kI) {
+      m_pidController.setI(i);
+      kI = i;
+    }
+
+    if (d != kD) {
+      m_pidController.setD(d);
+      kD = d;
+    }
+
+    if (iz != kIz) {
+      m_pidController.setIZone(iz);
+      kIz = iz;
+    }
+
+    if (ff != kFF) {
+      m_pidController.setFF(ff);
+      kFF = ff;
+    }
+
+    if ((max != kMaxOutput) || (min != kMinOutput)) { 
+      m_pidController.setOutputRange(min, max); 
+      kMinOutput = min; kMaxOutput = max; 
+    }
+
+    m_pidController.setReference(setPoint, ControlType.kVelocity);
     
-    // This method will be called once per scheduler run
-    double lastAverageRPM = m_loggingData.AverageRPM;
-    double lastLeftEncoder = m_loggingData.LeftEncoderPosition;
-    double lastRightEncoder = m_loggingData.RightEncoderPosition;
-    long lastNanoSeconds = m_loggingData.nanoSeconds;
+    SmartDashboard.putNumber("SetPoint", setPoint);
+    SmartDashboard.putNumber("ProcessVariable", m_rightShooterEncoder.getVelocity());
 
     m_loggingData.LeftShooterMotorLevel = m_leftShooterMotor.get();
     m_loggingData.RightShooterMotorLevel = m_rightShooterMotor.get();
@@ -123,35 +194,6 @@ public class Shooter extends SubsystemBase {
     m_loggingData.RightEncoderPosition = getRightShooterEncoder();
     m_loggingData.SetPoint = setPoint;
     m_loggingData.nanoSeconds = System.nanoTime();
-
-    double elapsedTime = ((m_loggingData.nanoSeconds - lastNanoSeconds) / 1000000000.0) / 60.0;
-    double leftEncoderRevolutions = -1 * (((m_loggingData.LeftEncoderPosition - lastLeftEncoder) * 39) / 30) / elapsedTime;
-    double rightEncoderRevolutions = (((m_loggingData.RightEncoderPosition - lastRightEncoder) * 39) / 30) / elapsedTime;
-    double RPM = (leftEncoderRevolutions + rightEncoderRevolutions) / 2;
-    m_loggingData.AverageRPM = (RPM + lastAverageRPM) / 2;
-    SmartDashboard.putNumber("RPM", m_loggingData.AverageRPM);
-    SmartDashboard.putBoolean("Is Shooter Ready", isShooterReady());
-
-    if (setPoint == 0) {
-      Robot.getStorage().setShooterRunning(false);
-      m_loggingData.ShooterMotorLevel = 0;
-    }
-
-    else {       
-       if (setPoint < 0) {
-        double error = setPoint - m_loggingData.AverageRPM;
-        m_loggingData.ShooterMotorLevel = (-1 * Constants.ShooterMotorLevel) + (.00018 * error);
-         SmartDashboard.putNumber("Error", error);
-       }
-
-       else if (setPoint > 0) {
-         double error = setPoint - m_loggingData.AverageRPM;
-         m_loggingData.ShooterMotorLevel = Constants.ShooterMotorLevel + (.00018 * error);
-         SmartDashboard.putNumber("Error", error);
-       }
-    }
-    
-    setShooterMotorLevel(m_loggingData.ShooterMotorLevel);
 
     m_logger.queueData(m_loggingData);
   }
@@ -163,11 +205,7 @@ public class Shooter extends SubsystemBase {
     public double RightMotorCurrent;
     public double LeftEncoderPosition;
     public double RightEncoderPosition;
-    public double ShooterMotorLevel;
-    public double AverageRPM;
     public double SetPoint;
-    public double LeftRPM;
-    public double RightRPM;
     public long nanoSeconds;
   }
 }

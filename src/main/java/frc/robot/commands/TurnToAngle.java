@@ -68,13 +68,13 @@ public class TurnToAngle extends CommandBase {
     }
 
     else if (delta > 0) {
-      DriveBase.getInstance().setLeftMotorLevel(.2);
-      DriveBase.getInstance().setRightMotorLevel(-.2);
+      DriveBase.getInstance().setLeftMotorLevel(.175);
+      DriveBase.getInstance().setRightMotorLevel(-.175);
     }
 
     else if (delta < 0) {
-      DriveBase.getInstance().setLeftMotorLevel(-.2);
-      DriveBase.getInstance().setRightMotorLevel(.2);
+      DriveBase.getInstance().setLeftMotorLevel(-.175);
+      DriveBase.getInstance().setRightMotorLevel(.175);
     } 
   }
 

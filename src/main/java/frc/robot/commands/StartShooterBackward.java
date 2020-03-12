@@ -23,7 +23,7 @@ public class StartShooterBackward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getShooter().setSetPoint(-3161);
+    Robot.getShooter().setSetPoint(-4505);
     
   }
 

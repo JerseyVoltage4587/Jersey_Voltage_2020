@@ -24,9 +24,7 @@ public class PositionRobotToShootForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    CommandScheduler.getInstance().schedule(new StartShooterForward());
-    Robot.getStorage().setShooterRunning(true);
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new Aim(), new WaitCommand(.2), new MoveToShootingPosition(), new WaitCommand(0.2), new StartKicker()));        
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new Aim(), new WaitCommand(.2), new MoveToShootingPosition()));        
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,6 +40,6 @@ public class PositionRobotToShootForward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
