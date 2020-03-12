@@ -10,13 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.*;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Robot;
 
 public class Aim extends CommandBase {
   private static Aim me;
+  double tv = 0;
 
   public static Aim getInstance() {
     return me;
@@ -35,7 +35,13 @@ public class Aim extends CommandBase {
   public void initialize() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(0);
     double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
-    if (Math.abs(tx) > 2) {
+    tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
+
+    if (tv == 0) {
+
+    }
+
+    else if (Math.abs(tx) > 2) {
       CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new TurnToAngle(tx), new WaitCommand(.2), new Aim()));
     }
   }
@@ -54,6 +60,10 @@ public class Aim extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (tv == 0) {
+      return true;
+    }
+
     return true;
   }
 }

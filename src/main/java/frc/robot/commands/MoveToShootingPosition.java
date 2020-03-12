@@ -13,6 +13,7 @@ import frc.robot.Robot;
 
 public class MoveToShootingPosition extends CommandBase {
   double ty = 0;
+  double tv = 0;
   /**
    * Creates a new MoveToShootingPosition.
    */
@@ -32,13 +33,18 @@ public class MoveToShootingPosition extends CommandBase {
   @Override
   public void execute() {
     ty = NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0);
+    tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
+    if (tv == 0) {
+      Robot.getDriveBase().setLeftMotorLevel(0);
+      Robot.getDriveBase().setRightMotorLevel(0);
+    }
 
-    if (ty < 5) {
+    else if (ty < 5) {
       Robot.getDriveBase().setLeftMotorLevel(-0.2);
       Robot.getDriveBase().setRightMotorLevel(-0.2);
     }
 
-    if (ty > 10) {
+    else if (ty > 10) {
       Robot.getDriveBase().setLeftMotorLevel(0.2);
       Robot.getDriveBase().setRightMotorLevel(0.2);
     }
@@ -55,7 +61,11 @@ public class MoveToShootingPosition extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (ty > 10 || ty < 5) {
+    if (tv == 0) {
+      return true;
+    }
+
+    else if (ty > 10 || ty < 5) {
       return false;
     }
     return true;

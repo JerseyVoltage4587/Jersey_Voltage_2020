@@ -117,6 +117,7 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+    SmartDashboard.putNumber("tv", NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0));
     SmartDashboard.putNumber("ty", NetworkTableInstance.getDefault().getTable("limelight").getEntry("ty").getDouble(0));
     SmartDashboard.putNumber("tx", NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0));
   }
