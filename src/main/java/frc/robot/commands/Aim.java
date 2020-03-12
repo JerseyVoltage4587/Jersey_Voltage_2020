@@ -33,7 +33,7 @@ public class Aim extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(0);
     double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     if (Math.abs(tx) > 2) {
       CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new TurnToAngle(tx), new WaitCommand(.2), new Aim()));
