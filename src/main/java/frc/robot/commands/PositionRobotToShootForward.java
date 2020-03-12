@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
@@ -23,6 +24,7 @@ public class PositionRobotToShootForward extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
     CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new Aim(), new WaitCommand(.2), new MoveToShootingPosition()));        
   }
 
@@ -34,6 +36,7 @@ public class PositionRobotToShootForward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(1);
   }
 
   // Returns true when the command should end.
