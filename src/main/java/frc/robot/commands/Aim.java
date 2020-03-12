@@ -33,7 +33,7 @@ public class Aim extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(0);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
     double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
 
