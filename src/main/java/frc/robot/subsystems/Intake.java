@@ -162,7 +162,6 @@ public class Intake extends SubsystemBase {
 
     SmartDashboard.putNumber("Number of times stalled", m_numberOfTimesStalled);
     SmartDashboard.putNumber("Arm Angle", getIntakeArmAngle());
-    SmartDashboard.putNumber("Encoder Value", getIntakeArmEncoder());
   }
 
   public static class IntakeLoggingData {

@@ -157,12 +157,8 @@ public class DriveBase extends SubsystemBase {
     //m_logger.queueData(m_loggingData);
     m_lastLogTime = now;
 
-    SmartDashboard.putNumber("Left Encoder", m_loggingData.LeftEncoderReading);
-    SmartDashboard.putNumber("Right Encoder", m_loggingData.RightEncoderReading);
     SmartDashboard.putNumber("Left Distance", m_loggingData.LeftPosition);
     SmartDashboard.putNumber("Right Distance", m_loggingData.RightPosition);
-    SmartDashboard.putNumber("Left Motor Level", m_loggingData.LeftMotorLevel);
-    SmartDashboard.putNumber("Right Motor Level", m_loggingData.RightMotorLevel);
   }
 
   public int getLeftEncoder() {
