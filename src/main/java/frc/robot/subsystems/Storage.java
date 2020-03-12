@@ -97,7 +97,7 @@ public class Storage extends SubsystemBase {
     }
 
     else if (m_isShooterRunning) {
-      m_storageBeltMotor.set(0);
+      
     }
 
     else if (m_isShooterReady) {
@@ -124,7 +124,7 @@ public class Storage extends SubsystemBase {
     }
 
     else if (m_isShooterRunning) {
-      m_storageToShooterMotor.set(0);
+      
     }
 
     else if (m_isShooterReady){
