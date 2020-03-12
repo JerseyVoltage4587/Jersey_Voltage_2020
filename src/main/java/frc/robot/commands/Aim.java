@@ -33,7 +33,6 @@ public class Aim extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(0);
     double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
 
@@ -54,7 +53,7 @@ public class Aim extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(1);
+
   }
 
   // Returns true when the command should end.
