@@ -30,7 +30,6 @@ public class Shooter extends SubsystemBase {
   private CANEncoder m_rightShooterEncoder;
   private CANPIDController m_pidController;
   private double setPoint = 0;
-  private static final int deviceID = 45;
   public double kP, kI, kD, kIz, kFF, kMaxOutput, kMinOutput, maxRPM;
   /**
    * Creates a new Shooter.
