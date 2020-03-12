@@ -38,7 +38,6 @@ public class Aim extends CommandBase {
     if (Math.abs(tx) > 2) {
       CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new TurnToAngle(tx), new WaitCommand(.2), new Aim()));
     }
-    SmartDashboard.putNumber("Aim", tx);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

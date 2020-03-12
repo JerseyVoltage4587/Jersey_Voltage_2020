@@ -156,13 +156,6 @@ public class Climber extends SubsystemBase {
     }
 
     SmartDashboard.putString("Climber Status", RobotClimberState);
-    SmartDashboard.putNumber("Climber Set Point", setPoint);
-    SmartDashboard.putNumber("Left Climber Motor Level", m_leftClimberMotor.get());
-    SmartDashboard.putNumber("Right Climber Motor Level", m_rightClimberMotor.get());
-    SmartDashboard.putNumber("Right Climber Position", m_loggingData.RightPosition);
-    SmartDashboard.putNumber("Right Climber Velocity", m_loggingData.RightVelocity);
-    SmartDashboard.putNumber("Left Climber Velocity", m_loggingData.LeftVelocity);
-    SmartDashboard.putNumber("Left Climber Position", m_loggingData.LeftPosition);
 
   
     m_lastLogTime = now;

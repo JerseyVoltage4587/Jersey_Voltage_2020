@@ -44,7 +44,6 @@ public class TurnToAngle extends CommandBase {
       }
       m_ifInitialized = true;
       m_finalAngle = heading + m_angle;
-      SmartDashboard.putNumber("First Heading", heading);
     }
     double delta = m_finalAngle - heading;
     if (delta < -180){
@@ -54,9 +53,6 @@ public class TurnToAngle extends CommandBase {
     if (delta > 180){
       delta -= 360;
     }
-
-    SmartDashboard.putNumber("Heading", heading);
-    SmartDashboard.putNumber("Difference", delta);
 
     if (delta > 10) {
       DriveBase.getInstance().setLeftMotorLevel(.25);

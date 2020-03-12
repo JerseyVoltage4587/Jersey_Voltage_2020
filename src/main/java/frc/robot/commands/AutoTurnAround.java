@@ -25,7 +25,6 @@ public class AutoTurnAround extends CommandBase {
   @Override
   public void initialize() {
     heading = Gyro.getYaw();
-    SmartDashboard.putNumber("heading", heading);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
