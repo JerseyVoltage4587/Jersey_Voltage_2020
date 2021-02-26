@@ -132,10 +132,10 @@ public class Climber extends SubsystemBase {
     m_loggingData.LeftClimberMotorCurrent = Robot.getPDP().getCurrent(Constants.LeftClimberMotorPDP_Port);
     m_loggingData.RightClimberMotorCurrent = Robot.getPDP().getCurrent(Constants.RightClimberMotorPDP_Port);
     m_loggingData.ClimberState = RobotClimberState;
-    m_loggingData.LeftEncoderReading = m_leftClimberMotor.getSelectedSensorPosition(0);
+    m_loggingData.LeftEncoderReading = (int) m_leftClimberMotor.getSelectedSensorPosition(0);
     m_loggingData.LeftPosition = m_loggingData.LeftEncoderReading / 4096.0;
     m_loggingData.LeftVelocity = Math.abs(m_loggingData.LeftPosition - lastLeftPosition) / seconds;
-    m_loggingData.RightEncoderReading = m_rightClimberMotor.getSelectedSensorPosition(0);
+    m_loggingData.RightEncoderReading = (int) m_rightClimberMotor.getSelectedSensorPosition(0);
     m_loggingData.RightPosition = m_loggingData.RightEncoderReading / 4096.0;
     m_loggingData.RightVelocity = Math.abs(m_loggingData.RightPosition - lastRightPosition) / seconds;
     m_logger.queueData(m_loggingData);

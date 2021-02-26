@@ -161,7 +161,7 @@ public class DriveBase extends SubsystemBase {
     SmartDashboard.putNumber("Right Distance", m_loggingData.RightPosition);
   }
 
-  public int getLeftEncoder() {
+  public double getLeftEncoder() {
     if (m_isActive == false) {
       return 0;
     }
@@ -172,7 +172,7 @@ public class DriveBase extends SubsystemBase {
     return getLeftEncoder() * Constants.DriveBaseWheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
   }
 
-  public int getRightEncoder() {
+  public double getRightEncoder() {
     if (m_isActive == false) {
       return 0;
     }
@@ -192,7 +192,7 @@ public class DriveBase extends SubsystemBase {
     public double LeftMotor1_SupplyCurrent;
     public double LeftMotor1_StatorCurrent;
     public double LeftMotor2_SupplyCurrent;
-    public int LeftEncoderReading;
+    public double LeftEncoderReading;
     public double LeftPosition;
     public double LeftVelocity;
     public double LeftAcceleration;
@@ -200,7 +200,7 @@ public class DriveBase extends SubsystemBase {
     public double RightMotor1_SupplyCurrent;
     public double RightMotor1_StatorCurrent;
     public double RightMotor2_SupplyCurrent;
-    public int RightEncoderReading;
+    public double RightEncoderReading;
     public double RightPosition;
     public double RightVelocity;
     public double RightAcceleration;

@@ -78,7 +78,7 @@ public class Intake extends SubsystemBase {
     return m_loggingData.ArmAngle;
   }
 
-  public int getIntakeArmEncoder() {
+  public double getIntakeArmEncoder() {
     if (m_isActive == false) {
       return 0;
     }
@@ -166,7 +166,7 @@ public class Intake extends SubsystemBase {
 
   public static class IntakeLoggingData {
     public double SetPoint;
-    public int ArmMotorEncoder;
+    public double ArmMotorEncoder;
     public double ArmAngle;
     public double IntakeMotorLevel;
     public double IntakeArmMotorLevel;
