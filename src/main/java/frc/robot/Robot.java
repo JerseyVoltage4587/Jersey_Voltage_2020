@@ -17,11 +17,14 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Aim;
 import frc.robot.commands.AutoMoveFoward;
-import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.commands.StartKicker;
 import frc.robot.commands.StartShooterForward;
 import frc.robot.commands.StopShooter;
-import frc.robot.subsystems.*;
+import frc.robot.subsystems.Climber;
+import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Storage;
 import frc.robot.util.Gyro;
 
 /**
