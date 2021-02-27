@@ -85,7 +85,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
+    //getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     CameraServer.getInstance();
     getDriveBase().zeroDriveSensors();
     getIntake().zeroIntakeSensors();

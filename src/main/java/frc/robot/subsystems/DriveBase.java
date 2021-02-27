@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
+import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.util.AsyncStructuredLogger;
 import frc.robot.util.Gyro;
 
@@ -43,8 +44,8 @@ public class DriveBase extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    m_lefttalon1 = new WPI_TalonSRX(Constants.LeftTalon1CAN_Address);
     System.out.println("DriveBase!!!!!!!!!!!!!");
+    m_lefttalon1 = new WPI_TalonSRX(Constants.LeftTalon1CAN_Address);
     m_righttalon2 = new WPI_TalonSRX(Constants.RightTalon2CAN_Address);
     m_leftvictor11 = new WPI_VictorSPX(Constants.LeftVictor1CAN_Address);
     m_rightvictor21 = new WPI_VictorSPX(Constants.RightVictor21CAN_Address);
