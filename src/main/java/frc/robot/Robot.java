@@ -7,6 +7,8 @@
 
 package frc.robot;
 
+import javax.print.event.PrintJobListener;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -17,6 +19,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Aim;
 import frc.robot.commands.AutoMoveFoward;
+import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.commands.StartKicker;
 import frc.robot.commands.StartShooterForward;
 import frc.robot.commands.StopShooter;
@@ -88,7 +91,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    //getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
+    getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     CameraServer.getInstance();
     getDriveBase().zeroDriveSensors();
     getIntake().zeroIntakeSensors();

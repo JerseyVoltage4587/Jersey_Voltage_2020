@@ -12,5 +12,7 @@
     "**/.settings": true,
     "**/.factorypath": true,
     "**/*~": true
-  }
+  },
+  "java.dependency.syncWithFolderExplorer": true,
+  "java.dependency.packagePresentation": "hierarchical"
 }
