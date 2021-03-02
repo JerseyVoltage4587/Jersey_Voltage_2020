@@ -51,7 +51,7 @@ public final class Constants {
     public static double StorageBeltMotorLevelPass = -0.304;
     public static double ClimberMotorLevel = 0.3;
     public static double StorageSeparatorMotorLevel = 0.4;
-    public static double StorageToShooterMotorLevelForward = -0.5;
+    public static double StorageToShooterMotorLevelForward = -0.4;
     public static double StorageToShooterMotorLevelBackward = 0.15;
     public static double IntakeArmMotorLevelUp = -0.4;
     public static double IntakeArmMotorLevelDown = 0.35;

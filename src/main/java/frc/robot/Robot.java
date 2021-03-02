@@ -95,12 +95,10 @@ public class Robot extends TimedRobot {
     CameraServer.getInstance();
     getDriveBase().zeroDriveSensors();
     getIntake().zeroIntakeSensors();
-    //getClimber();
-    //getDriveBase();
-    //getIntake();
-    //getShooter();
-    //getStorage();
-    //getOI();
+    getClimber();
+    getShooter();
+    getStorage();
+    getOI();
   }
 
   /**
