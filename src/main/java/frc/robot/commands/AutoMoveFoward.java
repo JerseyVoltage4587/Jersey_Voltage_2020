@@ -13,6 +13,7 @@ import frc.robot.Robot;
 public class AutoMoveFoward extends CommandBase {
   int leftEncoder = 0;
   int rightEncoder = 0;
+  double leftMotorLevelChange = 0.5;
   double leftInches = 0;
   double rightInches = 0;
   double averageInches = 0;
@@ -40,6 +41,14 @@ public class AutoMoveFoward extends CommandBase {
     Robot.getDriveBase().setLeftMotorLevel(0.5);
     leftInches = Robot.getDriveBase().getLeftDistanceInches();
     rightInches = Robot.getDriveBase().getRightDistanceInches();
+    if (leftInches < rightInches - 5) {
+      leftMotorLevelChange += 0.05;
+      Robot.getDriveBase().setRightMotorLevel(leftMotorLevelChange);
+    }
+    if (leftInches > rightInches + 5) {
+      leftMotorLevelChange -= 0.05;
+      Robot.getDriveBase().setRightMotorLevel(leftMotorLevelChange);
+    }
     averageInches = (leftInches + rightInches) / 2;
   }
 
