@@ -34,6 +34,7 @@ public class DriveBase extends SubsystemBase {
   private DriveBaseLoggingData m_loggingData;
   private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
   private long m_lastLogTime = 0;
+  int setDistance = 0;
 
 
   /**
@@ -102,6 +103,14 @@ public class DriveBase extends SubsystemBase {
       return;
     }
     m_drive.setSafetyEnabled(x);
+  }
+
+  public void setAutoDistance(int inches) {
+    setDistance = inches;
+  }
+
+  public int getAutoDistance() {
+    return setDistance;
   }
 
   public void zeroDriveSensors() {

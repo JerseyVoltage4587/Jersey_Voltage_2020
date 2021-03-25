@@ -66,7 +66,7 @@ public class AutoMoveFoward extends CommandBase {
       return true;
     }
 
-    if (averageInches >= 66) {
+    if (averageInches >= Robot.getDriveBase().getAutoDistance()) {
       return true;
     }
 
