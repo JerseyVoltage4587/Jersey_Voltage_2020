@@ -46,14 +46,21 @@ public class Turn extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    setAngle -= 10;
     if (setAngle > 0) {
-      if (Gyro.getYaw() > heading + setAngle) {
+      setAngle -= 5;     
+    }
+    else {
+      setAngle += 5;
+    }
+    if (setAngle > 0) {
+      if (Gyro.getYaw() >= heading + setAngle) {
         return true;
       }      
     }
-    else if (Gyro.getYaw() < heading + setAngle) {
-      return true;
+    else {
+      if (Gyro.getYaw() < heading + setAngle) {
+        return true;
+      }
     }
     return false;
   }

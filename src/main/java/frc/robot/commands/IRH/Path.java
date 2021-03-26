@@ -13,7 +13,7 @@ import frc.robot.commands.RaiseIntakeArm;
 
 public class Path extends CommandBase {
   /** Creates a new Path. */
-  String layout = "A";
+  String layout = "ARed";
 
   public Path() {
     // Use addRequirements() here to declare subsystem dependencies.
@@ -31,7 +31,7 @@ public class Path extends CommandBase {
   @Override
   public void execute() {
     if (Robot.getIntake().IsArmMotorStalled()) {
-      layout = "B";
+      layout = "BRed";
     }
   }
 
@@ -39,18 +39,18 @@ public class Path extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     CommandScheduler.getInstance().schedule(new RaiseIntakeArm());
-    if (layout.equals("A")) {
-      CommandScheduler.getInstance().schedule(new PathA());
-    }
-    else if (layout.equals("B")) {
-      CommandScheduler.getInstance().schedule(new PathB());
+    if (layout.equals("BRed")) {
+      CommandScheduler.getInstance().schedule(new BRed());
     }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (Robot.getDriveBase().getLeftMotorLevel() == 0 && Robot.getDriveBase().getRightMotorLevel() == 0) {
+    if (layout.equals("BRed")) {
+      return true;
+    }
+    else if (Robot.getDriveBase().getLeftMotorLevel() == 0 && Robot.getDriveBase().getRightMotorLevel() == 0) {
       return true;
     }
     return false;
