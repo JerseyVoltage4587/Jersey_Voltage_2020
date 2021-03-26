@@ -13,6 +13,7 @@ import frc.robot.Robot;
 public class AutoMoveFoward extends CommandBase {
   int leftEncoder = 0;
   int rightEncoder = 0;
+  int setDistance = 0;
   double leftMotorLevelChange = 0.5;
   double leftInches = 0;
   double rightInches = 0;
@@ -20,7 +21,7 @@ public class AutoMoveFoward extends CommandBase {
   /**
    * Creates a new AutoMoveFoward.
    */
-  public AutoMoveFoward() {
+  public AutoMoveFoward(int distance) {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getDriveBase());
   }
@@ -66,7 +67,7 @@ public class AutoMoveFoward extends CommandBase {
       return true;
     }
 
-    if (averageInches >= Robot.getDriveBase().getAutoDistance()) {
+    if (averageInches >= setDistance) {
       return true;
     }
 

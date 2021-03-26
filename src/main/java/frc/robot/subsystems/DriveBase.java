@@ -34,7 +34,6 @@ public class DriveBase extends SubsystemBase {
   private DriveBaseLoggingData m_loggingData;
   private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
   private long m_lastLogTime = 0;
-  int setDistance = 0;
 
 
   /**
@@ -90,6 +89,13 @@ public class DriveBase extends SubsystemBase {
     m_lefttalon1.set(LeftMotorLevel);
   }
 
+  public double getLeftMotorLevel() {
+    if (m_isActive == false) {
+      return -1;
+    }
+    return LeftMotorLevel;
+  }
+
   public void setRightMotorLevel(double x) {
     if (m_isActive == false) {
       return;
@@ -98,19 +104,18 @@ public class DriveBase extends SubsystemBase {
     m_righttalon2.set(RightMotorLevel);
   }
 
+  public double getRightMotorLevel() {
+    if (m_isActive == false) {
+      return -1;
+    }
+    return RightMotorLevel;
+  }
+
   public void setSafetyEnabled(boolean x){
     if (m_isActive == false) {
       return;
     }
     m_drive.setSafetyEnabled(x);
-  }
-
-  public void setAutoDistance(int inches) {
-    setDistance = inches;
-  }
-
-  public int getAutoDistance() {
-    return setDistance;
   }
 
   public void zeroDriveSensors() {

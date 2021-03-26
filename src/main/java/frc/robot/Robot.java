@@ -150,8 +150,7 @@ public class Robot extends TimedRobot {
     // }
     getStorage().setShooterRunning(false);
     getStorage().setShooterReady(false);
-    getDriveBase().setAutoDistance(66);
-    CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(),new WaitCommand(1), new StartKicker()));
+    CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(66),new WaitCommand(1), new StartKicker()));
   }
 
   /**

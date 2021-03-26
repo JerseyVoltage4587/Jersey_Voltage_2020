@@ -111,7 +111,6 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-    //System.out.println("Intake Periodic");
 
     if (m_isActive == false) {
       return;
