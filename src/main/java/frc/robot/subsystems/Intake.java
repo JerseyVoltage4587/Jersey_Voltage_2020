@@ -23,6 +23,7 @@ public class Intake extends SubsystemBase {
   private WPI_TalonSRX m_intakeMotor = null;
   private WPI_TalonSRX m_intakeArmMotor = null;
   private int m_numberOfTimesStalled = 0;
+  private boolean m_pickedUpBall = false;
   private double m_setPoint = 0;
   private IntakeLoggingData m_loggingData;
   private AsyncStructuredLogger<IntakeLoggingData> m_logger;
@@ -127,6 +128,10 @@ public class Intake extends SubsystemBase {
     m_loggingData.IntakeArmMotorStatorCurrent = m_intakeArmMotor.getStatorCurrent();
     m_loggingData.IntakeArmMotorSupplyCurrent = m_intakeArmMotor.getSupplyCurrent();
     m_logger.queueData(m_loggingData);
+
+    if (m_loggingData.IntakeMotorStatorCurrent > 0) {
+      m_numberOfTimesStalled += 1;
+    }
 
     if (m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent) {
       m_numberOfTimesStalled += 1;

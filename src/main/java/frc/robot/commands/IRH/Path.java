@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class Path extends CommandBase {
   /** Creates a new Path. */
-  String layout = "";
 
   public Path() {
     // Use addRequirements() here to declare subsystem dependencies.
