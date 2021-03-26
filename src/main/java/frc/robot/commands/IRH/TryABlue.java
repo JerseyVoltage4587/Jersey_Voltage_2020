@@ -41,7 +41,7 @@ public class TryABlue extends CommandBase {
       CommandScheduler.getInstance().schedule(new ABlue());
     }
     else {
-      CommandScheduler.getInstance().schedule(new TryABlue());
+      CommandScheduler.getInstance().schedule(new TryBBlue());
     }
   }
 

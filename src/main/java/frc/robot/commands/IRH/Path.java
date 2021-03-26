@@ -6,7 +6,6 @@ package frc.robot.commands.IRH;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.Robot;
 
 public class Path extends CommandBase {
   /** Creates a new Path. */
@@ -14,8 +13,6 @@ public class Path extends CommandBase {
 
   public Path() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getDriveBase());
-    addRequirements(Robot.getIntake());
   }
 
   // Called when the command is initially scheduled.
@@ -39,6 +36,6 @@ public class Path extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return true;
   }
 }
