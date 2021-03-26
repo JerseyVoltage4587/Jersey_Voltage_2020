@@ -4,29 +4,19 @@
 
 package frc.robot.commands.IRH;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.AutoMoveFoward;
+import frc.robot.commands.LowerIntakeArm;
+import frc.robot.commands.RaiseIntakeArm;
 
-public class BRed extends CommandBase {
-  /** Creates a new Bred. */
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class BRed extends SequentialCommandGroup {
+  /** Creates a new BRed. */
   public BRed() {
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(new LowerIntakeArm(), new AutoMoveFoward(60), new Turn(90), new AutoMoveFoward(60), new Turn(180), new AutoMoveFoward(60), new Turn(90), new AutoMoveFoward(60), new RaiseIntakeArm());
   }
 }

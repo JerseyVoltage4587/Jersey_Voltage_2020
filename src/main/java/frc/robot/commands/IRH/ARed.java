@@ -4,29 +4,18 @@
 
 package frc.robot.commands.IRH;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.AutoMoveFoward;
+import frc.robot.commands.RaiseIntakeArm;
 
-public class ARed extends CommandBase {
+// NOTE:  Consider using this command inline, rather than writing a subclass.  For more
+// information, see:
+// https://docs.wpilib.org/en/stable/docs/software/commandbased/convenience-features.html
+public class ARed extends SequentialCommandGroup {
   /** Creates a new ARed. */
   public ARed() {
-    // Use addRequirements() here to declare subsystem dependencies.
-  }
-
-  // Called when the command is initially scheduled.
-  @Override
-  public void initialize() {}
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {}
-
-  // Called once the command ends or is interrupted.
-  @Override
-  public void end(boolean interrupted) {}
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    return false;
+    // Add your commands in the addCommands() call, e.g.
+    // addCommands(new FooCommand(), new BarCommand());
+    addCommands(new Turn(-90), new AutoMoveFoward(30), new Turn(-90), new AutoMoveFoward(120), new Turn(-90), new AutoMoveFoward(90), new Turn(-90), new AutoMoveFoward(60), new RaiseIntakeArm(), new AutoMoveFoward(195));
   }
 }

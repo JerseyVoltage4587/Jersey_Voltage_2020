@@ -7,12 +7,13 @@ package frc.robot.commands.IRH;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Robot;
+import frc.robot.commands.AutoMoveFoward;
+import frc.robot.commands.LowerIntakeArm;
+import frc.robot.commands.RaiseIntakeArm;
 
-public class Path extends CommandBase {
-  /** Creates a new Path. */
-  String layout = "";
-
-  public Path() {
+public class TryBRed extends CommandBase {
+  /** Creates a new TryBRed. */
+  public TryBRed() {
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getDriveBase());
     addRequirements(Robot.getIntake());
@@ -21,24 +22,38 @@ public class Path extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    CommandScheduler.getInstance().schedule(new TryBRed());
+    CommandScheduler.getInstance().schedule(new LowerIntakeArm(), new AutoMoveFoward(75));
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-
+    if (Robot.getIntake().IsArmMotorStalled()) {
+      Robot.getDriveBase().setLayout("BRed");
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-
+    CommandScheduler.getInstance().schedule(new RaiseIntakeArm());
+    if (Robot.getDriveBase().getLayout().equals("BRed")) {
+      CommandScheduler.getInstance().schedule(new BRed());
+    }
+    else {
+      CommandScheduler.getInstance().schedule(new TryABlue());
+    }
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (Robot.getDriveBase().getLayout().equals("BRed")) {
+      return true;
+    }
+    else if (Robot.getDriveBase().getRightMotorLevel() == 0 && Robot.getDriveBase().getLeftMotorLevel() == 0) {
+      return true;
+    }
     return false;
   }
 }

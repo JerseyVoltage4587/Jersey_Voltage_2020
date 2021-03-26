@@ -34,6 +34,7 @@ public class DriveBase extends SubsystemBase {
   private DriveBaseLoggingData m_loggingData;
   private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
   private long m_lastLogTime = 0;
+  private String layout = "";
 
 
   /**
@@ -109,6 +110,14 @@ public class DriveBase extends SubsystemBase {
       return -1;
     }
     return RightMotorLevel;
+  }
+
+  public void setLayout(String l) {
+    layout = l;
+  }
+
+  public String getLayout() {
+    return layout;
   }
 
   public void setSafetyEnabled(boolean x){
