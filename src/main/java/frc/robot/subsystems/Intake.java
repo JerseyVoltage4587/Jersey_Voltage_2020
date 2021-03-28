@@ -57,11 +57,15 @@ public class Intake extends SubsystemBase {
 		return m_Instance;
   }
 
-  public double getIntakeMotorLevel() {
+  public boolean hasPickedUpBall() {
     if (m_isActive == false) {
-      return 0;
+      return false;
     }
-    return m_intakeMotor.get();
+    return m_pickedUpBall;
+  }
+
+  public void setPickedUpBall(boolean b) {
+    m_pickedUpBall = b;
   }
 
   public void zeroIntakeSensors() {
@@ -127,9 +131,10 @@ public class Intake extends SubsystemBase {
     m_loggingData.IntakeArmMotorSupplyCurrent = m_intakeArmMotor.getSupplyCurrent();
     m_logger.queueData(m_loggingData);
 
-    //if (m_loggingData.IntakeMotorStatorCurrent > 0) {
-      //m_numberOfTimesStalled += 1;
-    //}
+    // if (trueVelocity < setVelocity)
+    if (m_loggingData.IntakeMotorStatorCurrent > 0) {
+      m_pickedUpBall = true;
+    }
 
     if (m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent) {
       m_numberOfTimesStalled += 1;
