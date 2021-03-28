@@ -44,7 +44,6 @@ public class Intake extends SubsystemBase {
     m_intakeArmMotor.setNeutralMode(NeutralMode.Brake);
     m_loggingData = new IntakeLoggingData();
     m_logger = new AsyncStructuredLogger<IntakeLoggingData>("Intake", /*forceUnique=*/false, IntakeLoggingData.class);
-  
   }
 
   public static Intake getInstance() {
@@ -112,7 +111,6 @@ public class Intake extends SubsystemBase {
 
   @Override
   public void periodic() {
-
     if (m_isActive == false) {
       return;
     }
@@ -129,9 +127,9 @@ public class Intake extends SubsystemBase {
     m_loggingData.IntakeArmMotorSupplyCurrent = m_intakeArmMotor.getSupplyCurrent();
     m_logger.queueData(m_loggingData);
 
-    if (m_loggingData.IntakeMotorStatorCurrent > 0) {
-      m_numberOfTimesStalled += 1;
-    }
+    //if (m_loggingData.IntakeMotorStatorCurrent > 0) {
+      //m_numberOfTimesStalled += 1;
+    //}
 
     if (m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent) {
       m_numberOfTimesStalled += 1;
@@ -164,6 +162,7 @@ public class Intake extends SubsystemBase {
       Robot.getStorage().setIntakeRunning(false);
     }
 
+    //SmartDashboard.putNumber("Intake motor velocity", m_intakeMotor.);
     SmartDashboard.putNumber("Number of times stalled", m_numberOfTimesStalled);
     SmartDashboard.putNumber("Arm Angle", getIntakeArmAngle());
   }
