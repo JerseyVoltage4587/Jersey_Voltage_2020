@@ -178,7 +178,6 @@ public class Shooter extends SubsystemBase {
     }
 
     m_pidController.setReference(setPoint, ControlType.kVelocity);
-    
     SmartDashboard.putNumber("SetPoint", setPoint);
     SmartDashboard.putNumber("ProcessVariable", m_rightShooterEncoder.getVelocity());
 

@@ -42,6 +42,7 @@ public class AutoMoveFoward extends CommandBase {
     Robot.getDriveBase().setLeftMotorLevel(0.5);
     leftInches = Robot.getDriveBase().getLeftDistanceInches();
     rightInches = Robot.getDriveBase().getRightDistanceInches();
+    System.out.println(leftInches + " " + rightInches);
     if (leftInches < rightInches - 5) {
       leftMotorLevelChange += 0.05;
       Robot.getDriveBase().setRightMotorLevel(leftMotorLevelChange);
@@ -68,6 +69,7 @@ public class AutoMoveFoward extends CommandBase {
     }
 
     if (averageInches >= setDistance) {
+      System.out.println("Auto Move");
       return true;
     }
 

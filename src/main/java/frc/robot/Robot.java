@@ -145,8 +145,10 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     int i = 2;
-    switch(i) {
+    CommandScheduler.getInstance().schedule(new AutoMoveFoward(75));
+    /*switch(i) {
       case 1:
+      System.out.println("Start");
         CommandScheduler.getInstance().schedule(new Path());
         break;
       case 2:
@@ -159,6 +161,7 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().schedule(new AutoNav_Bounce());
         break;
     }
+    */
     //getStorage().setShooterRunning(false);
     //getStorage().setShooterReady(false);
     //CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(66),new WaitCommand(1), new StartKicker()));
