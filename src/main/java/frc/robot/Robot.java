@@ -144,7 +144,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    int i = 1;
+    int i = 2;
     switch(i) {
       case 1:
         CommandScheduler.getInstance().schedule(new Path());
