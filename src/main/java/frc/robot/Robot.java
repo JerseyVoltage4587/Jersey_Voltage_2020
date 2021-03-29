@@ -21,6 +21,10 @@ import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.commands.StartKicker;
 import frc.robot.commands.StartShooterForward;
 import frc.robot.commands.StopShooter;
+import frc.robot.commands.IRH.AutoNav_BarrelRacing;
+import frc.robot.commands.IRH.AutoNav_Bounce;
+import frc.robot.commands.IRH.AutoNav_Slalom;
+import frc.robot.commands.IRH.Path;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
@@ -140,15 +144,24 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    // m_autonomousCommand = m_robotContainer.getAutonomousCommand();
-
-    // schedule the autonomous command (example)
-    // if (m_autonomousCommand != null) {
-    // m_autonomousCommand.schedule();
-    // }
-    getStorage().setShooterRunning(false);
-    getStorage().setShooterReady(false);
-    CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(66),new WaitCommand(1), new StartKicker()));
+    int i = 1;
+    switch(i) {
+      case 1:
+        CommandScheduler.getInstance().schedule(new Path());
+        break;
+      case 2:
+        CommandScheduler.getInstance().schedule(new AutoNav_BarrelRacing());
+        break;
+      case 3:
+        CommandScheduler.getInstance().schedule(new AutoNav_Slalom());
+        break;
+      case 4:
+        CommandScheduler.getInstance().schedule(new AutoNav_Bounce());
+        break;
+    }
+    //getStorage().setShooterRunning(false);
+    //getStorage().setShooterReady(false);
+    //CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(66),new WaitCommand(1), new StartKicker()));
   }
 
   /**
