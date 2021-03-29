@@ -37,6 +37,7 @@ public class TryABlue extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     CommandScheduler.getInstance().schedule(new RaiseIntakeArm());
+    Robot.getIntake().setPickedUpBall(false);
     if (Robot.getDriveBase().getLayout().equals("ABlue")) {
       CommandScheduler.getInstance().schedule(new ABlue());
     }
