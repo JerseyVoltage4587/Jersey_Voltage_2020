@@ -131,10 +131,12 @@ public class Intake extends SubsystemBase {
     m_loggingData.IntakeArmMotorSupplyCurrent = m_intakeArmMotor.getSupplyCurrent();
     m_logger.queueData(m_loggingData);
 
-    // if (trueVelocity < setVelocity)
-    if (m_loggingData.IntakeMotorStatorCurrent > 0) {
-      m_pickedUpBall = true;
+    if (getSetPoint() == 78) {
+      if (getIntakeArmAngle() < (78 - 2)) {
+        m_pickedUpBall = true;
+      }      
     }
+    SmartDashboard.putBoolean("Picked Up Ball", m_pickedUpBall);
 
     if (m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent) {
       m_numberOfTimesStalled += 1;
