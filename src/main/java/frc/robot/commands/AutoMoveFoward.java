@@ -20,6 +20,7 @@ public class AutoMoveFoward extends CommandBase {
    * Creates a new AutoMoveFoward.
    */
   public AutoMoveFoward(int distance) {
+    setDistance = distance;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getDriveBase());
   }
