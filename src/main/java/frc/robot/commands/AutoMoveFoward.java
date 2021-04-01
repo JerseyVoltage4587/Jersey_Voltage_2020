@@ -11,10 +11,8 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 
 public class AutoMoveFoward extends CommandBase {
-  int leftEncoder = 0;
-  int rightEncoder = 0;
   int setDistance = 0;
-  double leftMotorLevelChange = 0.5;
+  double rightMotorLevelChange = 0.5;
   double leftInches = 0;
   double rightInches = 0;
   double averageInches = 0;
@@ -44,12 +42,12 @@ public class AutoMoveFoward extends CommandBase {
     rightInches = Robot.getDriveBase().getRightDistanceInches();
     System.out.println(leftInches + " " + rightInches);
     if (leftInches < rightInches - 5) {
-      leftMotorLevelChange += 0.05;
-      Robot.getDriveBase().setRightMotorLevel(leftMotorLevelChange);
+      rightMotorLevelChange += 0.05;
+      Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
     }
     if (leftInches > rightInches + 5) {
-      leftMotorLevelChange -= 0.05;
-      Robot.getDriveBase().setRightMotorLevel(leftMotorLevelChange);
+      rightMotorLevelChange -= 0.05;
+      Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
     }
     averageInches = (leftInches + rightInches) / 2;
     System.out.println("Average Inches: " + averageInches);

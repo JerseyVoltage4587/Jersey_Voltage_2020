@@ -17,6 +17,6 @@ public class ABlue extends SequentialCommandGroup {
   public ABlue() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new LowerIntakeArm(), new Turn(90), new AutoMoveFoward(90), new Turn(90), new AutoMoveFoward(30), new Turn(90), new AutoMoveFoward(60), new Turn(90), new AutoMoveFoward(90), new RaiseIntakeArm(), new AutoMoveFoward(75));
+    addCommands(new SequentialCommandGroup(new LowerIntakeArm(), new Turn(90), new AutoMoveFoward(90), new Turn(90), new AutoMoveFoward(30), new Turn(90), new AutoMoveFoward(60), new Turn(90), new AutoMoveFoward(90), new RaiseIntakeArm(), new AutoMoveFoward(75)));
   }
 }

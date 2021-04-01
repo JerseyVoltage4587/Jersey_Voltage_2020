@@ -16,6 +16,6 @@ public class ARed extends SequentialCommandGroup {
   public ARed() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new Turn(-90), new AutoMoveFoward(30), new Turn(-90), new AutoMoveFoward(120), new Turn(-90), new AutoMoveFoward(90), new Turn(-90), new AutoMoveFoward(60), new RaiseIntakeArm(), new AutoMoveFoward(195));
+    addCommands(new SequentialCommandGroup(new Turn(-90), new AutoMoveFoward(30), new Turn(-90), new AutoMoveFoward(120), new Turn(-90), new AutoMoveFoward(90), new Turn(-90), new AutoMoveFoward(60), new RaiseIntakeArm(), new AutoMoveFoward(195)));
   }
 }

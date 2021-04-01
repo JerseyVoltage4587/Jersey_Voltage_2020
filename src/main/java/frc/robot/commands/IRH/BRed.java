@@ -17,6 +17,7 @@ public class BRed extends SequentialCommandGroup {
   public BRed() {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new LowerIntakeArm(), new AutoMoveFoward(60), new Turn(90), new AutoMoveFoward(60), new Turn(180), new AutoMoveFoward(60), new Turn(90), new AutoMoveFoward(60), new RaiseIntakeArm());
+    clearGroupedCommands();
+    addCommands(new SequentialCommandGroup(new LowerIntakeArm(), new AutoMoveFoward(60), new Turn(90), new AutoMoveFoward(60), new Turn(180), new AutoMoveFoward(60), new Turn(90), new AutoMoveFoward(60), new RaiseIntakeArm()));
   }
 }

@@ -132,7 +132,7 @@ public class Intake extends SubsystemBase {
     m_logger.queueData(m_loggingData);
 
     if (getSetPoint() == 78) {
-      if (getIntakeArmAngle() < (78 - 2)) {
+      if (getIntakeArmAngle() < (78 - 4)) {
         m_pickedUpBall = true;
       }      
     }
