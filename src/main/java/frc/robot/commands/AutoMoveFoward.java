@@ -52,6 +52,7 @@ public class AutoMoveFoward extends CommandBase {
       Robot.getDriveBase().setRightMotorLevel(leftMotorLevelChange);
     }
     averageInches = (leftInches + rightInches) / 2;
+    System.out.println("Average Inches: " + averageInches);
   }
 
   // Called once the command ends or is interrupted.
