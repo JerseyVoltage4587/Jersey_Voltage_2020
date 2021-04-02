@@ -17,6 +17,6 @@ public class AutoNav_BarrelRacing extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     clearGroupedCommands();
-    addCommands(new SequentialCommandGroup(new AutoMoveFoward(75), new Square(60, 90), new AutoMoveFoward(90), new Square(60, -90), new AutoMoveFoward(60), new Square(60, 90), new AutoTurnAround(), new AutoMoveFoward(225)));
+    addCommands(new AutoMoveFoward(73), new Square(58, 90), new AutoMoveFoward(88), new Square(58, -90), new AutoMoveFoward(58), new Square(58, 90), new AutoTurnAround(), new AutoMoveFoward(223));
   }
 }

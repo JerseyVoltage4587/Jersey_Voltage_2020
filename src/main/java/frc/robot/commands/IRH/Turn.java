@@ -1,66 +1,114 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
+/*----------------------------------------------------------------------------*/
+/* Copyright (c) 2019 FIRST. All Rights Reserved.                             */
+/* Open Source Software - may be modified and shared by FRC teams. The code   */
+/* must be accompanied by the FIRST BSD license file in the root directory of */
+/* the project.                                                               */
+/*----------------------------------------------------------------------------*/
 
 package frc.robot.commands.IRH;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.OI;
 import frc.robot.Robot;
+import frc.robot.subsystems.DriveBase;
 import frc.robot.util.Gyro;
 
 public class Turn extends CommandBase {
-  /** Creates a new Turn. */
-  double heading = 0;
-  int setAngle = 0;
-  public Turn(int angle) {
+  private double m_angle;
+  private double m_finalAngle;
+  private boolean m_ifInitialized = false;
+  /**
+   * Creates a new TurnToAngle.
+   */
+  public Turn(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Robot.getDriveBase());
-    setAngle = angle;
+    m_angle = angle;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    heading = Gyro.getYaw();;
-    if (setAngle > 0) {
-      Robot.getDriveBase().setLeftMotorLevel(0.5);
-      Robot.getDriveBase().setRightMotorLevel(-0.5);
-    }
-    else {
-      Robot.getDriveBase().setLeftMotorLevel(-0.5);
-      Robot.getDriveBase().setRightMotorLevel(0.5);
-    }
+    m_ifInitialized = false;
+    DriveBase.getInstance().setSafetyEnabled(false);
+    SmartDashboard.putString("TurnToAngle", "initialize");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    double heading = Gyro.getYaw();
+    if (m_ifInitialized == false){
+      if (Gyro.IMU_IsCalibrating()) {
+        return;
+      }
+      m_ifInitialized = true;
+      m_finalAngle = heading + m_angle;
+    }
+    double delta = m_finalAngle - heading;
+    if (delta < -180) {
+      delta += 360;
+    }
+
+    if (delta > 180) {
+      delta -= 360;
+    }
+
+    if (delta > 10) {
+      DriveBase.getInstance().setLeftMotorLevel(.35);
+      DriveBase.getInstance().setRightMotorLevel(-.35);
+    }
+
+    else if (delta < -10) {
+      DriveBase.getInstance().setLeftMotorLevel(-.35);
+      DriveBase.getInstance().setRightMotorLevel(.35);
+    }
+
+    else if (delta > 0) {
+      DriveBase.getInstance().setLeftMotorLevel(.2);
+      DriveBase.getInstance().setRightMotorLevel(-.2);
+    }
+
+    else if (delta < 0) {
+      DriveBase.getInstance().setLeftMotorLevel(-.2);
+      DriveBase.getInstance().setRightMotorLevel(.2);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    Robot.getDriveBase().setLeftMotorLevel(0);
-    Robot.getDriveBase().setRightMotorLevel(0);
+    System.out.println("Turn to Angle: Done");
+    DriveBase.getInstance().setLeftMotorLevel(0);
+    DriveBase.getInstance().setRightMotorLevel(0);
+    DriveBase.getInstance().setSafetyEnabled(true);
+    SmartDashboard.putString("TurnToAngle", "end");
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (setAngle > 0) {
-      setAngle -= 5;     
+    if (Math.abs(OI.getInstance().getDrive()) > 0.10) {
+      return true;
     }
-    else {
-      setAngle += 5;
+
+    if (Math.abs(OI.getInstance().getTurn()) > 0.10) {
+      return true;
     }
-    if (setAngle > 0) {
-      if (Gyro.getYaw() >= heading + setAngle) {
-        return true;
-      }      
+
+    if (m_ifInitialized == false) {
+      return false;
     }
-    else {
-      if (Gyro.getYaw() < heading + setAngle) {
-        return true;
-      }
+
+    double heading = Gyro.getYaw();
+    double delta = Math.abs(heading - m_finalAngle);
+    
+    if (delta > 180){
+      delta = 360 - delta;
+    }
+
+    if (delta <= 2){
+      return true;
     }
     return false;
   }

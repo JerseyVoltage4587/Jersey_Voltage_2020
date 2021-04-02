@@ -5,6 +5,7 @@
 package frc.robot.commands.IRH;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.AutoMoveFoward;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -15,6 +16,6 @@ public class Square extends SequentialCommandGroup {
   public Square(int length, int direction) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SequentialCommandGroup(new AutoMoveFoward(length), new Turn(direction), new AutoMoveFoward(60), new Turn(direction), new AutoMoveFoward(60), new Turn(direction), new AutoMoveFoward(60), new Turn(direction)));
+    addCommands(new SequentialCommandGroup(new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction)));
   }
 }

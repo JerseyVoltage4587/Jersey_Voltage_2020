@@ -184,6 +184,8 @@ public class DriveBase extends SubsystemBase {
 
     SmartDashboard.putNumber("Left Distance", m_loggingData.LeftPosition);
     SmartDashboard.putNumber("Right Distance", m_loggingData.RightPosition);
+    SmartDashboard.putNumber("Left Partial Distance", getPartialLeftInches());
+    SmartDashboard.putNumber("Right Partial Distance", getPartialRightInches());
   }
 
   public double getLeftEncoder() {

@@ -12,7 +12,7 @@ import frc.robot.Robot;
 
 public class AutoMoveFoward extends CommandBase {
   int setDistance = 0;
-  double rightMotorLevelChange = 0.5;
+  double rightMotorLevelChange = 0.35;
   double leftInches = 0;
   double startLeftInches = 0;
   double startRightInches = 0;
@@ -44,15 +44,15 @@ public class AutoMoveFoward extends CommandBase {
   public void execute() {
     Robot.getDriveBase().setRightMotorLevel(0.5);
     Robot.getDriveBase().setLeftMotorLevel(0.5);
-    leftInches = Robot.getDriveBase().getLeftDistanceInches() - startLeftInches;
-    rightInches = Robot.getDriveBase().getRightDistanceInches() - startRightInches;
+    leftInches = Robot.getDriveBase().getLeftDistanceInches();
+    rightInches = Robot.getDriveBase().getRightDistanceInches();
     Robot.getDriveBase().setPartialInches(leftInches, rightInches);
     if (leftInches < rightInches - 5) {
-      rightMotorLevelChange += 0.05;
+      rightMotorLevelChange -= 0.03;
       Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
     }
     if (leftInches > rightInches + 5) {
-      rightMotorLevelChange -= 0.05;
+      rightMotorLevelChange += 0.03;
       Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
     }
     averageInches = (leftInches + rightInches) / 2;
@@ -61,6 +61,7 @@ public class AutoMoveFoward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
+    System.out.println("Move: Done\n" + averageInches);
     Robot.getDriveBase().setLeftMotorLevel(0);
     Robot.getDriveBase().setRightMotorLevel(0);
   }
@@ -68,6 +69,7 @@ public class AutoMoveFoward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    System.out.println(averageInches);
     if (Robot.getOI().getDrive() > 0.7) {
       return true;
     }
