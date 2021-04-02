@@ -15,6 +15,7 @@ import frc.robot.commands.RaiseIntakeArm;
 public class BBlue extends SequentialCommandGroup {
   /** Creates a new BBlue. */
   public BBlue() {
+    System.out.println("B Blue");
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     clearGroupedCommands();

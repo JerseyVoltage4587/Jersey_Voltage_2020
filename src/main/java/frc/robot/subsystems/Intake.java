@@ -23,7 +23,7 @@ public class Intake extends SubsystemBase {
   private WPI_TalonSRX m_intakeMotor = null;
   private WPI_TalonSRX m_intakeArmMotor = null;
   private int m_numberOfTimesStalled = 0;
-  private boolean m_pickedUpBall = false;
+  private double m_pickedUpBall = 0;
   private double m_setPoint = 0;
   private IntakeLoggingData m_loggingData;
   private AsyncStructuredLogger<IntakeLoggingData> m_logger;
@@ -61,10 +61,10 @@ public class Intake extends SubsystemBase {
     if (m_isActive == false) {
       return false;
     }
-    return m_pickedUpBall;
+    return (m_pickedUpBall > 5);
   }
 
-  public void setPickedUpBall(boolean b) {
+  public void setPickedUpBall(int b) {
     m_pickedUpBall = b;
   }
 
@@ -131,12 +131,11 @@ public class Intake extends SubsystemBase {
     m_loggingData.IntakeArmMotorSupplyCurrent = m_intakeArmMotor.getSupplyCurrent();
     m_logger.queueData(m_loggingData);
 
-    if (getSetPoint() == 78) {
-      if (getIntakeArmAngle() < (78 - 4)) {
-        m_pickedUpBall = true;
-      }      
+    if (m_loggingData.IntakeMotorStatorCurrent < Constants.IntakeStallCurrent && m_loggingData.IntakeMotorStatorCurrent < -1) {
+      m_pickedUpBall += 1;
     }
-    SmartDashboard.putBoolean("Picked Up Ball", m_pickedUpBall);
+    SmartDashboard.putBoolean("Picked Up Ball", hasPickedUpBall());
+    SmartDashboard.putNumber("Intake Stator Current", m_intakeMotor.getStatorCurrent());
 
     if (m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent) {
       m_numberOfTimesStalled += 1;

@@ -15,6 +15,7 @@ import frc.robot.commands.RaiseIntakeArm;
 public class BRed extends SequentialCommandGroup {
   /** Creates a new BRed. */
   public BRed() {
+    System.out.println("B Red");
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     clearGroupedCommands();

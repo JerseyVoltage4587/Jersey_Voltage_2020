@@ -31,6 +31,8 @@ public class DriveBase extends SubsystemBase {
   private WPI_VictorSPX m_rightvictor21;
   private double LeftMotorLevel;
   private double RightMotorLevel;
+  private double partialLeftInches = 0;
+  private double partialRightInches = 0;
   private DriveBaseLoggingData m_loggingData;
   private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
   private long m_lastLogTime = 0;
@@ -208,6 +210,19 @@ public class DriveBase extends SubsystemBase {
 
   private double getRateOfChange(double initialValue, double finalValue, long initialTime, long finalTime) {
     return (finalValue - initialValue) / (finalTime - initialTime);
+  }
+
+  public void setPartialInches(double L, double R) {
+    partialLeftInches = L;
+    partialRightInches = R;
+  }
+
+  public double getPartialLeftInches() {
+    return partialLeftInches;
+  }
+
+  public double getPartialRightInches() {
+    return partialRightInches;
   }
 
   public static class DriveBaseLoggingData {

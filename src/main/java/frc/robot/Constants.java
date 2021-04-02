@@ -60,6 +60,7 @@ public final class Constants {
     
     //Motor Stall Currents
     public static final double IntakeArmStallCurrent = 20;
+    public static final double IntakeStallCurrent = -10;
     
     //Encoder Tics
     public static final int DriveBaseEncoderTics = 4096;

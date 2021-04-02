@@ -1,0 +1,14 @@
+Galatic Search-
+    Intake arm lowers slowly, must test at almost exact distance.
+    
+Mechanical-
+    Kicker wheel axel and upper storage axel are unsecured, need allen wrench.
+    Leftover 1" hex spacer and a washer. (Note: washer might not be from robot)
+
+Changes-
+    Changed the way the robot detects if it has intaken a ball.
+    Removed raiseIntakeArm() from all Try{Path}'s.
+    Changed AutoMoveFoward() to AutoMoveFoward(int inches) to make the command more useful.
+    Fixed AutoMoveFoward(int inches) to actually use the variable it was given.
+    Changed Turn() to Turn(int degrees) to make the command more useful.
+    Added ints partialLeftInches and partialRightInches with public get() methods to DriveBase subsystem to make the isFinished() method of AutoMoveFoward(int inches) to work multiple times.

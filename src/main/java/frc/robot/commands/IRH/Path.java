@@ -17,6 +17,7 @@ public class Path extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("Path");
     CommandScheduler.getInstance().schedule(new TryBRed());
   }
 

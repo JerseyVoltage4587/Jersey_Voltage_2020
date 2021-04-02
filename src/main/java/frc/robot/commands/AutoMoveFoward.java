@@ -14,6 +14,8 @@ public class AutoMoveFoward extends CommandBase {
   int setDistance = 0;
   double rightMotorLevelChange = 0.5;
   double leftInches = 0;
+  double startLeftInches = 0;
+  double startRightInches = 0;
   double rightInches = 0;
   double averageInches = 0;
   /**
@@ -32,6 +34,9 @@ public class AutoMoveFoward extends CommandBase {
     Robot.getDriveBase().zeroDriveSensors();
     Robot.getDriveBase().setRightMotorLevel(0.5);
     Robot.getDriveBase().setLeftMotorLevel(0.5);
+    Robot.getDriveBase().setPartialInches(0, 0);
+    startLeftInches = Robot.getDriveBase().getLeftDistanceInches();
+    startRightInches = Robot.getDriveBase().getRightDistanceInches();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -39,9 +44,9 @@ public class AutoMoveFoward extends CommandBase {
   public void execute() {
     Robot.getDriveBase().setRightMotorLevel(0.5);
     Robot.getDriveBase().setLeftMotorLevel(0.5);
-    leftInches = Robot.getDriveBase().getLeftDistanceInches();
-    rightInches = Robot.getDriveBase().getRightDistanceInches();
-    System.out.println(leftInches + " " + rightInches);
+    leftInches = Robot.getDriveBase().getLeftDistanceInches() - startLeftInches;
+    rightInches = Robot.getDriveBase().getRightDistanceInches() - startRightInches;
+    Robot.getDriveBase().setPartialInches(leftInches, rightInches);
     if (leftInches < rightInches - 5) {
       rightMotorLevelChange += 0.05;
       Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
@@ -51,7 +56,6 @@ public class AutoMoveFoward extends CommandBase {
       Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
     }
     averageInches = (leftInches + rightInches) / 2;
-    System.out.println("Average Inches: " + averageInches);
   }
 
   // Called once the command ends or is interrupted.
@@ -69,7 +73,6 @@ public class AutoMoveFoward extends CommandBase {
     }
 
     if (averageInches >= setDistance) {
-      System.out.println("Auto Move");
       return true;
     }
 
