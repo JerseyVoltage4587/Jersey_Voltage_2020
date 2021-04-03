@@ -31,7 +31,6 @@ public class Turn extends CommandBase {
   public void initialize() {
     m_ifInitialized = false;
     DriveBase.getInstance().setSafetyEnabled(false);
-    SmartDashboard.putString("TurnToAngle", "initialize");
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -82,7 +81,6 @@ public class Turn extends CommandBase {
     DriveBase.getInstance().setLeftMotorLevel(0);
     DriveBase.getInstance().setRightMotorLevel(0);
     DriveBase.getInstance().setSafetyEnabled(true);
-    SmartDashboard.putString("TurnToAngle", "end");
   }
 
   // Returns true when the command should end.

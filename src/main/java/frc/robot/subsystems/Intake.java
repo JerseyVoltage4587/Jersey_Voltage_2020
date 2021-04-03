@@ -135,7 +135,6 @@ public class Intake extends SubsystemBase {
       m_pickedUpBall += 1;
     }
     SmartDashboard.putBoolean("Picked Up Ball", hasPickedUpBall());
-    SmartDashboard.putNumber("Intake Stator Current", m_intakeMotor.getStatorCurrent());
 
     if (m_loggingData.IntakeArmMotorStatorCurrent > Constants.IntakeArmStallCurrent) {
       m_numberOfTimesStalled += 1;
@@ -168,7 +167,6 @@ public class Intake extends SubsystemBase {
       Robot.getStorage().setIntakeRunning(false);
     }
 
-    //SmartDashboard.putNumber("Intake motor velocity", m_intakeMotor.);
     SmartDashboard.putNumber("Number of times stalled", m_numberOfTimesStalled);
     SmartDashboard.putNumber("Arm Angle", getIntakeArmAngle());
   }
