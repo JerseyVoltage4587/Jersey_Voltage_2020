@@ -146,16 +146,16 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    int i = 3;
+    int i = 2;
     switch(i) {
       case 1:
         CommandScheduler.getInstance().schedule(new Path());
         break;
       case 2:
-        CommandScheduler.getInstance().schedule(new AutoNav_BarrelRacing());
+        CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new AutoMoveFoward(175), new Turn(90), new AutoMoveFoward(34), new Turn(85), new AutoMoveFoward(51)/*, new Turn(90), new AutoMoveFoward(42), new Turn(90), new AutoMoveFoward(107), new Turn(-90), new AutoMoveFoward(59), new Turn(-90), new AutoMoveFoward(59), new Turn(-90), new AutoMoveFoward(53), new Turn(-90)/*, new AutoMoveFoward(18), new Turn(50), new AutoMoveFoward(90), new Turn(70), new AutoMoveFoward(43), new Turn()*/));
         break;
       case 3:
-        CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new AutoMoveFoward(33), new WaitCommand(0.25), new Turn(-90), new WaitCommand(0.25), new AutoMoveFoward(40), new WaitCommand(0.25), new Turn(85), new WaitCommand(0.25), new AutoMoveFoward(153), new WaitCommand(0.25), new Turn(90), new WaitCommand(0.25), new Square(40 ,-90), new WaitCommand(0.25)));
+        CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new AutoMoveFoward(33), new WaitCommand(0.15), new Turn(-90), new WaitCommand(0.25), new AutoMoveFoward(40), new WaitCommand(0.25), new Turn(85), new WaitCommand(0.25), new AutoMoveFoward(153), new WaitCommand(0.25), new Turn(90), new WaitCommand(0.25), new Square(40 ,-90), new WaitCommand(0.25)));
         break;
       case 4:
         CommandScheduler.getInstance().schedule(new AutoNav_Bounce());

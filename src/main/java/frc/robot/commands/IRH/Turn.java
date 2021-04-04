@@ -7,22 +7,23 @@
 
 package frc.robot.commands.IRH;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.OI;
 import frc.robot.Robot;
-import frc.robot.subsystems.DriveBase;
 import frc.robot.util.Gyro;
 
 public class Turn extends CommandBase {
-  private double m_angle;
-  private double m_finalAngle;
+  private double m_angle = 0;
+  private double m_finalAngle = 0;
   private boolean m_ifInitialized = false;
   /**
    * Creates a new TurnToAngle.
    */
   public Turn(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.getDriveBase());
     m_angle = angle;
   }
 
@@ -30,7 +31,7 @@ public class Turn extends CommandBase {
   @Override
   public void initialize() {
     m_ifInitialized = false;
-    DriveBase.getInstance().setSafetyEnabled(false);
+    Robot.getDriveBase().setSafetyEnabled(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -54,23 +55,23 @@ public class Turn extends CommandBase {
     }
 
     if (delta > 10) {
-      DriveBase.getInstance().setLeftMotorLevel(.35);
-      DriveBase.getInstance().setRightMotorLevel(-.35);
+      Robot.getDriveBase().setLeftMotorLevel(.325);
+      Robot.getDriveBase().setRightMotorLevel(-.325);
     }
 
     else if (delta < -10) {
-      DriveBase.getInstance().setLeftMotorLevel(-.35);
-      DriveBase.getInstance().setRightMotorLevel(.35);
+      Robot.getDriveBase().setLeftMotorLevel(-.325);
+      Robot.getDriveBase().setRightMotorLevel(.325);
     }
 
     else if (delta > 0) {
-      DriveBase.getInstance().setLeftMotorLevel(.2);
-      DriveBase.getInstance().setRightMotorLevel(-.2);
+      Robot.getDriveBase().setLeftMotorLevel(.275);
+      Robot.getDriveBase().setRightMotorLevel(-.275);
     }
 
     else if (delta < 0) {
-      DriveBase.getInstance().setLeftMotorLevel(-.2);
-      DriveBase.getInstance().setRightMotorLevel(.2);
+      Robot.getDriveBase().setLeftMotorLevel(-.275);
+      Robot.getDriveBase().setRightMotorLevel(.275);
     }
   }
 
@@ -78,9 +79,9 @@ public class Turn extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     System.out.println("Turn to Angle: Done");
-    DriveBase.getInstance().setLeftMotorLevel(0);
-    DriveBase.getInstance().setRightMotorLevel(0);
-    DriveBase.getInstance().setSafetyEnabled(true);
+    Robot.getDriveBase().setLeftMotorLevel(0);
+    Robot.getDriveBase().setRightMotorLevel(0);
+    CommandScheduler.getInstance().schedule(new WaitCommand(0.15));
   }
 
   // Returns true when the command should end.
@@ -100,8 +101,9 @@ public class Turn extends CommandBase {
 
     double heading = Gyro.getYaw();
     double delta = Math.abs(heading - m_finalAngle);
+    System.out.println("Turn Delta " + delta + "\nTurn Heading " + heading+ "\nFinal Angle " + m_finalAngle);
     
-    if (delta > 180){
+    if (delta > 180) {
       delta = 360 - delta;
     }
 

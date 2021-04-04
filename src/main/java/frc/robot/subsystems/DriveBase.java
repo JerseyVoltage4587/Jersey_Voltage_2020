@@ -186,6 +186,8 @@ public class DriveBase extends SubsystemBase {
     SmartDashboard.putNumber("Right Distance", m_loggingData.RightPosition);
     SmartDashboard.putNumber("Distance", (m_loggingData.LeftPosition + m_loggingData.RightPosition) / 2);
     SmartDashboard.putNumber("Heading", Gyro.getYaw());
+    SmartDashboard.putNumber("Right Motor Level", getRightMotorLevel());
+    SmartDashboard.putNumber("Left Motor Level", getLeftMotorLevel());
   }
 
   public double getLeftEncoder() {

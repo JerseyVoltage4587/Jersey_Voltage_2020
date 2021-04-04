@@ -8,6 +8,8 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Robot;
 
 public class AutoMoveFoward extends CommandBase {
@@ -34,19 +36,13 @@ public class AutoMoveFoward extends CommandBase {
     Robot.getDriveBase().zeroDriveSensors();
     Robot.getDriveBase().setRightMotorLevel(0.5);
     Robot.getDriveBase().setLeftMotorLevel(0.5);
-    Robot.getDriveBase().setPartialInches(0, 0);
-    startLeftInches = Robot.getDriveBase().getLeftDistanceInches();
-    startRightInches = Robot.getDriveBase().getRightDistanceInches();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    Robot.getDriveBase().setRightMotorLevel(0.5);
-    Robot.getDriveBase().setLeftMotorLevel(0.5);
     leftInches = Robot.getDriveBase().getLeftDistanceInches();
     rightInches = Robot.getDriveBase().getRightDistanceInches();
-    Robot.getDriveBase().setPartialInches(leftInches, rightInches);
     if (leftInches < rightInches - 5) {
       rightMotorLevelChange -= 0.03;
       Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
@@ -56,6 +52,22 @@ public class AutoMoveFoward extends CommandBase {
       Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
     }
     averageInches = (leftInches + rightInches) / 2;
+    if (averageInches > (setDistance - 40)) {  
+      Robot.getDriveBase().setRightMotorLevel(0.4);
+      Robot.getDriveBase().setLeftMotorLevel(0.4);
+    }
+    else if (averageInches > (setDistance - 20)) {
+      Robot.getDriveBase().setRightMotorLevel(0.3);
+      Robot.getDriveBase().setLeftMotorLevel(0.3);
+    }
+    else if (averageInches > (setDistance - 10)) {
+      Robot.getDriveBase().setRightMotorLevel(0.2);
+      Robot.getDriveBase().setLeftMotorLevel(0.2);
+    }
+    else {  
+      Robot.getDriveBase().setRightMotorLevel(0.5);
+      Robot.getDriveBase().setLeftMotorLevel(0.5);
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -64,6 +76,7 @@ public class AutoMoveFoward extends CommandBase {
     System.out.println("Move: Done\n" + averageInches);
     Robot.getDriveBase().setLeftMotorLevel(0);
     Robot.getDriveBase().setRightMotorLevel(0);
+    CommandScheduler.getInstance().schedule(new WaitCommand(0.15));
   }
 
   // Returns true when the command should end.
