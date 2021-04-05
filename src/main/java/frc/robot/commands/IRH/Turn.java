@@ -8,8 +8,6 @@
 package frc.robot.commands.IRH;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.OI;
 import frc.robot.Robot;
 import frc.robot.util.Gyro;
@@ -30,6 +28,7 @@ public class Turn extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("Turn " + Gyro.getYaw() + " S T A R T");
     m_ifInitialized = false;
     Robot.getDriveBase().setSafetyEnabled(false);
   }
@@ -43,7 +42,7 @@ public class Turn extends CommandBase {
         return;
       }
       m_ifInitialized = true;
-      m_finalAngle = heading + m_angle;
+      m_finalAngle = m_angle;
     }
     double delta = m_finalAngle - heading;
     if (delta < -180) {
@@ -78,10 +77,9 @@ public class Turn extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Turn to Angle: Done");
+    System.out.println("Turn " + Gyro.getYaw() + " D O N E");
     Robot.getDriveBase().setLeftMotorLevel(0);
     Robot.getDriveBase().setRightMotorLevel(0);
-    CommandScheduler.getInstance().schedule(new WaitCommand(0.15));
   }
 
   // Returns true when the command should end.
@@ -101,7 +99,6 @@ public class Turn extends CommandBase {
 
     double heading = Gyro.getYaw();
     double delta = Math.abs(heading - m_finalAngle);
-    System.out.println("Turn Delta " + delta + "\nTurn Heading " + heading+ "\nFinal Angle " + m_finalAngle);
     
     if (delta > 180) {
       delta = 360 - delta;

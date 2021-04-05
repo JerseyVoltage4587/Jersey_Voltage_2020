@@ -129,14 +129,16 @@ public class DriveBase extends SubsystemBase {
     m_drive.setSafetyEnabled(x);
   }
 
-  public void zeroDriveSensors() {
+  public void zeroDriveSensors(boolean gyro) {
     if (m_isActive == false) {
       return;
     }
-    m_lefttalon1.setSelectedSensorPosition(0, 0, 10);
-    m_righttalon2.setSelectedSensorPosition(0, 0, 10);
-    Gyro.getInstance();
-    Gyro.reset();
+    m_lefttalon1.setSelectedSensorPosition(0, 0, 40);
+    m_righttalon2.setSelectedSensorPosition(0, 0, 40);
+    if (gyro) {
+      Gyro.getInstance();
+      Gyro.reset();
+    }
   }
 
   public void arcadeDrive(double forward, double turn) {
@@ -182,10 +184,7 @@ public class DriveBase extends SubsystemBase {
     m_logger.queueData(m_loggingData);
     m_lastLogTime = now;
 
-    SmartDashboard.putNumber("Left Distance", m_loggingData.LeftPosition);
-    SmartDashboard.putNumber("Right Distance", m_loggingData.RightPosition);
     SmartDashboard.putNumber("Distance", (m_loggingData.LeftPosition + m_loggingData.RightPosition) / 2);
-    SmartDashboard.putNumber("Heading", Gyro.getYaw());
     SmartDashboard.putNumber("Right Motor Level", getRightMotorLevel());
     SmartDashboard.putNumber("Left Motor Level", getLeftMotorLevel());
   }
