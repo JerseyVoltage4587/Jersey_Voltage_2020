@@ -83,7 +83,7 @@ public class OI extends CommandBase {
 
     buttonA1.whenPressed(new PositionRobotToShootForward());
     //buttonB1.whenPressed();
-    //buttonX1.whenPressed();
+    //xbuttonX1.whenPressed();
     //buttonY1.whenPressed();
     //leftBumper1.whenPressed();
     //rightBumper1.whenPressed();

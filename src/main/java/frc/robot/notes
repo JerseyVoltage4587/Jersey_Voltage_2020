@@ -1,14 +1,14 @@
 Galatic Search-
     Intake arm lowers slowly, must test at almost exact distance.
     
-Mechanical-
-    Kicker wheel axel and upper storage axel are unsecured, need allen wrench.
-    Leftover 1" hex spacer and a washer. (Note: washer might not be from robot)
+AutoNav-
+    The second AutoMoveFoward() in AutoNav_BarrelRacing(), AutoMoveFoward(34), does not work, but all the other AutoMoveFoward()'s do.
+    Tunr(double angle) works much better with field based heading.
 
 Changes-
     Changed the way the robot detects if it has intaken a ball.
     Removed raiseIntakeArm() from all Try{Path}'s.
-    Changed AutoMoveFoward() to AutoMoveFoward(int inches) to make the command more useful.
+    Changed AutoMoveFoward() to AutoMoveFoward(int inches) to make the command accept variables.
     Fixed AutoMoveFoward(int inches) to actually use the variable it was given.
-    Changed Turn() to Turn(int degrees) to make the command more useful.
-    Added ints partialLeftInches and partialRightInches with public get() methods to DriveBase subsystem to make the isFinished() method of AutoMoveFoward(int inches) to work multiple times.
+    Changed Turn() to Turn(double angle) to make the command accept variables.
+    Changed Turn(double angle) to accept field based heading instead of robot based heading.

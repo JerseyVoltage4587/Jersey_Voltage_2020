@@ -70,7 +70,7 @@ public class Shooter extends SubsystemBase {
     m_pidController.setOutputRange(kMinOutput, kMaxOutput);
 
     //Display PID coefficients on SmartDashboard
-    /*
+    
     SmartDashboard.putNumber("P Gain", kP);
     SmartDashboard.putNumber("I Gain", kI);
     SmartDashboard.putNumber("D Gain", kD);
@@ -78,7 +78,7 @@ public class Shooter extends SubsystemBase {
     SmartDashboard.putNumber("Feed Forward", kFF);
     SmartDashboard.putNumber("Max Output", kMaxOutput);
     SmartDashboard.putNumber("Min Output", kMinOutput);
-    */
+
     m_logger = new AsyncStructuredLogger<ShooterLoggingData>("Shooter", /*forceUnique=*/ false, ShooterLoggingData.class);
   }
 
