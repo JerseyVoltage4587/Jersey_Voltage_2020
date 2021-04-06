@@ -184,7 +184,6 @@ public class DriveBase extends SubsystemBase {
     m_logger.queueData(m_loggingData);
     m_lastLogTime = now;
 
-    SmartDashboard.putNumber("Distance", (m_loggingData.LeftPosition + m_loggingData.RightPosition) / 2);
     SmartDashboard.putNumber("Right Motor Level", getRightMotorLevel());
     SmartDashboard.putNumber("Left Motor Level", getLeftMotorLevel());
   }

@@ -113,7 +113,6 @@ public class OI extends CommandBase {
     leftTrigger2.whenPressed(new PassBall());
     leftTrigger2.whenReleased(new EndPassBall());
     //rightTrigger2.whenPressed(new ShootForward());
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Get the value of the "drive" stick.

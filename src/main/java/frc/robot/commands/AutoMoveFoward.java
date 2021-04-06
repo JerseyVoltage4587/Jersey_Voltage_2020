@@ -33,6 +33,7 @@ public class AutoMoveFoward extends CommandBase {
     System.out.println("Move " + setDistance + " S T A R T");
     Robot.getDriveBase().setSafetyEnabled(false);
     Robot.getDriveBase().zeroDriveSensors(false);
+    System.out.println("Move " + ((Robot.getDriveBase().getLeftDistanceInches() + Robot.getDriveBase().getRightDistanceInches()) / 2) + " Z E R O");
     Robot.getDriveBase().setRightMotorLevel(0.45);
     Robot.getDriveBase().setLeftMotorLevel(0.5);
   }
