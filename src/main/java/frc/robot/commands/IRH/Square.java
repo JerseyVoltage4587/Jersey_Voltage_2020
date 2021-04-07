@@ -16,6 +16,6 @@ public class Square extends SequentialCommandGroup {
   public Square(int length, int direction) {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
-    addCommands(new SequentialCommandGroup(new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction)));
+    //addCommands(new SequentialCommandGroup(new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction), new WaitCommand(0.25), new AutoMoveFoward(length), new WaitCommand(0.25), new Turn(direction)));
   }
 }

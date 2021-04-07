@@ -16,6 +16,9 @@ public class Turn extends CommandBase {
   private double m_angle = 0;
   private double m_finalAngle = 0;
   private boolean m_ifInitialized = false;
+  private double m_lastHeading = 0;
+  private int m_number_of_stalled = 0;
+  private int m_finished_counter = 0;
   /**
    * Creates a new TurnToAngle.
    */
@@ -31,12 +34,21 @@ public class Turn extends CommandBase {
     System.out.println("Turn " + Gyro.getYaw() + " S T A R T");
     m_ifInitialized = false;
     Robot.getDriveBase().setSafetyEnabled(false);
+    m_number_of_stalled = 0;
+    m_finished_counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     double heading = Gyro.getYaw();
+    if ((heading - m_lastHeading) < 1) {
+      m_number_of_stalled += 1;
+    }
+    else {
+      m_number_of_stalled = 0;
+    }
+
     if (m_ifInitialized == false){
       if (Gyro.IMU_IsCalibrating()) {
         return;
@@ -54,24 +66,71 @@ public class Turn extends CommandBase {
     }
 
     if (delta > 10) {
-      Robot.getDriveBase().setLeftMotorLevel(.325);
-      Robot.getDriveBase().setRightMotorLevel(-.325);
+      Robot.getDriveBase().setLeftMotorLevel(.35);
+      Robot.getDriveBase().setRightMotorLevel(-.35);
     }
 
     else if (delta < -10) {
-      Robot.getDriveBase().setLeftMotorLevel(-.325);
-      Robot.getDriveBase().setRightMotorLevel(.325);
+      Robot.getDriveBase().setLeftMotorLevel(-.35);
+      Robot.getDriveBase().setRightMotorLevel(.35);
     }
 
     else if (delta > 0) {
-      Robot.getDriveBase().setLeftMotorLevel(.275);
-      Robot.getDriveBase().setRightMotorLevel(-.275);
+      Robot.getDriveBase().setLeftMotorLevel(.3);
+      Robot.getDriveBase().setRightMotorLevel(-.3);
     }
 
     else if (delta < 0) {
-      Robot.getDriveBase().setLeftMotorLevel(-.275);
-      Robot.getDriveBase().setRightMotorLevel(.275);
+      Robot.getDriveBase().setLeftMotorLevel(-.3);
+      Robot.getDriveBase().setRightMotorLevel(.3);
     }
+
+    
+    if (m_number_of_stalled > 5) {
+      if (delta > 10) {
+        Robot.getDriveBase().setLeftMotorLevel(.41);
+        Robot.getDriveBase().setRightMotorLevel(-.41);
+      }
+  
+      else if (delta < -10) {
+        Robot.getDriveBase().setLeftMotorLevel(-.41);
+        Robot.getDriveBase().setRightMotorLevel(.41);
+      }
+
+      else if (delta > 0) {
+        Robot.getDriveBase().setLeftMotorLevel(.4);
+        Robot.getDriveBase().setRightMotorLevel(-.4);
+      }
+  
+      else if (delta < 0) {
+        Robot.getDriveBase().setLeftMotorLevel(-.4);
+        Robot.getDriveBase().setRightMotorLevel(.4);
+      }
+    }
+
+    if (m_number_of_stalled > 10) {
+      if (delta > 10) {
+        Robot.getDriveBase().setLeftMotorLevel(.475);
+        Robot.getDriveBase().setRightMotorLevel(-.475);
+      }
+  
+      else if (delta < -10) {
+        Robot.getDriveBase().setLeftMotorLevel(-.475);
+        Robot.getDriveBase().setRightMotorLevel(.475);
+      }
+
+      else if (delta > 0) {
+        Robot.getDriveBase().setLeftMotorLevel(.45);
+        Robot.getDriveBase().setRightMotorLevel(-.45);
+      }
+  
+      else if (delta < 0) {
+        Robot.getDriveBase().setLeftMotorLevel(-.45);
+        Robot.getDriveBase().setRightMotorLevel(.45);
+      }
+    }
+
+    m_lastHeading = heading;
   }
 
   // Called once the command ends or is interrupted.
@@ -105,7 +164,10 @@ public class Turn extends CommandBase {
     }
 
     if (delta <= 2){
-      return true;
+      m_finished_counter += 1;
+      if (m_finished_counter > 3) {
+        return true;
+      }
     }
     return false;
   }

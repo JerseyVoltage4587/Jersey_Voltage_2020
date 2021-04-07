@@ -159,7 +159,7 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().schedule(new AutoNav_BarrelRacing());
         break;
       case 3:
-        CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new AutoMoveFoward(33), new WaitCommand(0.15), new Turn(-90), new WaitCommand(0.25), new AutoMoveFoward(40), new WaitCommand(0.25), new Turn(85), new WaitCommand(0.25), new AutoMoveFoward(153), new WaitCommand(0.25), new Turn(90), new WaitCommand(0.25), new Square(40 ,-90), new WaitCommand(0.25)));
+        CommandScheduler.getInstance().schedule(new AutoNav_Slalom());
         break;
       case 4:
         CommandScheduler.getInstance().schedule(new AutoNav_Bounce());

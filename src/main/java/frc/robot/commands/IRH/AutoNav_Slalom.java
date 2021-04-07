@@ -16,6 +16,6 @@ public class AutoNav_Slalom extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     clearGroupedCommands();
-    addCommands(new SequentialCommandGroup(new AutoMoveFoward(43), new Turn(-90), new AutoMoveFoward(43), new Turn(90), new AutoMoveFoward(163), new Turn(90), new Square(43, -90), new AutoMoveFoward(43), new Turn(90), new AutoMoveFoward(163), new Turn(34), new AutoMoveFoward(108)));
+    //addCommands(new SequentialCommandGroup(new AutoMoveFoward(43), new Turn(-90), new AutoMoveFoward(43), new Turn(90), new AutoMoveFoward(163), new Turn(90), new Square(43, -90), new AutoMoveFoward(43), new Turn(90), new AutoMoveFoward(163), new Turn(34), new AutoMoveFoward(108)));
   }
 }

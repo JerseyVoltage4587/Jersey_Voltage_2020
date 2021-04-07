@@ -22,7 +22,7 @@ public class TryBBlue extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Try B Blue");
-    CommandScheduler.getInstance().schedule(new LowerIntakeArm(), new AutoMoveFoward(30));
+    //CommandScheduler.getInstance().schedule(new LowerIntakeArm(), new AutoMoveFoward(30));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

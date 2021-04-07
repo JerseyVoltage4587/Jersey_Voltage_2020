@@ -9,20 +9,24 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.util.*;
 
 public class AutoMoveFoward extends CommandBase {
   int setDistance = 0;
-  double rightMotorLevelChange = 0.5;
+  double rightMotorLevelChange = 0.36;
   double leftInches = 0;
   double startLeftInches = 0;
   double startRightInches = 0;
   double rightInches = 0;
   double averageInches = 0;
+  double m_heading = 0;
+  boolean first = true;
   /**
    * Creates a new AutoMoveFoward.
    */
-  public AutoMoveFoward(int distance) {
+  public AutoMoveFoward(int distance, double heading) {
     setDistance = distance;
+    m_heading = heading;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getDriveBase());
   }
@@ -34,22 +38,42 @@ public class AutoMoveFoward extends CommandBase {
     Robot.getDriveBase().setSafetyEnabled(false);
     Robot.getDriveBase().zeroDriveSensors(false);
     System.out.println("Move " + ((Robot.getDriveBase().getLeftDistanceInches() + Robot.getDriveBase().getRightDistanceInches()) / 2) + " Z E R O");
-    Robot.getDriveBase().setRightMotorLevel(0.45);
-    Robot.getDriveBase().setLeftMotorLevel(0.5);
+    Robot.getDriveBase().setRightMotorLevel(0.36);
+    Robot.getDriveBase().setLeftMotorLevel(0.4);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    if (first) {
+      return;
+    }
     leftInches = Robot.getDriveBase().getLeftDistanceInches();
     rightInches = Robot.getDriveBase().getRightDistanceInches();
     averageInches = (leftInches + rightInches) / 2;
-    if (leftInches < rightInches - 0.5) {
-      rightMotorLevelChange -= 0.01;
-      Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
+    double delta = Gyro.getYaw() - m_heading;
+
+    if (delta > 180) {
+      delta -= 360;
     }
-    if (leftInches > rightInches + 0.5) {
-      rightMotorLevelChange += 0.01;
+
+    if (delta < -180) {
+      delta += 360;
+    }
+
+    if (Math.abs(delta) > 2) {
+      if (delta < 0) {
+        rightMotorLevelChange -= 0.01;
+        Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
+      }
+      else if (delta > 0) {
+        rightMotorLevelChange += 0.01;
+        Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
+      }
+    }
+    
+    else {
+      rightMotorLevelChange = 0.36;
       Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
     }
   }
@@ -65,6 +89,10 @@ public class AutoMoveFoward extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if (first) {
+      first = false;
+      return false;
+    }
     if (Robot.getOI().getDrive() > 0.7) {
       return true;
     }
