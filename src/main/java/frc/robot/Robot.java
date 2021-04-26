@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.Aim;
+import frc.robot.commands.AutoMoveBackward;
 import frc.robot.commands.AutoMoveFoward;
 import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.commands.StartKicker;
@@ -25,8 +26,6 @@ import frc.robot.commands.IRH.AutoNav_BarrelRacing;
 import frc.robot.commands.IRH.AutoNav_Bounce;
 import frc.robot.commands.IRH.AutoNav_Slalom;
 import frc.robot.commands.IRH.Path;
-import frc.robot.commands.IRH.Square;
-import frc.robot.commands.IRH.Turn;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Intake;
@@ -150,7 +149,9 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     getDriveBase().zeroDriveSensors(true);
-    int i = 2;
+
+    //IRH
+    /*int i = 4;
     switch(i) {
       case 1:
         CommandScheduler.getInstance().schedule(new Path());
@@ -164,11 +165,12 @@ public class Robot extends TimedRobot {
       case 4:
         CommandScheduler.getInstance().schedule(new AutoNav_Bounce());
         break;
-    }
+    }*/
     
-    //getStorage().setShooterRunning(false);
-    //getStorage().setShooterReady(false);
-    //CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(66),new WaitCommand(1), new StartKicker()));
+    //Regular Competition
+    getStorage().setShooterRunning(false);
+    getStorage().setShooterReady(false);
+    CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(66, 0),new WaitCommand(1), new StartKicker()));
   }
 
   /**
