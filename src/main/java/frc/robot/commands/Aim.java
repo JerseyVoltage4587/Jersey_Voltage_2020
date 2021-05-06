@@ -53,19 +53,5 @@ public class Aim extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-<<<<<<< HEAD
-
-=======
->>>>>>> a373c27e30a772308d42cd3bf99c0a4de3ebc847
-  }
-
-  // Returns true when the command should end.
-  @Override
-  public boolean isFinished() {
-    if (tv == 0) {
-      return true;
-    }
-
-    return true;
   }
 }
