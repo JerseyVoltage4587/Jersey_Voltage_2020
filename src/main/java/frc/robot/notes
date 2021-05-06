@@ -1,0 +1,14 @@
+Galatic Search-
+    Intake arm lowers slowly, must test at almost exact distance.
+    
+AutoNav-
+    The second AutoMoveFoward() in AutoNav_BarrelRacing(), AutoMoveFoward(34), does not work, but all the other AutoMoveFoward()'s do.
+    Tunr(double angle) works much better with field based heading.
+
+Changes-
+    Changed the way the robot detects if it has intaken a ball.
+    Removed raiseIntakeArm() from all Try{Path}'s.
+    Changed AutoMoveFoward() to AutoMoveFoward(int inches) to make the command accept variables.
+    Fixed AutoMoveFoward(int inches) to actually use the variable it was given.
+    Changed Turn() to Turn(double angle) to make the command accept variables.
+    Changed Turn(double angle) to accept field based heading instead of robot based heading.

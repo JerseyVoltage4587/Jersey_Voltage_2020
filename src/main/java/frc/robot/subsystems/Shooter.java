@@ -70,6 +70,7 @@ public class Shooter extends SubsystemBase {
     m_pidController.setOutputRange(kMinOutput, kMaxOutput);
 
     //Display PID coefficients on SmartDashboard
+    
     SmartDashboard.putNumber("P Gain", kP);
     SmartDashboard.putNumber("I Gain", kI);
     SmartDashboard.putNumber("D Gain", kD);
@@ -178,7 +179,6 @@ public class Shooter extends SubsystemBase {
     }
 
     m_pidController.setReference(setPoint, ControlType.kVelocity);
-    
     SmartDashboard.putNumber("SetPoint", setPoint);
     SmartDashboard.putNumber("ProcessVariable", m_rightShooterEncoder.getVelocity());
 

@@ -30,9 +30,12 @@ public class DriveBase extends SubsystemBase {
   private WPI_VictorSPX m_rightvictor21;
   private double LeftMotorLevel;
   private double RightMotorLevel;
+  private double partialLeftInches = 0;
+  private double partialRightInches = 0;
   private DriveBaseLoggingData m_loggingData;
   //private AsyncStructuredLogger<DriveBaseLoggingData> m_logger;
   private long m_lastLogTime = 0;
+  private String layout = "";
 
 
   /**
@@ -88,12 +91,34 @@ public class DriveBase extends SubsystemBase {
     m_lefttalon1.set(LeftMotorLevel);
   }
 
+  public double getLeftMotorLevel() {
+    if (m_isActive == false) {
+      return -1;
+    }
+    return LeftMotorLevel;
+  }
+
   public void setRightMotorLevel(double x) {
     if (m_isActive == false) {
       return;
     }
     RightMotorLevel = x;
     m_righttalon2.set(RightMotorLevel);
+  }
+
+  public double getRightMotorLevel() {
+    if (m_isActive == false) {
+      return -1;
+    }
+    return RightMotorLevel;
+  }
+
+  public void setLayout(String l) {
+    layout = l;
+  }
+
+  public String getLayout() {
+    return layout;
   }
 
   public void setSafetyEnabled(boolean x){
@@ -103,14 +128,16 @@ public class DriveBase extends SubsystemBase {
     m_drive.setSafetyEnabled(x);
   }
 
-  public void zeroDriveSensors() {
+  public void zeroDriveSensors(boolean gyro) {
     if (m_isActive == false) {
       return;
     }
-    m_lefttalon1.setSelectedSensorPosition(0, 0, 10);
-    m_righttalon2.setSelectedSensorPosition(0, 0, 10);
-    Gyro.getInstance();
-    Gyro.reset();
+    m_lefttalon1.setSelectedSensorPosition(0, 0, 40);
+    m_righttalon2.setSelectedSensorPosition(0, 0, 40);
+    if (gyro) {
+      Gyro.getInstance();
+      Gyro.reset();
+    }
   }
 
   public void arcadeDrive(double forward, double turn) {
@@ -157,11 +184,11 @@ public class DriveBase extends SubsystemBase {
     //m_logger.queueData(m_loggingData);
     m_lastLogTime = now;
 
-    SmartDashboard.putNumber("Left Distance", m_loggingData.LeftPosition);
-    SmartDashboard.putNumber("Right Distance", m_loggingData.RightPosition);
+    SmartDashboard.putNumber("Right Motor Level", getRightMotorLevel());
+    SmartDashboard.putNumber("Left Motor Level", getLeftMotorLevel());
   }
 
-  public int getLeftEncoder() {
+  public double getLeftEncoder() {
     if (m_isActive == false) {
       return 0;
     }
@@ -172,7 +199,7 @@ public class DriveBase extends SubsystemBase {
     return getLeftEncoder() * Constants.DriveBaseWheelDiameter * Math.PI / Constants.DriveBaseEncoderTics;
   }
 
-  public int getRightEncoder() {
+  public double getRightEncoder() {
     if (m_isActive == false) {
       return 0;
     }
@@ -187,12 +214,25 @@ public class DriveBase extends SubsystemBase {
     return (finalValue - initialValue) / (finalTime - initialTime);
   }
 
+  public void setPartialInches(double L, double R) {
+    partialLeftInches = L;
+    partialRightInches = R;
+  }
+
+  public double getPartialLeftInches() {
+    return partialLeftInches;
+  }
+
+  public double getPartialRightInches() {
+    return partialRightInches;
+  }
+
   public static class DriveBaseLoggingData {
     public double LeftMotorLevel;
     public double LeftMotor1_SupplyCurrent;
     public double LeftMotor1_StatorCurrent;
     public double LeftMotor2_SupplyCurrent;
-    public int LeftEncoderReading;
+    public double LeftEncoderReading;
     public double LeftPosition;
     public double LeftVelocity;
     public double LeftAcceleration;
@@ -200,7 +240,7 @@ public class DriveBase extends SubsystemBase {
     public double RightMotor1_SupplyCurrent;
     public double RightMotor1_StatorCurrent;
     public double RightMotor2_SupplyCurrent;
-    public int RightEncoderReading;
+    public double RightEncoderReading;
     public double RightPosition;
     public double RightVelocity;
     public double RightAcceleration;

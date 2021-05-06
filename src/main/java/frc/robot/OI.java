@@ -83,7 +83,7 @@ public class OI extends CommandBase {
 
     buttonA1.whenPressed(new PositionRobotToShootForward());
     //buttonB1.whenPressed();
-    //buttonX1.whenPressed();
+    //xbuttonX1.whenPressed();
     //buttonY1.whenPressed();
     //leftBumper1.whenPressed();
     //rightBumper1.whenPressed();
@@ -113,7 +113,6 @@ public class OI extends CommandBase {
     leftTrigger2.whenPressed(new PassBall());
     leftTrigger2.whenReleased(new EndPassBall());
     //rightTrigger2.whenPressed(new ShootForward());
-    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Get the value of the "drive" stick.

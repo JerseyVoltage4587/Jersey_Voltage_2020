@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import frc.robot.Robot;
@@ -140,6 +141,7 @@ public class Storage extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
+    SmartDashboard.putBoolean("Shooter Ready", m_isShooterReady);
     // This method will be called once per scheduler run
     m_loggingData.BeltMotorLevel = m_storageBeltMotor.get();
     m_loggingData.BeltMotorCurrent = Robot.getPDP().getCurrent(Constants.StorageBeltMotorPDP_Port);

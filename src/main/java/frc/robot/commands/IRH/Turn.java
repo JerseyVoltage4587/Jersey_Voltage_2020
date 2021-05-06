@@ -5,32 +5,32 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-package frc.robot.commands;
+package frc.robot.commands.IRH;
 
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.OI;
-import frc.robot.subsystems.DriveBase;
+import frc.robot.Robot;
 import frc.robot.util.Gyro;
 
-public class TurnToAngle extends CommandBase {
-  private double m_angle;
-  private double m_finalAngle;
+public class Turn extends CommandBase {
+  private double m_angle = 0;
+  private double m_finalAngle = 0;
   private boolean m_ifInitialized = false;
   /**
    * Creates a new TurnToAngle.
    */
-  public TurnToAngle(double angle) {
+  public Turn(double angle) {
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(Robot.getDriveBase());
     m_angle = angle;
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    System.out.println("Turn " + Gyro.getYaw() + " S T A R T");
     m_ifInitialized = false;
-    DriveBase.getInstance().setSafetyEnabled(false);
-    SmartDashboard.putString("TurnToAngle", "initialize");
+    Robot.getDriveBase().setSafetyEnabled(false);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -42,45 +42,44 @@ public class TurnToAngle extends CommandBase {
         return;
       }
       m_ifInitialized = true;
-      m_finalAngle = heading + m_angle;
+      m_finalAngle = m_angle;
     }
     double delta = m_finalAngle - heading;
-    if (delta < -180){
+    if (delta < -180) {
       delta += 360;
     }
 
-    if (delta > 180){
+    if (delta > 180) {
       delta -= 360;
     }
 
     if (delta > 10) {
-      DriveBase.getInstance().setLeftMotorLevel(.25);
-      DriveBase.getInstance().setRightMotorLevel(-.25);
+      Robot.getDriveBase().setLeftMotorLevel(.325);
+      Robot.getDriveBase().setRightMotorLevel(-.325);
     }
 
     else if (delta < -10) {
-      DriveBase.getInstance().setLeftMotorLevel(-.25);
-      DriveBase.getInstance().setRightMotorLevel(.25);
+      Robot.getDriveBase().setLeftMotorLevel(-.325);
+      Robot.getDriveBase().setRightMotorLevel(.325);
     }
 
     else if (delta > 0) {
-      DriveBase.getInstance().setLeftMotorLevel(.175);
-      DriveBase.getInstance().setRightMotorLevel(-.175);
+      Robot.getDriveBase().setLeftMotorLevel(.275);
+      Robot.getDriveBase().setRightMotorLevel(-.275);
     }
 
     else if (delta < 0) {
-      DriveBase.getInstance().setLeftMotorLevel(-.175);
-      DriveBase.getInstance().setRightMotorLevel(.175);
-    } 
+      Robot.getDriveBase().setLeftMotorLevel(-.275);
+      Robot.getDriveBase().setRightMotorLevel(.275);
+    }
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    DriveBase.getInstance().setLeftMotorLevel(0);
-    DriveBase.getInstance().setRightMotorLevel(0);
-    DriveBase.getInstance().setSafetyEnabled(true);
-    SmartDashboard.putString("TurnToAngle", "end");
+    System.out.println("Turn " + Gyro.getYaw() + " D O N E");
+    Robot.getDriveBase().setLeftMotorLevel(0);
+    Robot.getDriveBase().setRightMotorLevel(0);
   }
 
   // Returns true when the command should end.
@@ -101,7 +100,7 @@ public class TurnToAngle extends CommandBase {
     double heading = Gyro.getYaw();
     double delta = Math.abs(heading - m_finalAngle);
     
-    if (delta > 180){
+    if (delta > 180) {
       delta = 360 - delta;
     }
 
