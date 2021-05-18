@@ -24,7 +24,7 @@ public class TryBRed extends CommandBase {
   @Override
   public void initialize() {
     System.out.println("Try B Red");
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new LowerIntakeArm(), new WaitCommand(2), new AutoMoveFoward(75)));
+    //CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new LowerIntakeArm(), new WaitCommand(2), new AutoMoveFoward(75)));
   }
 
   // Called every time the scheduler runs while the command is scheduled.

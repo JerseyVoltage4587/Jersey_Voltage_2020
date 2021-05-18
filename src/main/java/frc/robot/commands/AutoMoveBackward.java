@@ -11,9 +11,9 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.util.*;
 
-public class AutoMoveFoward extends CommandBase {
+public class AutoMoveBackward extends CommandBase {
   int setDistance = 0;
-  double rightMotorLevelChange = 0.36;
+  double rightMotorLevelChange = -0.36;
   double leftInches = 0;
   double startLeftInches = 0;
   double startRightInches = 0;
@@ -22,9 +22,9 @@ public class AutoMoveFoward extends CommandBase {
   double m_heading = 0;
   boolean first = true;
   /**
-   * Creates a new AutoMoveFoward.
+   * Creates a new AutoMoveBackward.
    */
-  public AutoMoveFoward(int distance, double heading) {
+  public AutoMoveBackward(int distance, double heading) {
     setDistance = distance;
     m_heading = heading;
     // Use addRequirements() here to declare subsystem dependencies.
@@ -38,8 +38,8 @@ public class AutoMoveFoward extends CommandBase {
     Robot.getDriveBase().setSafetyEnabled(false);
     Robot.getDriveBase().zeroDriveSensors(false);
     System.out.println("Move " + ((Robot.getDriveBase().getLeftDistanceInches() + Robot.getDriveBase().getRightDistanceInches()) / 2) + " Z E R O");
-    Robot.getDriveBase().setRightMotorLevel(0.36);
-    Robot.getDriveBase().setLeftMotorLevel(0.4);
+    Robot.getDriveBase().setRightMotorLevel(-0.36);
+    Robot.getDriveBase().setLeftMotorLevel(-0.4);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -73,7 +73,7 @@ public class AutoMoveFoward extends CommandBase {
     }
     
     else {
-      rightMotorLevelChange = 0.36;
+      rightMotorLevelChange = -0.36;
       Robot.getDriveBase().setRightMotorLevel(rightMotorLevelChange);
     }
   }
@@ -97,7 +97,7 @@ public class AutoMoveFoward extends CommandBase {
       return true;
     }
 
-    if (averageInches >= setDistance) {
+    if (averageInches <= setDistance) {
       return true;
     }
 

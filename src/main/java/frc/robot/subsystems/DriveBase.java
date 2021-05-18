@@ -214,11 +214,6 @@ public class DriveBase extends SubsystemBase {
     return (finalValue - initialValue) / (finalTime - initialTime);
   }
 
-  public void setPartialInches(double L, double R) {
-    partialLeftInches = L;
-    partialRightInches = R;
-  }
-
   public double getPartialLeftInches() {
     return partialLeftInches;
   }

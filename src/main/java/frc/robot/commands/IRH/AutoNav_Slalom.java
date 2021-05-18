@@ -5,6 +5,7 @@
 package frc.robot.commands.IRH;
 
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.AutoMoveFoward;
 
 // NOTE:  Consider using this command inline, rather than writing a subclass.  For more
@@ -16,6 +17,6 @@ public class AutoNav_Slalom extends SequentialCommandGroup {
     // Add your commands in the addCommands() call, e.g.
     // addCommands(new FooCommand(), new BarCommand());
     clearGroupedCommands();
-    addCommands(new SequentialCommandGroup(new AutoMoveFoward(43), new Turn(-90), new AutoMoveFoward(43), new Turn(90), new AutoMoveFoward(163), new Turn(90), new Square(43, -90), new AutoMoveFoward(43), new Turn(90), new AutoMoveFoward(163), new Turn(34), new AutoMoveFoward(108)));
+    addCommands(new SequentialCommandGroup(new AutoMoveFoward(35, 0), new WaitCommand(0.15), new Turn(-90), new WaitCommand(0.15), new AutoMoveFoward(35, -90), new WaitCommand(0.15), new Turn(0), new WaitCommand(0.15), new AutoMoveFoward(152, 0), new WaitCommand(0.15), new Turn(90), new WaitCommand(0.15), new AutoMoveFoward(35, 90), new WaitCommand(0.15), new Turn(0), new WaitCommand(0.15), new AutoMoveFoward(38, 0), new WaitCommand(0.15), new Turn(-90), new WaitCommand(0.15), new AutoMoveFoward(35, -90), new WaitCommand(0.15), new Turn(180), new WaitCommand(0.15), new AutoMoveFoward(35, 180), new WaitCommand(0.15), new Turn(90), new WaitCommand(0.15), new AutoMoveFoward(35, 90), new WaitCommand(0.15), new Turn(180), new WaitCommand(0.15), new AutoMoveFoward(152, 180), new WaitCommand(0.15), new Turn(-90), new WaitCommand(0.15), new AutoMoveFoward(35, -90), new WaitCommand(0.15), new Turn(180), new WaitCommand(0.15), new AutoMoveFoward(35, 180), new WaitCommand(0.15)));
   }
 }
