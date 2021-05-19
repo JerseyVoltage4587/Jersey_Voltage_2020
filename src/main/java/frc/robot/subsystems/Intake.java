@@ -155,7 +155,7 @@ public class Intake extends SubsystemBase {
       level = -0.4;
     }
 
-    //m_intakeArmMotor.set(level);
+    m_intakeArmMotor.set(level);
     
     if (m_setPoint > 0) {
       m_intakeMotor.set(Constants.IntakeMotorLevel);
