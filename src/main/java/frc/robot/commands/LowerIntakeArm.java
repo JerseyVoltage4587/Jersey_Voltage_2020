@@ -23,8 +23,8 @@ public class LowerIntakeArm extends CommandBase {
   @Override
   public void initialize() {
     Robot.getIntake().setSetPoint(85);
-    //Bumpers: 70
-    //No Bumpers: 77
+    //Bumpers: 85
+    //No Bumpers: 95
   }
 
   // Called every time the scheduler runs while the command is scheduled.
