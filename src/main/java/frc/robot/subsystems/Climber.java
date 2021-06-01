@@ -99,12 +99,12 @@ public class Climber extends SubsystemBase {
     double motorLevel;
 
     if (position <= setPoint + Constants.PullModeSlowDownOffset) {
-      double error = (m_loggingData.LeftPosition - setPoint);
+      double error = (setPoint - position);
       motorLevel = Constants.PullModeSlowBaseLevel + error * Constants.PullModeSlowKp;
     }
 
     else {
-      double error = (Constants.PullModeFastVelocity - m_loggingData.LeftVelocity);
+      double error = (Constants.PullModeFastVelocity - velocity);
       motorLevel = Constants.PullModeFastBaseLevel + error * Constants.PullModeFastKp;
     }
 
@@ -125,7 +125,7 @@ public class Climber extends SubsystemBase {
 
     lastLeftPosition = m_loggingData.LeftPosition;
     lastRightPosition = m_loggingData.RightPosition;
-    seconds = (m_lastLogTime - now) / 1000000000.0;
+    seconds = (now - m_lastLogTime) / 1000000000.0;
 
     m_loggingData.LeftClimberMotorLevel = m_leftClimberMotor.get();
     m_loggingData.RightClimberMotorLevel = m_rightClimberMotor.get();
@@ -134,10 +134,10 @@ public class Climber extends SubsystemBase {
     m_loggingData.ClimberState = RobotClimberState;
     m_loggingData.LeftEncoderReading = (int) m_leftClimberMotor.getSelectedSensorPosition(0);
     m_loggingData.LeftPosition = m_loggingData.LeftEncoderReading / 4096.0;
-    m_loggingData.LeftVelocity = Math.abs(m_loggingData.LeftPosition - lastLeftPosition) / seconds;
+    m_loggingData.LeftVelocity = (m_loggingData.LeftPosition - lastLeftPosition) / seconds;
     m_loggingData.RightEncoderReading = (int) m_rightClimberMotor.getSelectedSensorPosition(0);
     m_loggingData.RightPosition = m_loggingData.RightEncoderReading / 4096.0;
-    m_loggingData.RightVelocity = Math.abs(m_loggingData.RightPosition - lastRightPosition) / seconds;
+    m_loggingData.RightVelocity = (m_loggingData.RightPosition - lastRightPosition) / seconds;
     m_logger.queueData(m_loggingData);
 
     if (RobotClimberState.equals("INITIAL")) {
@@ -146,16 +146,24 @@ public class Climber extends SubsystemBase {
     }
 
     else if (RobotClimberState.equals("PUSH")) {
-      m_leftClimberMotor.set(calculatePushMotorLevel(m_loggingData.LeftPosition, m_loggingData.LeftVelocity));
-      m_rightClimberMotor.set(calculatePushMotorLevel(m_loggingData.RightPosition, m_loggingData.RightVelocity));
+      m_leftClimberMotor.set(0.2);
+      m_rightClimberMotor.set(0.2);
+      //m_leftClimberMotor.set(calculatePushMotorLevel(m_loggingData.LeftPosition, m_loggingData.LeftVelocity));
+      //m_rightClimberMotor.set(calculatePushMotorLevel(m_loggingData.RightPosition, m_loggingData.RightVelocity));
     }
 
     else if (RobotClimberState.equals("PULL")) {
-      m_leftClimberMotor.set(calculatePullMotorLevel(m_loggingData.LeftPosition, m_loggingData.LeftVelocity));
-      m_rightClimberMotor.set(calculatePullMotorLevel(m_loggingData.RightPosition, m_loggingData.RightVelocity));
+      m_leftClimberMotor.set(-0.2);
+      m_rightClimberMotor.set(-0.2);
+      //m_leftClimberMotor.set(calculatePullMotorLevel(m_loggingData.LeftPosition, m_loggingData.LeftVelocity));
+      //m_rightClimberMotor.set(calculatePullMotorLevel(m_loggingData.RightPosition, m_loggingData.RightVelocity));
     }
 
     SmartDashboard.putString("Climber Status", RobotClimberState);
+    SmartDashboard.putNumber("Climber Left Pos", m_loggingData.LeftPosition);
+    SmartDashboard.putNumber("Climber Right Pos", m_loggingData.RightPosition);
+    SmartDashboard.putNumber("Climber Left Vel", m_loggingData.LeftVelocity);
+    SmartDashboard.putNumber("Climber Right Vel", m_loggingData.RightVelocity);
 
   
     m_lastLogTime = now;

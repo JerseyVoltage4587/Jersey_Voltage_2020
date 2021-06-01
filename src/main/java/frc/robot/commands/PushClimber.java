@@ -23,7 +23,7 @@ public class PushClimber extends CommandBase {
   @Override
   public void initialize() {
     Robot.getClimber().setRobotClimberState("PUSH");
-    Robot.getClimber().setSetPoint(415);
+    //Robot.getClimber().setSetPoint(415);
   }
 
   // Called every time the scheduler runs while the command is scheduled.
