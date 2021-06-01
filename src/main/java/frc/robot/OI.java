@@ -22,6 +22,7 @@ import frc.robot.commands.RaiseIntakeArm;
 import frc.robot.commands.StartKicker;
 import frc.robot.commands.StartShooterBackward;
 import frc.robot.commands.StartShooterForward;
+import frc.robot.commands.StopClimber;
 import frc.robot.commands.StopKicker;
 import frc.robot.commands.StopShooter;
 
@@ -97,9 +98,11 @@ public class OI extends CommandBase {
     rightTrigger1.whenReleased(new RaiseIntakeArm());
 
     buttonA2.whenPressed(new PullClimber());
+    buttonA2.whenReleased(new StopClimber());
     //buttonB2.whenPressed(new StartShooterForward());
     //buttonX2.whenPressed(new StartShooterBackward());
     buttonY2.whenPressed(new PushClimber());
+    buttonY2.whenReleased(new StopClimber());
     rightTrigger2.whenPressed(new StartKicker());
     rightTrigger2.whenReleased(new StopKicker());
     rightBumper2.whenPressed(new StartShooterForward());
