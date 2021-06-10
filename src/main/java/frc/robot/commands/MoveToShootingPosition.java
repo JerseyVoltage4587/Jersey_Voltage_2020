@@ -7,18 +7,22 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
+import frc.robot.subsystems.DriveBase;
 
 public class MoveToShootingPosition extends CommandBase {
   double ty = 0;
   double tv = 0;
+  public static int tvFails = 0;
+  public static final int tvLimit = 100;
   /**
    * Creates a new MoveToShootingPosition.
    */
   public MoveToShootingPosition() {
-    
+
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(Robot.getDriveBase());
   }
@@ -26,6 +30,7 @@ public class MoveToShootingPosition extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    tvFails = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -47,6 +52,7 @@ public class MoveToShootingPosition extends CommandBase {
       Robot.getDriveBase().setLeftMotorLevel(0.2);
       Robot.getDriveBase().setRightMotorLevel(0.2);
     }
+    SmartDashboard.putString("MoveToPosition", "executing");
   }
 
   // Called once the command ends or is interrupted.
@@ -60,12 +66,15 @@ public class MoveToShootingPosition extends CommandBase {
   @Override
   public boolean isFinished() {
     if (tv == 0) {
-      return true;
+      tvFails++;
+      return tvFails > tvLimit;
     }
 
     else if (ty > 10 || ty < 5) {
       return false;
     }
+    SmartDashboard.putString("MoveToPosition", "end");
+    DriveBase.getInstance().setSafetyEnabled(true);
     return true;
   }
 }

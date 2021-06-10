@@ -17,6 +17,9 @@ public class TurnToAngle extends CommandBase {
   private double m_angle;
   private double m_finalAngle;
   private boolean m_ifInitialized = false;
+  private final double slowSpeed = 0.3;
+  private final double fastSpeed = 0.5;
+  private final double nearDelta = 10; //Threshold angle for switching between slowSpeed and fastSpeed constants
   /**
    * Creates a new TurnToAngle.
    */
@@ -39,39 +42,36 @@ public class TurnToAngle extends CommandBase {
     double heading = Gyro.getYaw();
     if (m_ifInitialized == false){
       if (Gyro.IMU_IsCalibrating()) {
+        DriveBase.getInstance().setLeftMotorLevel(0);
+        DriveBase.getInstance().setRightMotorLevel(0);
+        SmartDashboard.putString("TurnToAngle", "Initializing");
         return;
       }
       m_ifInitialized = true;
       m_finalAngle = heading + m_angle;
     }
-    double delta = m_finalAngle - heading;
+
+    double delta = (m_finalAngle - heading) % 360.0;
     if (delta < -180){
       delta += 360;
     }
-
     if (delta > 180){
       delta -= 360;
     }
 
-    if (delta > 10) {
-      DriveBase.getInstance().setLeftMotorLevel(.25);
-      DriveBase.getInstance().setRightMotorLevel(-.25);
+    double deltaAbs = Math.abs(delta);
+    double deltaSign = Math.signum(delta);
+
+    if (deltaAbs > nearDelta) {
+      DriveBase.getInstance().setLeftMotorLevel(deltaSign * fastSpeed);
+      DriveBase.getInstance().setRightMotorLevel(deltaSign * -fastSpeed);
+    }
+    else {
+      DriveBase.getInstance().setLeftMotorLevel(deltaSign * slowSpeed);
+      DriveBase.getInstance().setRightMotorLevel(deltaSign * -slowSpeed);      
     }
 
-    else if (delta < -10) {
-      DriveBase.getInstance().setLeftMotorLevel(-.25);
-      DriveBase.getInstance().setRightMotorLevel(.25);
-    }
-
-    else if (delta > 0) {
-      DriveBase.getInstance().setLeftMotorLevel(.175);
-      DriveBase.getInstance().setRightMotorLevel(-.175);
-    }
-
-    else if (delta < 0) {
-      DriveBase.getInstance().setLeftMotorLevel(-.175);
-      DriveBase.getInstance().setRightMotorLevel(.175);
-    } 
+    SmartDashboard.putString("TurnToAngle", String.format("delta: %f", delta));
   }
 
   // Called once the command ends or is interrupted.
@@ -79,7 +79,7 @@ public class TurnToAngle extends CommandBase {
   public void end(boolean interrupted) {
     DriveBase.getInstance().setLeftMotorLevel(0);
     DriveBase.getInstance().setRightMotorLevel(0);
-    DriveBase.getInstance().setSafetyEnabled(true);
+    DriveBase.getInstance().setSafetyEnabled(false);
     SmartDashboard.putString("TurnToAngle", "end");
   }
 
@@ -99,13 +99,16 @@ public class TurnToAngle extends CommandBase {
     }
 
     double heading = Gyro.getYaw();
-    double delta = Math.abs(heading - m_finalAngle);
-    
+    double delta = (m_finalAngle - heading) % 360.0;
+    if (delta < -180){
+      delta += 360;
+    }
     if (delta > 180){
-      delta = 360 - delta;
+      delta -= 360;
     }
 
-    if (delta <= 2){
+
+    if (Math.abs(delta) <= 1){
       return true;
     }
     return false;

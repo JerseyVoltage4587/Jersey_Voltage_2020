@@ -98,11 +98,11 @@ public class OI extends CommandBase {
     rightTrigger1.whenReleased(new RaiseIntakeArm());
 
     buttonA2.whenPressed(new PullClimber());
-    buttonA2.whenReleased(new StopClimber());
+    //buttonA2.whenReleased(new StopClimber());
     //buttonB2.whenPressed(new StartShooterForward());
     //buttonX2.whenPressed(new StartShooterBackward());
     buttonY2.whenPressed(new PushClimber());
-    buttonY2.whenReleased(new StopClimber());
+    //buttonY2.whenReleased(new StopClimber());
     rightTrigger2.whenPressed(new StartKicker());
     rightTrigger2.whenReleased(new StopKicker());
     rightBumper2.whenPressed(new StartShooterForward());

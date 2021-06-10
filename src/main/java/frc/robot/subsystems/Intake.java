@@ -21,7 +21,7 @@ public class Intake extends SubsystemBase {
   public boolean m_isActive = true;
   static Intake m_Instance = null;
   private WPI_TalonSRX m_intakeMotor = null;
-  //private WPI_TalonSRX m_intakeArmMotor = null;
+  private WPI_TalonSRX m_intakeArmMotor = null;
   private int m_numberOfTimesStalled = 0;
   private double m_setPoint = 0;
   private IntakeLoggingData m_loggingData;
@@ -37,10 +37,10 @@ public class Intake extends SubsystemBase {
     }
     m_intakeMotor = new WPI_TalonSRX(Constants.IntakeMotorCAN_Address);
     m_intakeMotor.configFactoryDefault();
-    //m_intakeArmMotor = new WPI_TalonSRX(Constants.IntakeMotorArmCAN_Address);
-    //m_intakeArmMotor.configFactoryDefault();
-    //m_intakeArmMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
-    //m_intakeArmMotor.setNeutralMode(NeutralMode.Brake);
+    m_intakeArmMotor = new WPI_TalonSRX(Constants.IntakeMotorArmCAN_Address);
+    m_intakeArmMotor.configFactoryDefault();
+    m_intakeArmMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 10);
+    m_intakeArmMotor.setNeutralMode(NeutralMode.Brake);
     m_loggingData = new IntakeLoggingData();
     m_logger = new AsyncStructuredLogger<IntakeLoggingData>("Intake", /*forceUnique=*/false, IntakeLoggingData.class);
   }
@@ -60,7 +60,7 @@ public class Intake extends SubsystemBase {
     if (m_isActive == false) {
       return;
     }
-    //m_intakeArmMotor.setSelectedSensorPosition(0, 0, 10);
+    m_intakeArmMotor.setSelectedSensorPosition(0, 0, 10);
   }
 
   public double getIntakeArmAngle() {
@@ -109,10 +109,10 @@ public class Intake extends SubsystemBase {
     // This method will be called once per scheduler run
 
     m_loggingData.SetPoint = m_setPoint;
-    //m_loggingData.ArmMotorEncoder = m_intakeArmMotor.getSelectedSensorPosition(0);
+    m_loggingData.ArmMotorEncoder = m_intakeArmMotor.getSelectedSensorPosition(0);
     m_loggingData.ArmAngle = -1 * (getIntakeArmEncoder()*360.0/4096.0)*(18.0/36)*(30.0/72);
     m_loggingData.IntakeMotorLevel = m_intakeMotor.get();
-    //m_loggingData.IntakeArmMotorLevel = m_intakeArmMotor.get();
+    m_loggingData.IntakeArmMotorLevel = m_intakeArmMotor.get();
     m_loggingData.IntakeMotorStatorCurrent = m_intakeMotor.getStatorCurrent();
     m_loggingData.IntakeMotorSupplyCurrent = m_intakeMotor.getSupplyCurrent();
     //m_loggingData.IntakeArmMotorStatorCurrent = m_intakeArmMotor.getStatorCurrent();
@@ -138,7 +138,7 @@ public class Intake extends SubsystemBase {
       level = -0.4;
     }
 
-    //m_intakeArmMotor.set(level);
+    m_intakeArmMotor.set(level);
     
     if (m_setPoint > 0) {
       m_intakeMotor.set(Constants.IntakeMotorLevel);

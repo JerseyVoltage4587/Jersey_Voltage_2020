@@ -25,7 +25,8 @@ public class PositionRobotToShootForward extends CommandBase {
   @Override
   public void initialize() {
     NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
-    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new Aim(), new WaitCommand(.2), new MoveToShootingPosition()));        
+//    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new Aim(), new WaitCommand(.2), new MoveToShootingPosition()));        
+    CommandScheduler.getInstance().schedule(new Aim());        
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -36,7 +37,7 @@ public class PositionRobotToShootForward extends CommandBase {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(1);
+  //  NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
   }
 
   // Returns true when the command should end.

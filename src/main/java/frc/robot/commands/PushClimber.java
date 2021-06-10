@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class PushClimber extends CommandBase {
@@ -23,7 +24,7 @@ public class PushClimber extends CommandBase {
   @Override
   public void initialize() {
     Robot.getClimber().setRobotClimberState("PUSH");
-    //Robot.getClimber().setSetPoint(415);
+    Robot.getClimber().setSetPoint(Constants.PushSetPoint);
   }
 
   // Called every time the scheduler runs while the command is scheduled.

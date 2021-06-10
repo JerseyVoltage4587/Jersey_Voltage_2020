@@ -47,17 +47,20 @@ public final class Constants {
     public static final int LeftTalon1PDP_Port = 15;
     
     //Motor Levels
-    public static double IntakeMotorLevel = -0.42;
+    public static double IntakeMotorLevel = -0.7;
     public static double ShooterMotorLevel = 0.753;
-    public static double StorageBeltMotorLevelFull = -0.6;
+    public static double StorageBeltMotorLevelFull = -0.8;
     public static double StorageBeltMotorLevelPass = 0.304;
-    public static double ClimberMotorLevel = 0.3;
+    public static double pushMotorLevel = 0.3;
+    public static double pullMotorLevel = 0.5;
     public static double StorageSeparatorMotorLevel = 0.4;
     public static double StorageToShooterMotorLevelForward = 0.4;
     public static double StorageToShooterMotorLevelNeutral = 0.15;
     public static double StorageToShooterMotorLevelBackward = -0.1;
-    public static double IntakeArmMotorLevelUp = -0.4;
-    public static double IntakeArmMotorLevelDown = 0.35;
+    public static double IntakeArmMotorLevelUp = -0.75; //-.4
+    public static double IntakeArmMotorLevelDown = 0.66; //.35
+    public static double ShooterLongShot = 4400; //rpm
+    public static double ShooterShortShot = -2500; //rpm
     
     //Motor Stall Currents
     public static final double IntakeArmStallCurrent = 20;
@@ -72,7 +75,7 @@ public final class Constants {
     public static final double ShooterWheelDiameter = 6; // inches
     
     //Degrees
-    public static final double IntakeArmDegrees = 87;
+    public static final double IntakeArmDegrees = 88;
 
     //Tolerance
     public static final double ShooterMotorTolerance = 20;
@@ -93,4 +96,11 @@ public final class Constants {
     public static final double PullModeFastVelocity = 100;
     public static final double PullModeFastBaseLevel = 0.5;
     public static final double PullModeFastKp = 0.03;
+
+
+    /**
+     * Climber set points
+     */
+    public static double PushSetPoint = 200;
+    public static double PullSetPoint = 50;
 }

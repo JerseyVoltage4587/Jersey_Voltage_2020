@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 import frc.robot.Robot;
 
 public class LowerIntakeArm extends CommandBase {
@@ -22,7 +23,7 @@ public class LowerIntakeArm extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    Robot.getIntake().setSetPoint(85);
+    Robot.getIntake().setSetPoint(Constants.IntakeArmDegrees);
     //Bumpers: 85
     //No Bumpers: 95
   }

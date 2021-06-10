@@ -146,17 +146,17 @@ public class Climber extends SubsystemBase {
     }
 
     else if (RobotClimberState.equals("PUSH")) {
-      m_leftClimberMotor.set(0.2);
-      m_rightClimberMotor.set(0.2);
-      //m_leftClimberMotor.set(calculatePushMotorLevel(m_loggingData.LeftPosition, m_loggingData.LeftVelocity));
-      //m_rightClimberMotor.set(calculatePushMotorLevel(m_loggingData.RightPosition, m_loggingData.RightVelocity));
+      //m_leftClimberMotor.set(Constants.pushMotorLevel);
+      //m_rightClimberMotor.set(Constants.pushMotorLevel);
+      m_leftClimberMotor.set(calculatePushMotorLevel(m_loggingData.LeftPosition, m_loggingData.LeftVelocity));
+      m_rightClimberMotor.set(calculatePushMotorLevel(m_loggingData.RightPosition, m_loggingData.RightVelocity));
     }
 
     else if (RobotClimberState.equals("PULL")) {
-      m_leftClimberMotor.set(-0.2);
-      m_rightClimberMotor.set(-0.2);
-      //m_leftClimberMotor.set(calculatePullMotorLevel(m_loggingData.LeftPosition, m_loggingData.LeftVelocity));
-      //m_rightClimberMotor.set(calculatePullMotorLevel(m_loggingData.RightPosition, m_loggingData.RightVelocity));
+      //m_leftClimberMotor.set(-Constants.pullMotorLevel);
+      //m_rightClimberMotor.set(-Constants.pullMotorLevel);
+      m_leftClimberMotor.set(calculatePullMotorLevel(m_loggingData.LeftPosition, m_loggingData.LeftVelocity));
+      m_rightClimberMotor.set(calculatePullMotorLevel(m_loggingData.RightPosition, m_loggingData.RightVelocity));
     }
 
     SmartDashboard.putString("Climber Status", RobotClimberState);
