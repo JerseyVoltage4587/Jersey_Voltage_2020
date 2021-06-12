@@ -83,24 +83,24 @@ public final class Constants {
     //PID
     public static final double IntakeArmKp = 0.0125;
 
-    public static final double PushModeSlowDownOffset = 70;
+    public static final double PushModeSlowDownOffset = 20;
     public static final double PushModeSlowBaseLevel = 0.07;
-    public static final double PushModeSlowKp = 0.01;
-    public static final double PushModeFastVelocity = 100;
+    public static final double PushModeSlowKp = 0.02;
+    public static final double PushModeFastVelocity = 300;
     public static final double PushModeFastBaseLevel = 0.07;
-    public static final double PushModeFastKp = 0.015;
+    public static final double PushModeFastKp = 0.004;
 
-    public static final double PullModeSlowDownOffset = 70;
-    public static final double PullModeSlowBaseLevel = 0.3;
-    public static final double PullModeSlowKp = 0.02;
-    public static final double PullModeFastVelocity = 100;
-    public static final double PullModeFastBaseLevel = 0.5;
-    public static final double PullModeFastKp = 0.03;
+    public static final double PullModeSlowDownOffset = 20;
+    public static final double PullModeSlowBaseLevel = -0.3;
+    public static final double PullModeSlowKp = 0.03;
+    public static final double PullModeFastVelocity = -150;
+    public static final double PullModeFastBaseLevel = -0.3;
+    public static final double PullModeFastKp = 0.005;
 
 
     /**
      * Climber set points
      */
-    public static double PushSetPoint = 200;
+    public static double PushSetPoint = 400;
     public static double PullSetPoint = 50;
 }

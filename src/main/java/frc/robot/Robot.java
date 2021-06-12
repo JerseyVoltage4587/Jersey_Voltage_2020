@@ -19,6 +19,7 @@ import frc.robot.commands.Aim;
 import frc.robot.commands.AutoMoveFoward;
 import frc.robot.commands.DefaultDriveBaseCommand;
 import frc.robot.commands.StartKicker;
+import frc.robot.commands.StartShooterBackward;
 import frc.robot.commands.StartShooterForward;
 import frc.robot.commands.StopShooter;
 import frc.robot.commands.IRH.AutoNav_BarrelRacing;
@@ -169,7 +170,7 @@ public class Robot extends TimedRobot {
     //Regular Competition
     getStorage().setShooterRunning(false);
     getStorage().setShooterReady(false);
-    CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(66, 0),new WaitCommand(1), new StartKicker()));
+    CommandScheduler.getInstance().schedule(new StartShooterBackward(), new SequentialCommandGroup(new AutoMoveFoward(66, 0),new WaitCommand(1), new StartKicker()));
   }
 
   /**

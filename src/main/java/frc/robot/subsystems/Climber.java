@@ -37,9 +37,15 @@ public class Climber extends SubsystemBase {
     m_leftClimberMotor = new WPI_TalonSRX(Constants.LeftClimberMotorCAN_Address);
     m_rightClimberMotor = new WPI_TalonSRX(Constants.RightClimberMotorCAN_Address);
     m_leftClimberMotor.configFactoryDefault();
+    m_leftClimberMotor.setNeutralMode(NeutralMode.Brake);
+    m_leftClimberMotor.configReverseSoftLimitEnable(true);
+    m_leftClimberMotor.configReverseSoftLimitThreshold(20);
+    m_leftClimberMotor.configOpenloopRamp(0.2);
     m_rightClimberMotor.configFactoryDefault();
     m_rightClimberMotor.setNeutralMode(NeutralMode.Brake);
-    m_leftClimberMotor.setNeutralMode(NeutralMode.Brake);
+    m_rightClimberMotor.configReverseSoftLimitEnable(true);
+    m_rightClimberMotor.configReverseSoftLimitThreshold(20);
+    m_rightClimberMotor.configOpenloopRamp(0.2);
     m_loggingData = new ClimberLoggingData();
     RobotClimberState = "STARTUP";
     setPoint = 0;
@@ -92,7 +98,7 @@ public class Climber extends SubsystemBase {
       motorLevel = Constants.PushModeFastBaseLevel + error * Constants.PushModeFastKp;
     }
 
-    return MathUtil.clamp(motorLevel, -1, 1);
+    return MathUtil.clamp(motorLevel, -0.25, 1);
   }
 
   private double calculatePullMotorLevel(double position, double velocity) {
@@ -108,7 +114,7 @@ public class Climber extends SubsystemBase {
       motorLevel = Constants.PullModeFastBaseLevel + error * Constants.PullModeFastKp;
     }
 
-    return MathUtil.clamp(motorLevel, -1, 1);
+    return MathUtil.clamp(motorLevel, -1, 0.25);
   }
 
   @Override

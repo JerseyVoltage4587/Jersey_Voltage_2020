@@ -33,14 +33,14 @@ public class DefaultDriveBaseCommand extends CommandBase {
     double forward = OI.getInstance().getDrive();
     double turn = OI.getInstance().getTurn();
 
-    if (Math.abs(forward) < 0.10) {
+    if (Math.abs(forward) < 0.05) {
 			forward = 0;
 		}
-		if (Math.abs(turn) < 0.10) {
+		if (Math.abs(turn) < 0.05) {
 			turn = 0;
     }
 
-    Robot.getDriveBase().m_drive.arcadeDrive(forward, turn);
+    Robot.getDriveBase().m_drive.arcadeDrive(forward, turn, true);
   }
 
   // Called once the command ends or is interrupted.
