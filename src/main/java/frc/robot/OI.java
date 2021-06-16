@@ -13,6 +13,7 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.commands.EndPassBall;
+import frc.robot.commands.LimelightOff;
 import frc.robot.commands.LowerIntakeArm;
 import frc.robot.commands.PassBall;
 import frc.robot.commands.PositionRobotToShootForward;
@@ -83,6 +84,7 @@ public class OI extends CommandBase {
     rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
 
     buttonA1.whenPressed(new PositionRobotToShootForward());
+    buttonA1.whenReleased(new LimelightOff());
     //buttonB1.whenPressed();
     //xbuttonX1.whenPressed();
     //buttonY1.whenPressed();

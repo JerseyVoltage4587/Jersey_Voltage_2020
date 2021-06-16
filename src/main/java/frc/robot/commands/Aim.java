@@ -38,6 +38,8 @@ public class Aim extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(3);//TEMP
+    CommandScheduler.getInstance().schedule(new SequentialCommandGroup(new WaitCommand(.2)));
     double tx = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tx").getDouble(0);
     tv = NetworkTableInstance.getDefault().getTable("limelight").getEntry("tv").getDouble(0);
 
@@ -75,6 +77,7 @@ public class Aim extends CommandBase {
   @Override
   public void end(boolean interrupted) {
     DriveBase.getInstance().setSafetyEnabled(true);
+    //NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setNumber(1);//TEMP
   }
 
   @Override

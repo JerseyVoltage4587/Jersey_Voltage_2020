@@ -49,8 +49,8 @@ public final class Constants {
     //Motor Levels
     public static double IntakeMotorLevel = -0.7;
     public static double ShooterMotorLevel = 0.753;
-    public static double StorageBeltMotorLevelFull = -0.8;
-    public static double StorageBeltMotorLevelPass = 0.304;
+    public static double StorageBeltMotorLevelFull = 0.8;
+    public static double StorageBeltMotorLevelPass = -0.654;
     public static double pushMotorLevel = 0.3;
     public static double pullMotorLevel = 0.5;
     public static double StorageSeparatorMotorLevel = 0.4;
@@ -59,7 +59,7 @@ public final class Constants {
     public static double StorageToShooterMotorLevelBackward = -0.1;
     public static double IntakeArmMotorLevelUp = -0.75; //-.4
     public static double IntakeArmMotorLevelDown = 0.66; //.35
-    public static double ShooterLongShot = 4400; //rpm
+    public static double ShooterLongShot = 3750; //rpm
     public static double ShooterShortShot = -2500; //rpm
     
     //Motor Stall Currents
@@ -101,6 +101,6 @@ public final class Constants {
     /**
      * Climber set points
      */
-    public static double PushSetPoint = 400;
-    public static double PullSetPoint = 50;
+    public static double PushSetPoint = 700;
+    public static double PullSetPoint = 75;
 }

@@ -93,7 +93,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(3);
+    NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").forceSetNumber(1);
     getDriveBase().setDefaultCommand(new DefaultDriveBaseCommand());
     CameraServer.getInstance();
     getDriveBase().zeroDriveSensors(true);
@@ -170,7 +170,7 @@ public class Robot extends TimedRobot {
     //Regular Competition
     getStorage().setShooterRunning(false);
     getStorage().setShooterReady(false);
-    CommandScheduler.getInstance().schedule(new StartShooterBackward(), new SequentialCommandGroup(new AutoMoveFoward(66, 0),new WaitCommand(1), new StartKicker()));
+    CommandScheduler.getInstance().schedule(new StartShooterForward(), new SequentialCommandGroup(new AutoMoveFoward(20, 0),new WaitCommand(2), new StartKicker()));
   }
 
   /**
