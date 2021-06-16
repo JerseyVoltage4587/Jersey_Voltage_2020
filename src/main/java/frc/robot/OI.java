@@ -67,21 +67,37 @@ public class OI extends CommandBase {
     rightStickButton1 = new JoystickButton(m_joy1, 10);
     leftTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 2);
     rightTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 3);
-
     m_joy2 = new Joystick(1);
-
-    buttonA2 = new JoystickButton(m_joy2, 1);
-    buttonB2 = new JoystickButton(m_joy2, 2);
-    buttonX2 = new JoystickButton(m_joy2, 3);
-    buttonY2 = new JoystickButton(m_joy2, 4);
-    leftBumper2 = new JoystickButton(m_joy2, 5);
-    rightBumper2 = new JoystickButton(m_joy2, 6);
-    backButton2 = new JoystickButton(m_joy2, 7);
-    startButton2 = new JoystickButton(m_joy2, 8);
-    leftStickButton2 = new JoystickButton(m_joy2, 9);
-    rightStickButton2 = new JoystickButton(m_joy2, 10);
-    leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
-    rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
+    //Driver two configuration if true normal, if false GUITARHERO
+    boolean sticks = true;
+    if(sticks){ //Joystick
+      buttonA2 = new JoystickButton(m_joy2, 1);
+      buttonB2 = new JoystickButton(m_joy2, 2);
+      buttonX2 = new JoystickButton(m_joy2, 3);
+      buttonY2 = new JoystickButton(m_joy2, 4);
+      leftBumper2 = new JoystickButton(m_joy2, 5);
+      rightBumper2 = new JoystickButton(m_joy2, 6);
+      backButton2 = new JoystickButton(m_joy2, 7);
+      startButton2 = new JoystickButton(m_joy2, 8);
+      leftStickButton2 = new JoystickButton(m_joy2, 9);
+      rightStickButton2 = new JoystickButton(m_joy2, 10);
+      leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
+      rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
+    }
+    else{ //Guitaaaaaaaaaaaaaaaaaaaaaaaaar      
+      buttonA2 = new JoystickButton(m_joy2, 9);     //Orange = retract arms
+      buttonB2 = new JoystickButton(m_joy2, 3); //NO
+      buttonX2 = new JoystickButton(m_joy2, 4); //NO
+      buttonY2 = new JoystickButton(m_joy2, 1);     //Blue = extend arms
+      leftBumper2 = new JoystickButton(m_joy2, 14); //Strum down = short shot
+      rightBumper2 = new JoystickButton(m_joy2, 13); //Strum up = long shot
+      backButton2 = new JoystickButton(m_joy2, 7); //NO
+      startButton2 = new JoystickButton(m_joy2, 8); //NO
+      leftStickButton2 = new JoystickButton(m_joy2, 10); //NO
+      rightStickButton2 = new JoystickButton(m_joy2, 11); //NO
+      leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2); //Red = reverse
+      rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 5);  //Green = shoot
+    }
 
     buttonA1.whenPressed(new PositionRobotToShootForward());
     buttonA1.whenReleased(new LimelightOff());
