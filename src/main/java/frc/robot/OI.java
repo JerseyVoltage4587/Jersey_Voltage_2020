@@ -69,22 +69,19 @@ public class OI extends CommandBase {
     rightTrigger1 = new JoyButton(m_joy1, JoyButton.JoyDir.DOWN, 3);
     m_joy2 = new Joystick(1);
     //Driver two configuration if true normal, if false GUITARHERO
-    boolean sticks = true;
-    if(sticks){ //Joystick
-      buttonA2 = new JoystickButton(m_joy2, 1);
-      buttonB2 = new JoystickButton(m_joy2, 2);
-      buttonX2 = new JoystickButton(m_joy2, 3);
-      buttonY2 = new JoystickButton(m_joy2, 4);
-      leftBumper2 = new JoystickButton(m_joy2, 5);
-      rightBumper2 = new JoystickButton(m_joy2, 6);
-      backButton2 = new JoystickButton(m_joy2, 7);
-      startButton2 = new JoystickButton(m_joy2, 8);
-      leftStickButton2 = new JoystickButton(m_joy2, 9);
-      rightStickButton2 = new JoystickButton(m_joy2, 10);
-      leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
-      rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
-    }
-    else{ //Guitaaaaaaaaaaaaaaaaaaaaaaaaar      
+    buttonA2 = new JoystickButton(m_joy2, 1);
+    buttonB2 = new JoystickButton(m_joy2, 2);
+    buttonX2 = new JoystickButton(m_joy2, 3);
+    buttonY2 = new JoystickButton(m_joy2, 4);
+    leftBumper2 = new JoystickButton(m_joy2, 5);
+    rightBumper2 = new JoystickButton(m_joy2, 6);
+    backButton2 = new JoystickButton(m_joy2, 7);
+    startButton2 = new JoystickButton(m_joy2, 8);
+    leftStickButton2 = new JoystickButton(m_joy2, 9);
+    rightStickButton2 = new JoystickButton(m_joy2, 10);
+    leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2);
+    rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 3);
+    /*else{ //Guitaaaaaaaaaaaaaaaaaaaaaaaaar      
       buttonA2 = new JoystickButton(m_joy2, 9);     //Orange = retract arms
       buttonB2 = new JoystickButton(m_joy2, 3); //NO
       buttonX2 = new JoystickButton(m_joy2, 4); //NO
@@ -97,7 +94,7 @@ public class OI extends CommandBase {
       rightStickButton2 = new JoystickButton(m_joy2, 11); //NO
       leftTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 2); //Red = reverse
       rightTrigger2 = new JoyButton(m_joy2, JoyButton.JoyDir.DOWN, 5);  //Green = shoot
-    }
+    }*/
 
     buttonA1.whenPressed(new PositionRobotToShootForward());
     buttonA1.whenReleased(new LimelightOff());

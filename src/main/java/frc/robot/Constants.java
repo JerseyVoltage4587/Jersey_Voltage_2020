@@ -60,9 +60,9 @@ public final class Constants {
     public static double IntakeArmMotorLevelUp = -0.75; //-.4
     public static double IntakeArmMotorLevelDown = 0.66; //.35
     public static double ShooterLongShot = 3750; //rpm
-    public static double ShooterShortShot = -2500; //rpm
+    public static double ShooterShortShot = -2050; //rpm
     
-    //Motor Stall Currents
+    //Motor Stall Currents  
     public static final double IntakeArmStallCurrent = 20;
     public static final double IntakeStallCurrent = -10;
     
@@ -96,7 +96,6 @@ public final class Constants {
     public static final double PullModeFastVelocity = -150;
     public static final double PullModeFastBaseLevel = -0.3;
     public static final double PullModeFastKp = 0.005;
-
 
     /**
      * Climber set points
